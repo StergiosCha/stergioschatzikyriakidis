@@ -147,14 +147,8 @@ const NovelistSection = () => {
           }}
         >
           <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            Beyond academia, I write fiction. I have published four novels in Greek and two 
-            short story collections (one in English). The stories explore memory, identity, 
-            and language—often across borders.
-          </p>
-          <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            My literary work examines the complexities of human relationships, the weight of 
-            history on personal narratives, and the ways in which language shapes our 
-            understanding of the world around us.
+            Beyond academia, I write fiction. I have published four novels in Greek and three
+            short story collections (one in English).
           </p>
         </div>
 
