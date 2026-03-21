@@ -191,7 +191,7 @@ const SoftwareSection = () => {
         >
           <img
             ref={photoRef}
-            src="/images/software-photo.jpg"
+            src="/stergioschatzikyriakidis/images/software-photo.jpg"
             alt="Software development"
             className="img-cover"
           />

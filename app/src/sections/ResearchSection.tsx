@@ -124,7 +124,7 @@ const ResearchSection = () => {
         >
           <img
             ref={photoRef}
-            src="/images/research-photo.jpg"
+            src="/stergioschatzikyriakidis/images/research-photo.jpg"
             alt="Research"
             className="img-cover"
           />

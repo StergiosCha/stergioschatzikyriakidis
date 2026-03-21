@@ -126,7 +126,7 @@ const BioSection = () => {
         >
           <img
             ref={portraitRef}
-            src="/images/bio-portrait.jpg"
+            src="/stergioschatzikyriakidis/images/bio-portrait.jpg"
             alt="Stergios Chatzikyriakidis"
             className="img-cover"
           />

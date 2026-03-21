@@ -160,7 +160,7 @@ const HeroSection = () => {
         >
           <img
             ref={portraitRef}
-            src="/images/hero-portrait.jpg"
+            src="/stergioschatzikyriakidis/images/hero-portrait.jpg"
             alt="Stergios Chatzikyriakidis"
             className="img-cover"
           />

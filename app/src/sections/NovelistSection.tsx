@@ -118,7 +118,7 @@ const NovelistSection = () => {
         >
           <img
             ref={photoRef}
-            src="/images/novelist-photo.jpg"
+            src="/stergioschatzikyriakidis/images/novelist-photo.jpg"
             alt="Novelist"
             className="img-cover"
           />
