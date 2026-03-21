@@ -178,9 +178,9 @@ const OutputsSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column - Header */}
-          <div ref={headerRef} className="lg:col-span-3">
+          <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0">
             <span className="label mb-3 block text-xs">Research Outputs</span>
             <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">Publications, Software & Datasets</h2>
             <p className="text-[#6E6A63] mb-6 text-sm leading-relaxed">
@@ -204,7 +204,7 @@ const OutputsSection = () => {
           {/* Right Column - Content */}
           <div ref={contentRef} className="lg:col-span-9">
             {activeTab === 'publications' ? (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Monographs */}
                 <Card className="bg-white/50 border-none shadow-sm">
                   <CardHeader className="pb-2">
@@ -281,7 +281,7 @@ const OutputsSection = () => {
                 </Card>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Applications */}
                 <Card className="bg-white/50 border-none shadow-sm">
                   <CardHeader className="pb-2">
