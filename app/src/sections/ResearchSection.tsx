@@ -179,7 +179,7 @@ const ResearchSection = () => {
           className="btn-primary absolute"
           style={{
             left: '52vw',
-            top: '72vh',
+            top: '82vh',
           }}
         >
           See selected publications
