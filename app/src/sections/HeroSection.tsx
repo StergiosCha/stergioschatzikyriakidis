@@ -125,27 +125,6 @@ const HeroSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="section-content">
-        {/* Accent Ring */}
-        <svg
-          ref={ringRef}
-          className="accent-shape"
-          style={{
-            left: '2vw',
-            top: '12vh',
-            width: '32vw',
-            height: '32vw',
-          }}
-          viewBox="0 0 200 200"
-        >
-          <circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="none"
-            stroke="#D06D48"
-            strokeWidth="18"
-          />
-        </svg>
 
         {/* Portrait Image - wider, less height */}
         <div
