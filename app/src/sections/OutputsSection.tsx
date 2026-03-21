@@ -174,7 +174,7 @@ const OutputsSection = () => {
     <section
       ref={sectionRef}
       id="outputs"
-      className="relative z-[60] py-20"
+      className="relative z-[60] pt-56 pb-20"
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
