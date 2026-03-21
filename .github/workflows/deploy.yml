@@ -35,7 +35,13 @@ jobs:
         run: |
           cd app
           npm run build
+
+      - name: Copy images to dist
+        run: |
+          cd app
           cp -r public/images dist/
+          ls -la dist/
+          ls -la dist/images/
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
