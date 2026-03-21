@@ -176,8 +176,6 @@ const OutputsSection = () => {
       id="outputs"
       className="relative z-[60] pb-20"
       style={{ backgroundColor: '#E9E6E1', paddingTop: '16.5rem' }}
-      className="relative z-[60] pb-20"
-      style={{ backgroundColor: '#E9E6E1', paddingTop: '16.5rem' }}
     >
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
