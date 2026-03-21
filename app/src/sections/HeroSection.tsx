@@ -151,10 +151,10 @@ const HeroSection = () => {
         <div
           className="absolute overflow-hidden"
           style={{
-            left: '8vw',
-            top: '18vh',
-            width: '45vw',
-            height: '55vh',
+            left: '10vw',
+            top: '15vh',
+            width: '38vw',
+            height: '65vh',
             borderRadius: '10px',
           }}
         >
