@@ -35,8 +35,8 @@ const Navigation = () => {
     );
 
     if (pinTrigger) {
-      // Scroll to 20% into the pin range so content is visible
-      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.2;
+      // Scroll to 40% into the pin range so entrance animation (0-30%) has finished
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.4;
       window.scrollTo({ top: target, behavior: 'smooth' });
     } else {
       element.scrollIntoView({ behavior: 'smooth' });
