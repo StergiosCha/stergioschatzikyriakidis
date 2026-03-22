@@ -26,37 +26,34 @@ const ContactSection = () => {
         },
       });
 
-      // ENTRANCE (0-30%)
-      // Background overlay fade in
+      // ENTRANCE (0-15%): Quick overlay + text settle
       scrollTl.fromTo(
         overlayRef.current,
         { opacity: 0 },
-        { opacity: 1, ease: 'none' },
+        { opacity: 1, ease: 'power2.out' },
         0
       );
 
-      // Text group
       scrollTl.fromTo(
         [headlineRef.current, bodyRef.current, emailRef.current, ctaRef.current],
-        { y: '30vh', opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.02, ease: 'none' },
-        0.05
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.01, ease: 'power2.out' },
+        0
       );
 
-      // Footer
       scrollTl.fromTo(
         footerRef.current,
         { opacity: 0 },
-        { opacity: 1, ease: 'none' },
-        0.15
+        { opacity: 1, ease: 'power2.out' },
+        0.05
       );
 
-      // SETTLE (30-70%): Hold
+      // SETTLE (15-85%): Hold
 
-      // EXIT (70-100%): Subtle fade to avoid blank
+      // EXIT (85-100%): Gentle fade
       scrollTl.to(
         [headlineRef.current, bodyRef.current, emailRef.current, ctaRef.current],
-        { opacity: 0.2, ease: 'power2.in' },
+        { opacity: 0.3, ease: 'power2.in' },
         0.85
       );
     }, sectionRef);

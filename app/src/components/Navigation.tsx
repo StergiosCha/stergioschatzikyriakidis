@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,10 +19,22 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    setIsOpen(false);
     const element = document.getElementById(id);
-    if (element) {
+    if (!element) return;
+
+    // Find the ScrollTrigger pinned to this section and scroll into its mid-range
+    const allTriggers = ScrollTrigger.getAll();
+    const pinTrigger = allTriggers.find(
+      (st) => st.vars.pin && st.trigger === element
+    );
+
+    if (pinTrigger) {
+      // Scroll to 20% into the pin range so content is visible
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.2;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    } else {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
     }
   };
 
