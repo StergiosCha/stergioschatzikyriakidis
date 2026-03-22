@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -62,6 +62,7 @@ const OutputsSection = () => {
   const applications = getToolsByCategory('application');
   const datasets = getToolsByCategory('dataset');
   const codeLibs = getToolsByCategory('code');
+  const models = getToolsByCategory('model');
 
   const PublicationCard = ({ pub }: { pub: typeof publications[0] }) => {
     const content = (
@@ -175,7 +176,7 @@ const OutputsSection = () => {
       ref={sectionRef}
       id="outputs"
       className="relative z-[60] pb-20"
-      style={{ backgroundColor: '#E9E6E1', paddingTop: '16.5rem' }}
+      style={{ backgroundColor: '#E9E6E1', paddingTop: '24rem' }}
     >
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -322,6 +323,21 @@ const OutputsSection = () => {
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {datasets.map((tool, idx) => (
+                      <ToolCard key={idx} tool={tool} />
+                    ))}
+                  </CardContent>
+                </Card>
+
+                {/* Fine-tuned Models */}
+                <Card className="bg-white/50 border-none shadow-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Cpu size={16} className="text-[#D06D48]" />
+                      Fine-tuned Models ({models.length})
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {models.map((tool, idx) => (
                       <ToolCard key={idx} tool={tool} />
                     ))}
                   </CardContent>

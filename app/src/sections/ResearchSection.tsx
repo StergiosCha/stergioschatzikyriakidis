@@ -124,8 +124,8 @@ const ResearchSection = () => {
         >
           <img
             ref={photoRef}
-            src="/stergioschatzikyriakidis/images/research-photo.jpg"
-            alt="Research"
+            src="/stergioschatzikyriakidis/images/research-zeugma.png"
+            alt="Zeugma Neuro-Symbolic Reasoning System"
             className="img-cover"
           />
         </div>

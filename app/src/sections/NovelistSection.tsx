@@ -105,22 +105,22 @@ const NovelistSection = () => {
           />
         </svg>
 
-        {/* Novelist Photo */}
+        {/* Book Cover Collage */}
         <div
           className="absolute overflow-hidden"
           style={{
-            left: '10vw',
-            top: '30vh',
-            width: '36vw',
-            height: '52vh',
+            left: '6vw',
+            top: '15vh',
+            width: '40vw',
+            height: '70vh',
             borderRadius: '10px',
           }}
         >
           <img
             ref={photoRef}
-            src="/stergioschatzikyriakidis/images/novelist-photo.jpg"
-            alt="Novelist"
-            className="img-cover"
+            src="/stergioschatzikyriakidis/images/novelist-collage.jpg"
+            alt="Book covers"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
 

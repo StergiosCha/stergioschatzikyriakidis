@@ -191,8 +191,8 @@ const SoftwareSection = () => {
         >
           <img
             ref={photoRef}
-            src="/stergioschatzikyriakidis/images/software-photo.jpg"
-            alt="Software development"
+            src="/stergioschatzikyriakidis/images/software-medea.png"
+            alt="MEDEA-NEUMOUSA Platform"
             className="img-cover"
           />
         </div>

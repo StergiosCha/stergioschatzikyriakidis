@@ -3,7 +3,7 @@ export interface Tool {
   description: string;
   platformUrl?: string | null;
   githubUrl?: string | null;
-  category: 'application' | 'dataset' | 'code';
+  category: 'application' | 'dataset' | 'code' | 'model';
 }
 
 export const tools: Tool[] = [
@@ -155,6 +155,42 @@ export const tools: Tool[] = [
     platformUrl: null,
     githubUrl: "https://github.com/kathrein/Shami-Sentiment-Analyzer",
     category: "dataset"
+  },
+  {
+    name: "Greek Rhyme Dataset",
+    description: "Dataset for Greek rhyme analysis. Role: Main creator.",
+    platformUrl: null,
+    githubUrl: "https://github.com/StergiosCha/Greek_Rhyme_Dataset",
+    category: "dataset"
+  },
+  {
+    name: "Interwar Poetry & Prose",
+    description: "Modern Greek interwar poetry corpus for RAG generation. Role: Main creator.",
+    platformUrl: null,
+    githubUrl: "https://github.com/StergiosCha/RAG-poetry",
+    category: "dataset"
+  },
+  // Fine-tuned Models
+  {
+    name: "Krikri-8B Base LoRA",
+    description: "Fine-tuned Llama model for Greek dialectal varieties (Cretan, Cypriot, Northern, Pontic). Trained on GRDD dataset.",
+    platformUrl: "https://huggingface.co/Stergios/krikri-8b-base-lora",
+    githubUrl: "https://github.com/StergiosCha/krikri_dialectal",
+    category: "model"
+  },
+  {
+    name: "Llama-3 8B Instruct LoRA",
+    description: "Fine-tuned Llama-3 8B for Greek dialectal NLP.",
+    platformUrl: "https://huggingface.co/Stergios/llama3-8b-instruct-lora",
+    githubUrl: "https://github.com/StergiosCha/krikri_dialectal",
+    category: "model"
+  },
+  {
+    name: "Llama-3.1 8B Instruct LoRA",
+    description: "Fine-tuned Llama-3.1 8B for Greek dialectal NLP.",
+    platformUrl: "https://huggingface.co/Stergios/llama3.1-8b-instruct-lora",
+    githubUrl: "https://github.com/StergiosCha/krikri_dialectal",
+    category: "model"
   },
 ];
 
