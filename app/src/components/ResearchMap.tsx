@@ -1,209 +1,662 @@
 import { useState, useRef, useEffect } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-interface ResearchNode {
-  id: string;
-  label: string;
+interface ResearchArea {
+  id: number;
+  title: string;
+  shortTitle: string;
+  description: string;
+  methodology: 'computational' | 'formal' | 'bridge';
   x: number;
   y: number;
   size: number;
-  color: string;
-  group: 'core' | 'nlp' | 'formal' | 'applied' | 'resource';
+  publicationCount: number;
+  publications: Array<{ code: string; title?: string }>;
+  software?: Array<{ code: string; name: string }>;
+  datasets?: Array<{ code: string; name: string }>;
 }
 
-interface ResearchEdge {
-  from: string;
-  to: string;
+interface ResearchConnection {
+  from: number;
+  to: number;
+  strength: 'strong' | 'medium' | 'weak';
 }
 
-const nodes: ResearchNode[] = [
-  // Core hub
-  { id: 'comp-ling', label: 'Computational\nLinguistics', x: 400, y: 260, size: 38, color: '#D06D48', group: 'core' },
-
-  // NLP cluster (left)
-  { id: 'nli', label: 'Natural Language\nInference', x: 160, y: 140, size: 28, color: '#111', group: 'nlp' },
-  { id: 'dialogue', label: 'Dialogue\nModelling', x: 100, y: 280, size: 24, color: '#111', group: 'nlp' },
-  { id: 'sentiment', label: 'Sentiment\nAnalysis', x: 130, y: 410, size: 22, color: '#111', group: 'nlp' },
-  { id: 'metaphor', label: 'Metaphor\nDetection', x: 250, y: 440, size: 20, color: '#111', group: 'nlp' },
-  { id: 'rag', label: 'RAG & LLM\nGeneration', x: 260, y: 120, size: 26, color: '#111', group: 'nlp' },
-
-  // Formal cluster (right)
-  { id: 'mtt', label: 'Type-Theoretical\nSemantics', x: 620, y: 140, size: 28, color: '#6E6A63', group: 'formal' },
-  { id: 'itp', label: 'Theorem Proving\nfor NL', x: 700, y: 270, size: 24, color: '#6E6A63', group: 'formal' },
-  { id: 'formal-syntax', label: 'Formal\nSyntax', x: 660, y: 400, size: 22, color: '#6E6A63', group: 'formal' },
-  { id: 'prob-sem', label: 'Probabilistic\nSemantics', x: 540, y: 420, size: 22, color: '#6E6A63', group: 'formal' },
-
-  // Applied / interdisciplinary (bottom)
-  { id: 'neuro-sym', label: 'Neuro-Symbolic\nNLP', x: 400, y: 100, size: 26, color: '#D06D48', group: 'applied' },
-  { id: 'dialectology', label: 'Computational\nDialectology', x: 400, y: 440, size: 24, color: '#9E7B5A', group: 'resource' },
-  { id: 'dh', label: 'Digital\nHumanities', x: 530, y: 340, size: 20, color: '#9E7B5A', group: 'applied' },
-  { id: 'under-res', label: 'Under-Resourced\nLanguages', x: 260, y: 320, size: 22, color: '#9E7B5A', group: 'resource' },
+const researchAreas: ResearchArea[] = [
+  {
+    id: 1,
+    title: 'Deep Learning, NLU, Explainability & Neuro-Symbolic Systems',
+    shortTitle: 'Deep Learning &\nExplainability',
+    description: 'NLI evaluation, robustness testing, annotation artifacts, neuro-symbolic integration, symbolic inference with Coq, LLM critique and explanation.',
+    methodology: 'computational',
+    x: 150,
+    y: 120,
+    size: 32,
+    publicationCount: 10,
+    publications: [
+      { code: 'Π3' },
+      { code: 'Π7' },
+      { code: 'Π19' },
+      { code: 'Σ10' },
+      { code: 'Σ17' },
+      { code: 'Σ22' },
+      { code: 'Σ29' },
+      { code: 'Σ34' },
+      { code: 'Σ35' },
+      { code: 'Σ36' },
+    ],
+    software: [
+      { code: 'S-3', name: 'MEDEA' },
+      { code: 'S-5', name: 'RAG-to-Coq' },
+      { code: 'S-11', name: 'DI_detector' },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Greek NLP, Dialects & Under-Resourced Languages',
+    shortTitle: 'Greek NLP &\nDialects',
+    description: 'GRDD/GRDD+ datasets, OYXOY/SuperOYXOY benchmarks, Krikri models, fine-grained entailment for Greek, dialect identification systems.',
+    methodology: 'computational',
+    x: 300,
+    y: 80,
+    size: 32,
+    publicationCount: 5,
+    publications: [
+      { code: 'Σ1' },
+      { code: 'Σ7' },
+      { code: 'Σ8' },
+      { code: 'Σ9' },
+      { code: 'Σ15' },
+    ],
+    software: [
+      { code: 'S-11', name: 'DI_detector' },
+    ],
+    datasets: [
+      { code: 'DS-1', name: 'GRDD' },
+      { code: 'DS-2', name: 'GRDD+' },
+      { code: 'DS-3', name: 'OYXOY' },
+      { code: 'DS-4', name: 'SuperOYXOY' },
+      { code: 'DS-5', name: 'Krikri' },
+      { code: 'DS-6', name: 'Greek Dialect Corpus' },
+    ],
+  },
+  {
+    id: 3,
+    title: 'Arabic Dialect NLP & Language Distance Models',
+    shortTitle: 'Arabic Dialects &\nLanguage Distance',
+    description: 'Shami corpus, ATSAD sentiment analysis, computational dialectometry, multidimensional distance framework, LSTM-CNN sentiment models.',
+    methodology: 'computational',
+    x: 450,
+    y: 60,
+    size: 28,
+    publicationCount: 5,
+    publications: [
+      { code: 'Π10' },
+      { code: 'Σ28' },
+      { code: 'Σ30' },
+      { code: 'Σ37' },
+      { code: 'Σ40' },
+    ],
+    software: [
+      { code: 'S-7', name: 'Dialect Analyzer' },
+      { code: 'S-10', name: 'Distance Calculator' },
+    ],
+    datasets: [
+      { code: 'DS-7', name: 'Shami Corpus' },
+      { code: 'DS-8', name: 'ATSAD' },
+      { code: 'DS-9', name: 'Arabic Distance' },
+      { code: 'DS-10', name: 'Sentiment Data' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'RAG & Knowledge-Enhanced LLMs',
+    shortTitle: 'RAG & Knowledge-\nEnhanced LLMs',
+    description: 'MEDEA-NEUMOUSA platform, RAG-to-Coq pipeline, TextCraft/Simasia systems, RAG poetry generation, Zeugma neuro-symbolic reasoning.',
+    methodology: 'bridge',
+    x: 100,
+    y: 280,
+    size: 30,
+    publicationCount: 4,
+    publications: [
+      { code: 'Σ4' },
+      { code: 'Σ6' },
+      { code: 'Σ12' },
+      { code: 'ΑΣ1' },
+    ],
+    software: [
+      { code: 'S-1', name: 'MuVeS' },
+      { code: 'S-2', name: 'Plot Analyzer' },
+      { code: 'S-3', name: 'MEDEA' },
+      { code: 'S-4', name: 'TextCraft' },
+      { code: 'S-5', name: 'RAG-to-Coq' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Type-Theoretical Semantics & Proof Assistants',
+    shortTitle: 'Type Theory &\nProof Assistants',
+    description: 'Martin-Löf Type Theory, Coq proof assistant, compositional semantics (adjectives, adverbs, copredication, coordination), formal verification.',
+    methodology: 'formal',
+    x: 650,
+    y: 120,
+    size: 32,
+    publicationCount: 8,
+    publications: [
+      { code: 'Β4' },
+      { code: 'Π5' },
+      { code: 'Π6' },
+      { code: 'Π15' },
+      { code: 'Π19' },
+      { code: 'Σ42' },
+      { code: 'Σ46' },
+      { code: 'Σ48' },
+    ],
+    software: [
+      { code: 'S-12', name: 'Coq for NL Semantics' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Probabilistic & Bayesian Semantics',
+    shortTitle: 'Probabilistic &\nBayesian Semantics',
+    description: 'Bayesian Inference Semantics, predicates-as-boxes model, compositional Bayesian pragmatics, Haskell implementation, Monte Carlo methods.',
+    methodology: 'formal',
+    x: 750,
+    y: 240,
+    size: 26,
+    publicationCount: 5,
+    publications: [
+      { code: 'Β7' },
+      { code: 'Σ25' },
+      { code: 'Σ31' },
+      { code: 'Σ32' },
+      { code: 'Σ38' },
+    ],
+    software: [
+      { code: 'S-13', name: 'Compositional Bayesian Semantics' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'AI for Digital Humanities',
+    shortTitle: 'AI for Digital\nHumanities',
+    description: 'Plot Analyzer for narrative analysis, MEDEA for classical philology, NATS text analysis suite, curriculum ontology extraction, diachronic corpus analysis.',
+    methodology: 'bridge',
+    x: 550,
+    y: 350,
+    size: 28,
+    publicationCount: 4,
+    publications: [
+      { code: 'Σ2' },
+      { code: 'Σ5' },
+      { code: 'Σ6' },
+      { code: 'Σ13' },
+    ],
+    software: [
+      { code: 'S-2', name: 'Plot Analyzer' },
+      { code: 'S-3', name: 'MEDEA' },
+      { code: 'S-6', name: 'NATS' },
+      { code: 'S-7', name: 'DH Tools' },
+      { code: 'S-8', name: 'Corpus Tools' },
+    ],
+  },
+  {
+    id: 8,
+    title: 'Dialogue Modelling & Incremental Processing',
+    shortTitle: 'Dialogue Modelling &\nIncremental Processing',
+    description: 'Split utterances, fragmentary answers, DNLI dataset, afterthoughts, shared utterances, Dynamic Syntax for dialogue and incremental parsing.',
+    methodology: 'computational',
+    x: 300,
+    y: 420,
+    size: 28,
+    publicationCount: 8,
+    publications: [
+      { code: 'Β1' },
+      { code: 'Β2' },
+      { code: 'Π4' },
+      { code: 'Π8' },
+      { code: 'Π16' },
+      { code: 'Σ14' },
+      { code: 'Σ25' },
+      { code: 'Σ26' },
+    ],
+    datasets: [
+      { code: 'DS-4', name: 'Dialogue NLI (DNLI)' },
+    ],
+  },
+  {
+    id: 9,
+    title: 'Formal Syntax of Greek & Diachronic Linguistics',
+    shortTitle: 'Formal Syntax &\nDiachronic Linguistics',
+    description: 'Clitic systems (Cypriot, Griko, Pontic, Northern Greek), Dynamic Syntax framework, PCC constraints, polydefinites, fieldwork data, cross-linguistic comparison.',
+    methodology: 'formal',
+    x: 700,
+    y: 380,
+    size: 32,
+    publicationCount: 8,
+    publications: [
+      { code: 'Π1' },
+      { code: 'Π12' },
+      { code: 'Π16' },
+      { code: 'Π20' },
+      { code: 'Π21' },
+      { code: 'Π22' },
+      { code: 'Σ57' },
+      { code: 'Σ58' },
+    ],
+    software: [
+      { code: 'S-9', name: 'Syntax-Expert' },
+    ],
+  },
+  {
+    id: 10,
+    title: 'Music & Language: Shared Processing',
+    shortTitle: 'Music & Language:\nShared Processing',
+    description: 'Polyrhythm processing, shared parsing mechanisms between music and language, Dynamic Syntax framework applied to music-language interaction.',
+    methodology: 'formal',
+    x: 550,
+    y: 520,
+    size: 22,
+    publicationCount: 3,
+    publications: [
+      { code: 'Β11' },
+      { code: 'ΑΣ23' },
+      { code: 'ΑΣ26' },
+    ],
+  },
 ];
 
-const edges: ResearchEdge[] = [
-  // Core connections
-  { from: 'comp-ling', to: 'nli' },
-  { from: 'comp-ling', to: 'dialogue' },
-  { from: 'comp-ling', to: 'mtt' },
-  { from: 'comp-ling', to: 'neuro-sym' },
-  { from: 'comp-ling', to: 'dialectology' },
-  { from: 'comp-ling', to: 'under-res' },
-  { from: 'comp-ling', to: 'dh' },
-  // NLP internal
-  { from: 'nli', to: 'rag' },
-  { from: 'nli', to: 'dialogue' },
-  { from: 'sentiment', to: 'metaphor' },
-  { from: 'dialogue', to: 'sentiment' },
-  { from: 'rag', to: 'neuro-sym' },
-  // Formal internal
-  { from: 'mtt', to: 'itp' },
-  { from: 'mtt', to: 'prob-sem' },
-  { from: 'itp', to: 'formal-syntax' },
-  { from: 'formal-syntax', to: 'prob-sem' },
-  // Cross-cluster
-  { from: 'neuro-sym', to: 'mtt' },
-  { from: 'neuro-sym', to: 'nli' },
-  { from: 'dialectology', to: 'under-res' },
-  { from: 'dh', to: 'itp' },
-  { from: 'dh', to: 'dialectology' },
-  { from: 'metaphor', to: 'under-res' },
-  { from: 'prob-sem', to: 'comp-ling' },
-  { from: 'sentiment', to: 'under-res' },
+const connections: ResearchConnection[] = [
+  // Strong connections (direct methodological links)
+  { from: 1, to: 5, strength: 'strong' }, // Neuro-symbolic ↔ Type theory
+  { from: 1, to: 4, strength: 'strong' }, // DL ↔ RAG (RAG-to-Coq)
+  { from: 1, to: 2, strength: 'strong' }, // DL ↔ Greek NLP (NLI evaluation)
+  { from: 2, to: 3, strength: 'strong' }, // Greek ↔ Arabic dialects (language distance)
+  { from: 2, to: 9, strength: 'strong' }, // Greek dialects ↔ Formal syntax
+  { from: 4, to: 5, strength: 'strong' }, // RAG-to-Coq pipeline
+  { from: 4, to: 7, strength: 'strong' }, // MEDEA platform
+  { from: 5, to: 6, strength: 'medium' }, // Both formal semantics approaches
+  { from: 5, to: 8, strength: 'medium' }, // Dynamic Syntax in both
+  { from: 5, to: 9, strength: 'medium' }, // Type theory ↔ Formal syntax
+  { from: 8, to: 9, strength: 'medium' }, // Dialogue ↔ Formal syntax (Dynamic Syntax)
+  { from: 8, to: 10, strength: 'medium' }, // Dialogue ↔ Music (shared mechanisms)
+  { from: 7, to: 2, strength: 'medium' }, // DH ↔ Greek NLP
+  { from: 1, to: 7, strength: 'medium' }, // Neuro-symbolic for DH
+  { from: 3, to: 9, strength: 'weak' }, // Language distance ↔ Diachronic
 ];
-
-const groupLabels: Record<string, string> = {
-  core: 'Central Focus',
-  nlp: 'NLP & Machine Learning',
-  formal: 'Formal & Theoretical',
-  applied: 'Neuro-Symbolic & DH',
-  resource: 'Languages & Resources',
-};
-
-const groupColors: Record<string, string> = {
-  core: '#D06D48',
-  nlp: '#111',
-  formal: '#6E6A63',
-  applied: '#D06D48',
-  resource: '#9E7B5A',
-};
 
 const ResearchMap = () => {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 520 });
+  const [selectedArea, setSelectedArea] = useState<number | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 900, height: 600 });
+  const [expandedDetail, setExpandedDetail] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const w = containerRef.current.offsetWidth;
-        setDimensions({ width: w, height: Math.min(520, w * 0.65) });
+        setDimensions({ width: w, height: Math.max(600, w * 0.67) });
       }
     };
     updateDimensions();
+    const timer = setTimeout(updateDimensions, 100);
     window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateDimensions);
+    };
   }, []);
 
-  const scaleX = dimensions.width / 800;
-  const scaleY = dimensions.height / 520;
-
-  const getConnectedNodes = (nodeId: string) => {
-    return edges
-      .filter(e => e.from === nodeId || e.to === nodeId)
-      .flatMap(e => [e.from, e.to])
-      .filter(id => id !== nodeId);
+  const getConnectedAreas = (areaId: number): number[] => {
+    return connections
+      .filter(c => c.from === areaId || c.to === areaId)
+      .flatMap(c => [c.from, c.to])
+      .filter(id => id !== areaId);
   };
 
-  const isHighlighted = (nodeId: string) => {
-    if (!hoveredNode) return true;
-    return nodeId === hoveredNode || getConnectedNodes(hoveredNode).includes(nodeId);
+  const getConnectionStrength = (areaId: number, connectedId: number): ResearchConnection['strength'] | null => {
+    const conn = connections.find(
+      c => (c.from === areaId && c.to === connectedId) || (c.from === connectedId && c.to === areaId)
+    );
+    return conn ? conn.strength : null;
   };
 
-  const isEdgeHighlighted = (edge: ResearchEdge) => {
-    if (!hoveredNode) return true;
-    return edge.from === hoveredNode || edge.to === hoveredNode;
+  const isHighlighted = (areaId: number): boolean => {
+    if (!hoveredNode && !selectedArea) return true;
+    const focusId = hoveredNode || selectedArea;
+    return areaId === focusId || getConnectedAreas(focusId!).includes(areaId);
   };
+
+  const isEdgeHighlighted = (from: number, to: number): boolean => {
+    if (!hoveredNode && !selectedArea) return true;
+    const focusId = hoveredNode || selectedArea;
+    return from === focusId! || to === focusId!;
+  };
+
+  const selectedAreaData = selectedArea ? researchAreas.find(a => a.id === selectedArea) : null;
+
+  const methodologyColors = {
+    computational: '#D06D48',
+    formal: '#6E6A63',
+    bridge: '#9E7B5A',
+  };
+
+  const scaleX = dimensions.width / 900;
+  const scaleY = dimensions.height / 600;
 
   return (
-    <div ref={containerRef} className="w-full">
-      <svg
-        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-        className="w-full"
-        style={{ maxHeight: '520px' }}
-      >
-        {/* Edges */}
-        {edges.map((edge, idx) => {
-          const fromNode = nodes.find(n => n.id === edge.from)!;
-          const toNode = nodes.find(n => n.id === edge.to)!;
-          const highlighted = isEdgeHighlighted(edge);
-          return (
-            <line
-              key={idx}
-              x1={fromNode.x * scaleX}
-              y1={fromNode.y * scaleY}
-              x2={toNode.x * scaleX}
-              y2={toNode.y * scaleY}
-              stroke={highlighted ? '#111' : '#111'}
-              strokeWidth={highlighted ? 1 : 0.5}
-              strokeOpacity={hoveredNode ? (highlighted ? 0.25 : 0.05) : 0.12}
-              strokeDasharray={highlighted && hoveredNode ? 'none' : '4 4'}
-              style={{ transition: 'all 0.3s ease' }}
+    <div ref={containerRef} className="w-full bg-gradient-to-b from-[#E9E6E1] to-[#F5F3F0] rounded-lg overflow-hidden">
+      <div className="p-6 sm:p-8">
+        {/* Legend */}
+        <div className="mb-6 flex flex-wrap gap-4 justify-center">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: methodologyColors.computational }}
             />
-          );
-        })}
-
-        {/* Nodes */}
-        {nodes.map(node => {
-          const highlighted = isHighlighted(node.id);
-          const isHovered = hoveredNode === node.id;
-          const lines = node.label.split('\n');
-          return (
-            <g
-              key={node.id}
-              onMouseEnter={() => setHoveredNode(node.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-              style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
-              opacity={hoveredNode ? (highlighted ? 1 : 0.15) : 1}
-            >
-              <circle
-                cx={node.x * scaleX}
-                cy={node.y * scaleY}
-                r={node.size * (isHovered ? 1.15 : 1) * Math.min(scaleX, scaleY)}
-                fill={node.color}
-                fillOpacity={isHovered ? 0.15 : 0.08}
-                stroke={node.color}
-                strokeWidth={isHovered ? 2 : 1}
-                strokeOpacity={isHovered ? 0.6 : 0.3}
-                style={{ transition: 'all 0.3s ease' }}
-              />
-              {lines.map((line, i) => (
-                <text
-                  key={i}
-                  x={node.x * scaleX}
-                  y={node.y * scaleY + (i - (lines.length - 1) / 2) * 12}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill={node.color}
-                  fontSize={node.group === 'core' ? 11 : 10}
-                  fontFamily="'Space Grotesk', sans-serif"
-                  fontWeight={node.group === 'core' || isHovered ? 600 : 500}
-                  style={{ transition: 'all 0.3s ease', pointerEvents: 'none' }}
-                >
-                  {line}
-                </text>
-              ))}
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* Legend */}
-      <div className="flex flex-wrap gap-4 justify-center mt-4">
-        {Object.entries(groupLabels).filter(([key]) => key !== 'core').map(([key, label]) => (
-          <div key={key} className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: groupColors[key] }} />
-            <span className="text-[10px] font-mono text-[#6E6A63] uppercase tracking-wide">{label}</span>
+            <span className="text-xs font-medium text-[#6E6A63] uppercase tracking-tight">Computational</span>
           </div>
-        ))}
+          <div className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: methodologyColors.formal }}
+            />
+            <span className="text-xs font-medium text-[#6E6A63] uppercase tracking-tight">Formal</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: methodologyColors.bridge }}
+            />
+            <span className="text-xs font-medium text-[#6E6A63] uppercase tracking-tight">Neuro-Symbolic Bridge</span>
+          </div>
+        </div>
+
+        {/* SVG Map */}
+        <div className="mb-6 bg-white rounded-lg p-4 shadow-sm border border-[#D06D48]/10">
+          <svg
+            viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            className="w-full"
+            style={{ maxHeight: '600px', minHeight: '400px' }}
+          >
+            {/* Connection lines */}
+            {connections.map((conn, idx) => {
+              const fromArea = researchAreas.find(a => a.id === conn.from)!;
+              const toArea = researchAreas.find(a => a.id === conn.to)!;
+              const highlighted = isEdgeHighlighted(conn.from, conn.to);
+
+              const strokeWidthMap = {
+                strong: 2,
+                medium: 1.5,
+                weak: 1,
+              };
+
+              const opacityMap = {
+                strong: 0.25,
+                medium: 0.15,
+                weak: 0.08,
+              };
+
+              return (
+                <line
+                  key={`edge-${idx}`}
+                  x1={fromArea.x * scaleX}
+                  y1={fromArea.y * scaleY}
+                  x2={toArea.x * scaleX}
+                  y2={toArea.y * scaleY}
+                  stroke="#111"
+                  strokeWidth={highlighted ? strokeWidthMap[conn.strength] : strokeWidthMap[conn.strength] * 0.6}
+                  strokeOpacity={highlighted ? opacityMap[conn.strength] : opacityMap[conn.strength] * 0.4}
+                  strokeDasharray={conn.strength === 'weak' ? '3 3' : 'none'}
+                  style={{ transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  pointerEvents="none"
+                />
+              );
+            })}
+
+            {/* Area nodes */}
+            {researchAreas.map(area => {
+              const highlighted = isHighlighted(area.id);
+              const isSelected = selectedArea === area.id;
+              const isHovered = hoveredNode === area.id;
+              const color = methodologyColors[area.methodology];
+
+              return (
+                <g
+                  key={`area-${area.id}`}
+                  onMouseEnter={() => setHoveredNode(area.id)}
+                  onMouseLeave={() => setHoveredNode(null)}
+                  onClick={() => {
+                    setSelectedArea(selectedArea === area.id ? null : area.id);
+                    setExpandedDetail(true);
+                  }}
+                  style={{
+                    cursor: 'pointer',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                  opacity={highlighted ? 1 : 0.25}
+                >
+                  {/* Glow effect for selected */}
+                  {isSelected && (
+                    <circle
+                      cx={area.x * scaleX}
+                      cy={area.y * scaleY}
+                      r={(area.size * 1.4) * Math.min(scaleX, scaleY)}
+                      fill={color}
+                      fillOpacity={0.12}
+                    />
+                  )}
+
+                  {/* Main circle */}
+                  <circle
+                    cx={area.x * scaleX}
+                    cy={area.y * scaleY}
+                    r={(area.size * (isHovered || isSelected ? 1.2 : 1)) * Math.min(scaleX, scaleY)}
+                    fill={color}
+                    fillOpacity={isHovered || isSelected ? 0.15 : 0.08}
+                    stroke={color}
+                    strokeWidth={isHovered || isSelected ? 2.5 : 1.5}
+                    strokeOpacity={isHovered || isSelected ? 0.7 : 0.4}
+                    style={{ transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  />
+
+                  {/* Label */}
+                  <text
+                    x={area.x * scaleX}
+                    y={area.y * scaleY - 5}
+                    textAnchor="middle"
+                    fill={color}
+                    fontSize={isHovered || isSelected ? 11 : 10}
+                    fontWeight={isHovered || isSelected ? 700 : 600}
+                    fontFamily="'Space Grotesk', sans-serif"
+                    style={{
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {area.id}
+                  </text>
+
+                  {/* Publication count badge */}
+                  <circle
+                    cx={area.x * scaleX + 12 * Math.min(scaleX, scaleY)}
+                    cy={area.y * scaleY - 10 * Math.min(scaleX, scaleY)}
+                    r={5 * Math.min(scaleX, scaleY)}
+                    fill="#D06D48"
+                    fillOpacity={0.9}
+                  />
+                  <text
+                    x={area.x * scaleX + 12 * Math.min(scaleX, scaleY)}
+                    y={area.y * scaleY - 10 * Math.min(scaleX, scaleY)}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="white"
+                    fontSize={7}
+                    fontWeight={700}
+                    fontFamily="'Space Grotesk', sans-serif"
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    {area.publicationCount}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Legend explanation */}
+        <div className="text-center text-xs text-[#6E6A63] mb-4">
+          <p className="mb-2">Click on any area to see details. Circle size indicates publication count.</p>
+        </div>
+
+        {/* Detail panel */}
+        {selectedAreaData && (
+          <div
+            ref={detailRef}
+            className="bg-white rounded-lg border-l-4 p-6 shadow-sm transition-all"
+            style={{ borderLeftColor: methodologyColors[selectedAreaData.methodology] }}
+          >
+            <div
+              className="flex justify-between items-start gap-4 cursor-pointer"
+              onClick={() => setExpandedDetail(!expandedDetail)}
+            >
+              <div className="flex-1">
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-xs font-semibold text-[#D06D48] uppercase tracking-tight">
+                    Area {selectedAreaData.id}
+                  </span>
+                  <span className="text-xs text-[#6E6A63]">
+                    {selectedAreaData.methodology === 'computational'
+                      ? 'Computational'
+                      : selectedAreaData.methodology === 'formal'
+                        ? 'Formal & Theoretical'
+                        : 'Neuro-Symbolic Bridge'}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-[#111] mb-2">{selectedAreaData.title}</h3>
+                {expandedDetail && (
+                  <p className="text-sm text-[#6E6A63] leading-relaxed mb-4">{selectedAreaData.description}</p>
+                )}
+              </div>
+              <button className="text-[#D06D48] flex-shrink-0 mt-1">
+                {expandedDetail ? (
+                  <ChevronUp size={20} />
+                ) : (
+                  <ChevronDown size={20} />
+                )}
+              </button>
+            </div>
+
+            {expandedDetail && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4 pt-4 border-t border-[#E9E6E1]">
+                {/* Publications */}
+                <div>
+                  <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">
+                    Key Publications ({selectedAreaData.publications.length})
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedAreaData.publications.map(pub => (
+                      <span
+                        key={pub.code}
+                        className="inline-block bg-[#D06D48]/10 text-[#D06D48] text-xs font-semibold px-2 py-1 rounded"
+                      >
+                        {pub.code}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Software */}
+                {selectedAreaData.software && selectedAreaData.software.length > 0 && (
+                  <div>
+                    <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">
+                      Software ({selectedAreaData.software.length})
+                    </h4>
+                    <div className="space-y-2">
+                      {selectedAreaData.software.map(soft => (
+                        <div key={soft.code} className="text-xs">
+                          <span className="font-semibold text-[#6E6A63]">{soft.code}</span>
+                          <span className="text-[#9E7B5A]">: {soft.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Datasets */}
+                {selectedAreaData.datasets && selectedAreaData.datasets.length > 0 && (
+                  <div>
+                    <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">
+                      Datasets ({selectedAreaData.datasets.length})
+                    </h4>
+                    <div className="space-y-2">
+                      {selectedAreaData.datasets.map(dataset => (
+                        <div key={dataset.code} className="text-xs">
+                          <span className="font-semibold text-[#6E6A63]">{dataset.code}</span>
+                          <span className="text-[#9E7B5A]">: {dataset.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {expandedDetail && (
+              <div className="mt-4 pt-4 border-t border-[#E9E6E1]">
+                <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">
+                  Related Areas
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {getConnectedAreas(selectedAreaData.id).map(connectedId => {
+                    const strength = getConnectionStrength(selectedAreaData.id, connectedId);
+                    const connectedArea = researchAreas.find(a => a.id === connectedId);
+                    return (
+                      <button
+                        key={connectedId}
+                        onClick={() => setSelectedArea(connectedId)}
+                        className="text-xs px-3 py-1 rounded transition-colors"
+                        style={{
+                          backgroundColor:
+                            strength === 'strong'
+                              ? '#D06D48/20'
+                              : strength === 'medium'
+                                ? '#9E7B5A/15'
+                                : '#6E6A63/10',
+                          color:
+                            strength === 'strong'
+                              ? '#D06D48'
+                              : strength === 'medium'
+                                ? '#9E7B5A'
+                                : '#6E6A63',
+                          border: `1px solid ${
+                            strength === 'strong'
+                              ? '#D06D48/30'
+                              : strength === 'medium'
+                                ? '#9E7B5A/20'
+                                : '#6E6A63/20'
+                          }`,
+                        }}
+                        title={`${strength === 'strong' ? 'Strong' : strength === 'medium' ? 'Medium' : 'Weak'} connection`}
+                      >
+                        <span className="font-semibold">#{connectedId}</span> {connectedArea?.shortTitle.split('\n')[0]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {!selectedAreaData && (
+          <div className="text-center text-sm text-[#6E6A63] py-4">
+            Click on any research area to view details
+          </div>
+        )}
       </div>
     </div>
   );
