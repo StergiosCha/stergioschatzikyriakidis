@@ -202,9 +202,8 @@ const HeroSection = () => {
               <ArrowRight size={18} />
             </a>
             <a
-              href="https://raw.githubusercontent.com/StergiosCha/stergioschatzikyriakidis/main/cv.md"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/stergioschatzikyriakidis/cv_cha.pdf"
+              download="cv_cha.pdf"
               className="btn-secondary"
             >
               <Download size={18} />
