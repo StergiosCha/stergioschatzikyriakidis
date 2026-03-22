@@ -10,7 +10,7 @@ const NewsResearchSection = () => {
     <section
       id="news-research"
       className="relative z-[60] py-16"
-      style={{ backgroundColor: '#DDD9D2' }}
+      style={{ backgroundColor: '#DDD9D2', scrollMarginTop: '4rem' }}
     >
       {/* Top divider line */}
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-10">
