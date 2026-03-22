@@ -23,6 +23,13 @@ export const tools: Tool[] = [
     category: "application"
   },
   {
+    name: "Plot Analyzer",
+    description: "Bidirectional neuro-symbolic narrative analysis platform with 8-stage hybrid architecture: neural perception via LLMs, symbolic reasoning based on 5 narrative theories (Aristotelian Poetics, Russian Formalism, etc.), bidirectional feedback loop, 14-type conflict taxonomy, and chunking & reconciliation for long texts. Role: Main developer.",
+    platformUrl: null,
+    githubUrl: "https://github.com/StergiosCha/plot_analyzer",
+    category: "application"
+  },
+  {
     name: "Simasia-Studio (TextCraft)",
     description: "AI text editor and translator with RAG for domain-specific translation, grammar/style analysis, track changes output. Role: Main developer.",
     platformUrl: "https://textcraft-ai.onrender.com",
@@ -93,6 +100,13 @@ export const tools: Tool[] = [
     category: "code"
   },
   // Datasets (from CV)
+  {
+    name: "HeptaTax",
+    description: "Dataset and benchmark for classification of 16th-century Heptanesian notarial acts, with neuro-symbolic classification system and evaluation. Role: Principal contributor.",
+    platformUrl: null,
+    githubUrl: "https://github.com/StergiosCha/HeptaTAX",
+    category: "dataset"
+  },
   {
     name: "GRDD/GRDD+",
     description: "Greek Regional Dialects: 11 varieties, ~7M words. Role: Main creator.",
