@@ -63,7 +63,18 @@ const ResearchSection = () => {
   const scrollToOutputs = () => {
     window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: 'publications' }));
     const element = document.getElementById('outputs');
-    if (element) {
+    if (!element) return;
+
+    // Use pin-aware scroll like Navigation does
+    const allTriggers = ScrollTrigger.getAll();
+    const pinTrigger = allTriggers.find(
+      (st) => st.vars.pin && st.trigger === element
+    );
+
+    if (pinTrigger) {
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.4;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    } else {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
