@@ -4,7 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
-import { conferenceTalks, invitedTalks, posters, Talk } from '../data/talks';
+import { conferenceTalks, invitedTalks, posters } from '../data/talks';
+import type { Talk } from '../data/talks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
