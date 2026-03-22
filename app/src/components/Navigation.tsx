@@ -35,11 +35,19 @@ const Navigation = () => {
     );
 
     if (pinTrigger) {
-      // Scroll to 40% into the pin range so entrance animation (0-30%) has finished
       const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.4;
-      window.scrollTo({ top: target, behavior: 'smooth' });
+      // Jump near the target instantly, then smooth-scroll the last 200px
+      window.scrollTo({ top: Math.max(0, target - 200), behavior: 'instant' });
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: target, behavior: 'smooth' });
+      });
     } else {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const rect = element.getBoundingClientRect();
+      const targetTop = window.scrollY + rect.top - 64;
+      window.scrollTo({ top: Math.max(0, targetTop - 200), behavior: 'instant' });
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      });
     }
   };
 
@@ -49,7 +57,6 @@ const Navigation = () => {
     { label: 'Publications', id: 'outputs', tab: 'publications' },
     { label: 'Talks', id: 'outputs', tab: 'talks' },
     { label: 'Software', id: 'outputs', tab: 'software' },
-    { label: 'Novelist', id: 'novelist' },
     { label: 'News', id: 'news-research' },
     { label: 'Contact', id: 'contact' },
   ];
