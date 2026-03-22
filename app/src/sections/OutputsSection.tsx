@@ -195,19 +195,19 @@ const OutputsSection = () => {
               Complete list of academic publications, invited talks, conference presentations, software systems, and datasets.
             </p>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-[#111]/5 h-auto">
-                <TabsTrigger value="publications" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
-                  <BookOpen size={14} className="mr-1" />
+            <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full">
+              <TabsList className="flex flex-col w-full bg-[#111]/5 h-auto gap-1 p-1">
+                <TabsTrigger value="publications" className="w-full data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2.5 justify-start px-3">
+                  <BookOpen size={14} className="mr-2 shrink-0" />
                   Publications
                 </TabsTrigger>
-                <TabsTrigger value="talks" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
-                  <Mic size={14} className="mr-1" />
-                  Talks
+                <TabsTrigger value="talks" className="w-full data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2.5 justify-start px-3">
+                  <Mic size={14} className="mr-2 shrink-0" />
+                  Talks & Presentations
                 </TabsTrigger>
-                <TabsTrigger value="software" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
-                  <FileText size={14} className="mr-1" />
-                  Software
+                <TabsTrigger value="software" className="w-full data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2.5 justify-start px-3">
+                  <FileText size={14} className="mr-2 shrink-0" />
+                  Software & Datasets
                 </TabsTrigger>
               </TabsList>
             </Tabs>
