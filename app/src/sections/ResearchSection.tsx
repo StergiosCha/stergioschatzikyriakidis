@@ -63,27 +63,8 @@ const ResearchSection = () => {
   const scrollToOutputs = () => {
     window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: 'publications' }));
     const element = document.getElementById('outputs');
-    if (!element) return;
-
-    // Use pin-aware scroll like Navigation does
-    const allTriggers = ScrollTrigger.getAll();
-    const pinTrigger = allTriggers.find(
-      (st) => st.vars.pin && st.trigger === element
-    );
-
-    if (pinTrigger) {
-      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.4;
-      window.scrollTo({ top: Math.max(0, target - 200), behavior: 'instant' });
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: target, behavior: 'smooth' });
-      });
-    } else {
-      const rect = element.getBoundingClientRect();
-      const targetTop = window.scrollY + rect.top - 64;
-      window.scrollTo({ top: Math.max(0, targetTop - 200), behavior: 'instant' });
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop, behavior: 'smooth' });
-      });
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

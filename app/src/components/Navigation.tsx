@@ -35,19 +35,11 @@ const Navigation = () => {
     );
 
     if (pinTrigger) {
-      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.4;
-      // Jump near the target instantly, then smooth-scroll the last 200px
-      window.scrollTo({ top: Math.max(0, target - 200), behavior: 'instant' });
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: target, behavior: 'smooth' });
-      });
+      // Scroll to 20% into the pin range so content is visible
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.2;
+      window.scrollTo({ top: target, behavior: 'smooth' });
     } else {
-      const rect = element.getBoundingClientRect();
-      const targetTop = window.scrollY + rect.top - 64;
-      window.scrollTo({ top: Math.max(0, targetTop - 200), behavior: 'instant' });
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop, behavior: 'smooth' });
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
