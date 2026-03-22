@@ -10,7 +10,7 @@ export interface Publication {
 }
 
 export const publications: Publication[] = [
-  { number: 1, title: "Dialogical Interaction, Types, and the Structure of Meaning", authors: "Gregoromichelaki, E., Chatzikyriakidis, S., Cooper, R. and Sutton P.", venue: "Cambridge Elements in Semantics series, CUP", year: "2026", link: null, pdfLink: null, type: "monograph" },
+  { number: 1, title: "Dialogical Interaction, Types, and the Structure of Meaning", authors: "Gregoromichelaki, E., Chatzikyriakidis, S., Cooper, R. and Sutton P.", venue: "Cambridge Elements in Semantics series, CUP", year: "To appear, 2026", link: null, pdfLink: null, type: "monograph" },
   { number: 2, title: "Theories of Types and the Structure of Meaning", authors: "Chatzikyriakidis, S., Cooper, R., Gregoromichelaki, E. and Sutton P.", venue: "Cambridge Elements in Semantics series, CUP", year: "2025", link: null, pdfLink: "https://resolve.cambridge.org/core/services/aop-cambridge-core/content/view/27C1813D046DADA53FC6A2BEC505E941/9781009619356AR.pdf/types-and-the-structure-of-meaning.pdf", type: "monograph" },
   { number: 3, title: "Artificial Intelligence and Large Language Models: History, Uses, Concerns", authors: "Chatzikyriakidis, S.", venue: "Diavlos press (in Greek)", year: "2024", link: "https://www.politeianet.gr/el/products/9789605315115-stergios-xajhkuriakidhs-diaflos-texnhth-nohmosunh-kai-megala-glossika-modela-istoria-xrhseis-anhsuxies", pdfLink: null, type: "monograph" },
   { number: 4, title: "Formal Semantics in Modern Type Theories", authors: "Chatzikyriakidis, S. and Luo, Z.", venue: "ISTE/Wiley Science", year: "2020", link: "https://www.wiley.com/en-us/Formal+Semantics+in+Modern+Type+Theories-p-9781786301260", pdfLink: null, type: "monograph" },
