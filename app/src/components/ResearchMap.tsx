@@ -19,7 +19,7 @@ interface ResearchArea {
 const areas: ResearchArea[] = [
   {
     id: 'dl-nlu',
-    label: 'Deep Learning & Explainability',
+    label: 'Μοντέλα Βαθιάς Μάθησης, Κατανόηση Φυσικής Γλώσσας, Εξηγησιμότητα και Νευροσυμβολικά Συστήματα',
     methodology: 'computational',
     description: 'NLI evaluation, annotation artifacts, neuro-symbolic integration with Coq, LLM critique and explanation.',
     publications: [
@@ -41,7 +41,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'greek-nlp',
-    label: 'Greek NLP & Dialects',
+    label: 'Επεξεργασία Φυσικής Γλώσσας για την Ελληνική, τους Διαλέκτους της και Υποεκπροσωπούμενες Γλώσσες',
     methodology: 'computational',
     description: 'GRDD/GRDD+ dialect datasets, OYXOY/SuperOYXOY benchmarks, Krikri models, dialect identification.',
     publications: [
@@ -56,7 +56,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'arabic',
-    label: 'Arabic Dialects & Language Distance',
+    label: 'Επεξεργασία Φυσικής Γλώσσας για Αραβικές Διαλέκτους και Μοντέλα Γλωσσικής Απόστασης',
     methodology: 'computational',
     description: 'Shami corpus, ATSAD sentiment analysis, computational dialectometry, language distance frameworks.',
     publications: [
@@ -69,7 +69,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'rag',
-    label: 'RAG & Knowledge-Enhanced LLMs',
+    label: 'Επαυξημένη Ανάκληση και Μεγάλα Γλωσσικά Μοντέλα Εμπλουτισμένα με Γνώση',
     methodology: 'bridge',
     description: 'MEDEA-NEUMOUSA for classical philology, RAG-to-Coq verification, TextCraft, poetry generation.',
     publications: [
@@ -84,7 +84,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'type-theory',
-    label: 'Type Theory & Proof Assistants',
+    label: 'Τυπική Σημασιολογία με Σύγχρονες Θεωρίες Τύπων και Βοηθούς Αποδείξεων',
     methodology: 'formal',
     description: 'Martin-Löf Type Theory for NL semantics, Coq for adjectives, adverbs, copredication, coordination.',
     publications: [
@@ -101,7 +101,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'bayesian',
-    label: 'Bayesian Semantics',
+    label: 'Πιθανοκρατική και Μπαγιεσιανή Σημασιολογία',
     methodology: 'formal',
     description: 'Bayesian Inference Semantics, predicates-as-boxes, compositional pragmatics, Monte Carlo, Haskell.',
     publications: [
@@ -116,7 +116,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'digital-humanities',
-    label: 'AI for Digital Humanities',
+    label: 'Εφαρμογές Τεχνητής Νοημοσύνης για τις Ψηφιακές Ανθρωπιστικές Επιστήμες',
     methodology: 'bridge',
     description: 'Plot Analyzer for narrative, MEDEA for classical texts, NATS text analysis, ontology extraction.',
     publications: [
@@ -129,7 +129,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'dialogue',
-    label: 'Dialogue & Incremental Parsing',
+    label: 'Διαλογική Μοντελοποίηση και Σταδιακή Επεξεργασία',
     methodology: 'computational',
     description: 'Split utterances, fragmentary answers, afterthoughts, shared utterances, Dynamic Syntax, DNLI.',
     publications: [
@@ -143,7 +143,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'formal-syntax',
-    label: 'Greek Formal Syntax',
+    label: 'Τυπική Σύνταξη Ελληνιικής,  Διαλέκτων και Διαχρονική Γλωσσολογία',
     methodology: 'formal',
     description: 'Clitic systems (Cypriot, Griko, Pontic, Northern Greek), Dynamic Syntax, PCC, polydefinites.',
     publications: [
@@ -157,7 +157,7 @@ const areas: ResearchArea[] = [
   },
   {
     id: 'music',
-    label: 'Music & Language',
+    label: 'Μουσική και Γλώσσα: Κοινές Στρατηγικές Επεξεργασίας',
     methodology: 'formal',
     description: 'Polyrhythm processing, shared parsing mechanisms, Dynamic Syntax for music-language interaction.',
     publications: [
