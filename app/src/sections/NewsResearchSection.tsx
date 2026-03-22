@@ -10,8 +10,13 @@ const NewsResearchSection = () => {
     <section
       id="news-research"
       className="relative z-[60] py-16"
-      style={{ backgroundColor: '#E9E6E1' }}
+      style={{ backgroundColor: '#DDD9D2' }}
     >
+      {/* Top divider line */}
+      <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-10">
+        <div className="h-px bg-[#111]/10" />
+      </div>
+
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
         {/* Latest News - always visible */}
         <div className="mb-12">
