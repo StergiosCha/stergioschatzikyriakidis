@@ -35,9 +35,13 @@ const Navigation = () => {
     );
 
     if (pinTrigger) {
-      // Scroll to 20% into the pin range so content is visible
-      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.2;
+      // Scroll to 50% into the pin range (well past entrance animations)
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.5;
       window.scrollTo({ top: target, behavior: 'smooth' });
+      // Force GSAP to catch up immediately so content isn't blank
+      setTimeout(() => ScrollTrigger.update(), 50);
+      setTimeout(() => ScrollTrigger.update(), 200);
+      setTimeout(() => ScrollTrigger.update(), 500);
     } else {
       element.scrollIntoView({ behavior: 'smooth' });
     }
