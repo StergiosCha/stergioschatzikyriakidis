@@ -1,9 +1,10 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
+import { conferenceTalks, invitedTalks, posters, Talk } from '../data/talks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -56,8 +57,10 @@ const OutputsSection = () => {
   }, []);
 
   const monographs = getPublicationsByType('monograph');
+  const chapters = getPublicationsByType('chapter');
   const edited = getPublicationsByType('edited');
   const journals = getPublicationsByType('journal');
+  const otherJournals = getPublicationsByType('other_journal');
   const conferences = getPublicationsByType('conference');
   const applications = getToolsByCategory('application');
   const datasets = getToolsByCategory('dataset');
@@ -123,6 +126,24 @@ const OutputsSection = () => {
     <PubContent pub={pub} />
   );
 
+  const TalkCard = ({ talk }: { talk: Talk }) => (
+    <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200">
+      <div className="flex gap-2 items-start">
+        <span className="text-[#D06D48] font-mono text-xs font-medium shrink-0 mt-0.5">[{talk.number}]</span>
+        <div className="flex-1 min-w-0">
+          <h4 className="font-display font-semibold text-[#111] text-sm leading-snug">
+            {talk.title}
+          </h4>
+          <p className="text-xs text-[#6E6A63] mb-1 leading-snug">{talk.authors}</p>
+          <p className="text-xs text-[#6E6A63] leading-snug">
+            <span>{talk.venue}, </span>
+            <span className="font-medium">{talk.year}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   const ToolCard = ({ tool }: { tool: typeof tools[0] }) => (
     <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200">
       <h4 className="font-display font-semibold text-[#111] text-sm mb-1 leading-snug">
@@ -168,16 +189,20 @@ const OutputsSection = () => {
           {/* Left Column - Header */}
           <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0">
             <span className="label mb-3 block text-xs">Research Outputs</span>
-            <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">Publications, Software & Datasets</h2>
+            <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">Publications, Talks & Software</h2>
             <p className="text-[#6E6A63] mb-6 text-sm leading-relaxed">
-              Complete list of academic publications (1-99), conference abstracts (100-114), software systems, and datasets.
+              Complete list of academic publications, invited talks, conference presentations, software systems, and datasets.
             </p>
-            
+
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-[#111]/5 h-auto">
+              <TabsList className="grid w-full grid-cols-3 bg-[#111]/5 h-auto">
                 <TabsTrigger value="publications" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
                   <BookOpen size={14} className="mr-1" />
                   Publications
+                </TabsTrigger>
+                <TabsTrigger value="talks" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
+                  <Mic size={14} className="mr-1" />
+                  Talks
                 </TabsTrigger>
                 <TabsTrigger value="software" className="data-[state=active]:bg-[#111] data-[state=active]:text-white text-xs py-2">
                   <FileText size={14} className="mr-1" />
@@ -206,12 +231,27 @@ const OutputsSection = () => {
                   </CardContent>
                 </Card>
 
+                {/* Book Chapters */}
+                <Card className="bg-white/50 border-none shadow-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <BookOpen size={16} className="text-[#D06D48]" />
+                      B. Book Chapters (5-12)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 gap-1">
+                    {chapters.map((pub, idx) => (
+                      <PublicationCard key={idx} pub={pub} />
+                    ))}
+                  </CardContent>
+                </Card>
+
                 {/* Edited Volumes */}
                 <Card className="bg-white/50 border-none shadow-sm">
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Users size={16} className="text-[#D06D48]" />
-                      B. Edited Books/Volumes (5-15)
+                      C. Edited Books/Volumes (13-24)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -226,22 +266,25 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <FileText size={16} className="text-[#D06D48]" />
-                      C. Journal Papers (16-37)
+                      D. Journal Papers (25-49)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
                     {journals.map((pub, idx) => (
                       <PublicationCard key={idx} pub={pub} />
                     ))}
+                    {otherJournals.map((pub, idx) => (
+                      <PublicationCard key={`oj-${idx}`} pub={pub} />
+                    ))}
                   </CardContent>
                 </Card>
 
-                {/* Conference Papers */}
+                {/* Conference Proceedings */}
                 <Card className="bg-white/50 border-none shadow-sm">
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Mic size={16} className="text-[#D06D48]" />
-                      D. Book Chapters, Conference Proceedings (38-99)
+                      E. Conference Proceedings (50-107)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -256,12 +299,59 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <ExternalLink size={16} className="text-[#D06D48]" />
-                      E. Conferences/Workshops with Peer-Reviewed Abstracts (100-114)
+                      F. Peer-Reviewed Abstracts (108-138)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
                     {abstracts.map((pub, idx) => (
                       <AbstractCard key={idx} pub={pub} />
+                    ))}
+                  </CardContent>
+                </Card>
+              </div>
+            ) : activeTab === 'talks' ? (
+              <div className="space-y-8">
+                {/* Invited Talks */}
+                <Card className="bg-white/50 border-none shadow-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Star size={16} className="text-[#D06D48]" />
+                      Invited Talks ({invitedTalks.length})
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 gap-1">
+                    {invitedTalks.map((talk, idx) => (
+                      <TalkCard key={idx} talk={talk} />
+                    ))}
+                  </CardContent>
+                </Card>
+
+                {/* Conference Talks */}
+                <Card className="bg-white/50 border-none shadow-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <MessageSquare size={16} className="text-[#D06D48]" />
+                      Conference/Workshop Presentations ({conferenceTalks.length})
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 gap-1">
+                    {conferenceTalks.map((talk, idx) => (
+                      <TalkCard key={idx} talk={talk} />
+                    ))}
+                  </CardContent>
+                </Card>
+
+                {/* Posters */}
+                <Card className="bg-white/50 border-none shadow-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Image size={16} className="text-[#D06D48]" />
+                      Posters ({posters.length})
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 gap-1">
+                    {posters.map((talk, idx) => (
+                      <TalkCard key={idx} talk={talk} />
                     ))}
                   </CardContent>
                 </Card>
