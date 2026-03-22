@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ResearchSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const arcRef = useRef<SVGSVGElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -26,14 +25,6 @@ const ResearchSection = () => {
       });
 
       // ENTRANCE (0-30%)
-      // Accent arc
-      scrollTl.fromTo(
-        arcRef.current,
-        { x: '-60vw', rotation: -35, scale: 0.7, opacity: 0 },
-        { x: 0, rotation: 0, scale: 1, opacity: 1, ease: 'none' },
-        0
-      );
-
       // Research photo
       scrollTl.fromTo(
         photoRef.current,
@@ -53,12 +44,6 @@ const ResearchSection = () => {
       // SETTLE (30-70%): Hold
 
       // EXIT (70-100%)
-      scrollTl.to(
-        arcRef.current,
-        { y: '-20vh', rotation: 25, opacity: 0.25, ease: 'power2.in' },
-        0.7
-      );
-
       scrollTl.to(
         photoRef.current,
         { y: '20vh', opacity: 0.25, ease: 'power2.in' },
@@ -90,27 +75,6 @@ const ResearchSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="section-content">
-        {/* Accent Arc */}
-        <svg
-          ref={arcRef}
-          className="accent-shape"
-          style={{
-            left: '6vw',
-            top: '10vh',
-            width: '40vw',
-            height: '40vw',
-          }}
-          viewBox="0 0 200 200"
-        >
-          <path
-            d="M 20 100 A 80 80 0 1 1 180 100"
-            fill="none"
-            stroke="#D06D48"
-            strokeWidth="24"
-            strokeLinecap="round"
-          />
-        </svg>
-
         {/* Research Photo */}
         <div
           className="absolute overflow-hidden"

@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const NovelistSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const ringRef = useRef<SVGSVGElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -26,14 +25,6 @@ const NovelistSection = () => {
       });
 
       // ENTRANCE (0-30%)
-      // Accent ring
-      scrollTl.fromTo(
-        ringRef.current,
-        { scale: 0.6, rotation: -25, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, ease: 'none' },
-        0
-      );
-
       // Novelist photo
       scrollTl.fromTo(
         photoRef.current,
@@ -53,12 +44,6 @@ const NovelistSection = () => {
       // SETTLE (30-70%): Hold
 
       // EXIT (70-100%)
-      scrollTl.to(
-        ringRef.current,
-        { scale: 1.3, opacity: 0.25, ease: 'power2.in' },
-        0.7
-      );
-
       scrollTl.to(
         photoRef.current,
         { x: '-18vw', opacity: 0.25, ease: 'power2.in' },
@@ -83,28 +68,6 @@ const NovelistSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="section-content">
-        {/* Accent Ring */}
-        <svg
-          ref={ringRef}
-          className="accent-shape"
-          style={{
-            left: '8vw',
-            top: '10vh',
-            width: '36vw',
-            height: '36vw',
-          }}
-          viewBox="0 0 200 200"
-        >
-          <circle
-            cx="100"
-            cy="100"
-            r="85"
-            fill="none"
-            stroke="#D06D48"
-            strokeWidth="16"
-          />
-        </svg>
-
         {/* Book Cover Collage */}
         <div
           className="absolute overflow-hidden"

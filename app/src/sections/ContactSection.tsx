@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const emailRef = useRef<HTMLAnchorElement>(null);
@@ -36,14 +35,6 @@ const ContactSection = () => {
         0
       );
 
-      // Accent circle
-      scrollTl.fromTo(
-        circleRef.current,
-        { x: '60vw', scale: 0.7, opacity: 0 },
-        { x: 0, scale: 1, opacity: 1, ease: 'none' },
-        0
-      );
-
       // Text group
       scrollTl.fromTo(
         [headlineRef.current, bodyRef.current, emailRef.current, ctaRef.current],
@@ -64,7 +55,7 @@ const ContactSection = () => {
 
       // EXIT (70-100%): Subtle fade to avoid blank
       scrollTl.to(
-        [headlineRef.current, bodyRef.current, emailRef.current, ctaRef.current, circleRef.current],
+        [headlineRef.current, bodyRef.current, emailRef.current, ctaRef.current],
         { opacity: 0.2, ease: 'power2.in' },
         0.85
       );
@@ -88,19 +79,6 @@ const ContactSection = () => {
       />
 
       <div className="section-content relative">
-        {/* Accent Circle */}
-        <div
-          ref={circleRef}
-          className="accent-shape rounded-full"
-          style={{
-            right: '6vw',
-            top: '12vh',
-            width: '34vw',
-            height: '34vw',
-            backgroundColor: '#D06D48',
-          }}
-        />
-
         {/* Headline */}
         <h2
           ref={headlineRef}

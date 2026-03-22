@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const BioSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLImageElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -27,14 +26,6 @@ const BioSection = () => {
       });
 
       // ENTRANCE (0-30%)
-      // Accent circle
-      scrollTl.fromTo(
-        circleRef.current,
-        { x: '60vw', scale: 0.6, opacity: 0 },
-        { x: 0, scale: 1, opacity: 1, ease: 'none' },
-        0
-      );
-
       // Portrait
       scrollTl.fromTo(
         portraitRef.current,
@@ -71,12 +62,6 @@ const BioSection = () => {
 
       // EXIT (70-100%)
       scrollTl.to(
-        circleRef.current,
-        { x: '30vw', scale: 1.15, opacity: 0.25, ease: 'power2.in' },
-        0.7
-      );
-
-      scrollTl.to(
         portraitRef.current,
         { x: '-20vw', opacity: 0.25, ease: 'power2.in' },
         0.7
@@ -100,19 +85,6 @@ const BioSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="section-content">
-        {/* Accent Circle */}
-        <div
-          ref={circleRef}
-          className="accent-shape rounded-full"
-          style={{
-            right: '6vw',
-            top: '10vh',
-            width: '44vw',
-            height: '44vw',
-            backgroundColor: '#D06D48',
-          }}
-        />
-
         {/* Portrait Image */}
         <div
           className="absolute overflow-hidden"

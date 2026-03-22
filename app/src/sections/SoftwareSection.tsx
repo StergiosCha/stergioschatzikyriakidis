@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SoftwareSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const triangleRef = useRef<SVGSVGElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -26,14 +25,6 @@ const SoftwareSection = () => {
       });
 
       // ENTRANCE (0-30%)
-      // Accent triangle
-      scrollTl.fromTo(
-        triangleRef.current,
-        { x: '60vw', y: '40vh', scale: 0.5, opacity: 0 },
-        { x: 0, y: 0, scale: 1, opacity: 1, ease: 'none' },
-        0
-      );
-
       // Software photo
       scrollTl.fromTo(
         photoRef.current,
@@ -53,12 +44,6 @@ const SoftwareSection = () => {
       // SETTLE (30-70%): Hold
 
       // EXIT (70-100%)
-      scrollTl.to(
-        triangleRef.current,
-        { rotation: 25, scale: 1.2, opacity: 0.25, ease: 'power2.in' },
-        0.7
-      );
-
       scrollTl.to(
         photoRef.current,
         { x: '20vw', opacity: 0.25, ease: 'power2.in' },
@@ -90,24 +75,6 @@ const SoftwareSection = () => {
       style={{ backgroundColor: '#E9E6E1' }}
     >
       <div className="section-content">
-        {/* Accent Triangle */}
-        <svg
-          ref={triangleRef}
-          className="accent-shape"
-          style={{
-            right: '6vw',
-            bottom: '10vh',
-            width: '34vw',
-            height: '34vw',
-          }}
-          viewBox="0 0 200 200"
-        >
-          <polygon
-            points="100,20 180,180 20,180"
-            fill="#D06D48"
-          />
-        </svg>
-
         {/* Headline */}
         <h2
           ref={headlineRef}
@@ -191,9 +158,9 @@ const SoftwareSection = () => {
         >
           <img
             ref={photoRef}
-            src="/stergioschatzikyriakidis/images/software-medea.png"
-            alt="MEDEA-NEUMOUSA Platform"
-            className="img-cover"
+            src="/stergioschatzikyriakidis/images/software-collage.jpg"
+            alt="Software tools and platforms collage"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
       </div>
