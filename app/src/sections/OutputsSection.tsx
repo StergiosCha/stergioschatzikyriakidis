@@ -285,7 +285,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Mic size={16} className="text-[#D06D48]" />
-                      E. Conference Proceedings (50-107)
+                      E. Conference Proceedings (50-108)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -300,7 +300,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <ExternalLink size={16} className="text-[#D06D48]" />
-                      F. Peer-Reviewed Abstracts (108-138)
+                      F. Peer-Reviewed Abstracts (109-139)
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
