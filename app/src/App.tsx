@@ -35,23 +35,18 @@ function App() {
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
-            const inPinned = pinnedRanges.some(
-              r => value >= r.start - 0.02 && value <= r.end + 0.02
+            // Find if we're inside a pinned range
+            const currentPinned = pinnedRanges.find(
+              r => value >= r.start - 0.01 && value <= r.end + 0.01
             );
-            if (!inPinned) return value;
-
-            const target = pinnedRanges.reduce(
-              (closest, r) =>
-                Math.abs(r.center - value) < Math.abs(closest - value)
-                  ? r.center
-                  : closest,
-              pinnedRanges[0]?.center ?? 0
-            );
-            return target;
+            // If not inside any pinned section (e.g. scrolling through Outputs), don't snap
+            if (!currentPinned) return value;
+            // Snap to the center of the current pinned section
+            return currentPinned.center;
           },
-          duration: { min: 0.18, max: 0.45 },
-          delay: 0,
-          ease: 'power2.out',
+          duration: { min: 0.25, max: 0.6 },
+          delay: 0.05,
+          ease: 'power2.inOut',
         },
       });
     };

@@ -191,13 +191,13 @@ const OutputsSection = () => {
     <section
       ref={sectionRef}
       id="outputs"
-      className="relative z-[60] pb-20"
-      style={{ backgroundColor: '#E9E6E1', paddingTop: '24rem' }}
+      className="relative z-[60] pb-32"
+      style={{ backgroundColor: '#E9E6E1', paddingTop: '6rem' }}
     >
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column - Header */}
-          <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0">
+          <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0 lg:sticky lg:top-8 lg:self-start">
             <span className="label mb-3 block text-xs">Research Outputs</span>
             <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">
               {activeTab === 'publications' ? 'Publications' : activeTab === 'talks' ? 'Talks & Presentations' : 'Software & Datasets'}
