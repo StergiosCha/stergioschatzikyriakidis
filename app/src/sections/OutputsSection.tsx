@@ -199,9 +199,15 @@ const OutputsSection = () => {
           {/* Left Column - Header */}
           <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0">
             <span className="label mb-3 block text-xs">Research Outputs</span>
-            <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">Publications, Talks & Software</h2>
+            <h2 className="text-[#111] mb-4 text-xl lg:text-2xl">
+              {activeTab === 'publications' ? 'Publications' : activeTab === 'talks' ? 'Talks & Presentations' : 'Software & Datasets'}
+            </h2>
             <p className="text-[#6E6A63] mb-6 text-sm leading-relaxed">
-              Complete list of academic publications, invited talks, conference presentations, software systems, and datasets.
+              {activeTab === 'publications'
+                ? 'Complete list of academic publications including monographs, book chapters, journal papers, and conference proceedings.'
+                : activeTab === 'talks'
+                ? 'Invited talks, conference and workshop presentations, and poster sessions.'
+                : 'Software systems, tools, datasets, and code libraries.'}
             </p>
 
             <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="w-full">

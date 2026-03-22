@@ -61,6 +61,7 @@ const ResearchSection = () => {
   }, []);
 
   const scrollToOutputs = () => {
+    window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: 'publications' }));
     const element = document.getElementById('outputs');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
