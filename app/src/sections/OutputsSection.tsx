@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -64,79 +64,64 @@ const OutputsSection = () => {
   const codeLibs = getToolsByCategory('code');
   const models = getToolsByCategory('model');
 
-  const PublicationCard = ({ pub }: { pub: typeof publications[0] }) => {
-    const content = (
-      <>
-        <div className="flex gap-2">
-          <span className="text-[#D06D48] font-mono text-xs font-medium shrink-0">[{pub.number}]</span>
-          <h4 className={`font-display font-semibold text-[#111] text-sm leading-snug ${pub.link ? 'group-hover:underline' : ''}`}>
-            {pub.title}
-          </h4>
-        </div>
-        <p className="text-xs text-[#6E6A63] mb-1 leading-snug ml-6">{pub.authors}</p>
-        <p className="text-xs text-[#6E6A63] leading-snug ml-6">
-          {pub.venue && <span>{pub.venue}, </span>}
-          <span className="font-medium">{pub.year}</span>
-        </p>
-      </>
-    );
-
-    if (pub.link) {
-      return (
-        <a
-          href={pub.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="output-item block p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200 group"
-        >
-          {content}
-        </a>
-      );
-    }
+  const PubContent = ({ pub }: { pub: typeof publications[0] | typeof abstracts[0] }) => {
+    const hasPdf = !!pub.pdfLink;
+    const hasExternal = !!pub.link;
 
     return (
-      <div className="output-item block p-3 rounded-lg">
-        {content}
+      <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200">
+        <div className="flex gap-2 items-start">
+          <span className="text-[#D06D48] font-mono text-xs font-medium shrink-0 mt-0.5">[{pub.number}]</span>
+          <div className="flex-1 min-w-0">
+            <h4 className="font-display font-semibold text-[#111] text-sm leading-snug">
+              {pub.title}
+            </h4>
+            <p className="text-xs text-[#6E6A63] mb-1 leading-snug">{pub.authors}</p>
+            <p className="text-xs text-[#6E6A63] leading-snug">
+              {pub.venue && <span>{pub.venue}, </span>}
+              <span className="font-medium">{pub.year}</span>
+            </p>
+            {(hasPdf || hasExternal) && (
+              <div className="flex gap-2 mt-2">
+                {hasPdf && (
+                  <a
+                    href={pub.pdfLink!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#D06D48] text-white text-xs font-semibold rounded hover:bg-[#B85A38] transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Download size={12} />
+                    PDF
+                  </a>
+                )}
+                {hasExternal && (
+                  <a
+                    href={pub.link!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#111]/10 text-[#111] text-xs font-medium rounded hover:bg-[#111]/20 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink size={12} />
+                    Link
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     );
   };
 
-  const AbstractCard = ({ pub }: { pub: typeof abstracts[0] }) => {
-    const content = (
-      <>
-        <div className="flex gap-2">
-          <span className="text-[#D06D48] font-mono text-xs font-medium shrink-0">[{pub.number}]</span>
-          <h4 className={`font-display font-semibold text-[#111] text-sm leading-snug ${pub.link ? 'group-hover:underline' : ''}`}>
-            {pub.title}
-          </h4>
-        </div>
-        <p className="text-xs text-[#6E6A63] mb-1 leading-snug ml-6">{pub.authors}</p>
-        <p className="text-xs text-[#6E6A63] leading-snug ml-6">
-          {pub.venue && <span>{pub.venue}, </span>}
-          <span className="font-medium">{pub.year}</span>
-        </p>
-      </>
-    );
+  const PublicationCard = ({ pub }: { pub: typeof publications[0] }) => (
+    <PubContent pub={pub} />
+  );
 
-    if (pub.link) {
-      return (
-        <a
-          href={pub.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="output-item block p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200 group"
-        >
-          {content}
-        </a>
-      );
-    }
-
-    return (
-      <div className="output-item block p-3 rounded-lg">
-        {content}
-      </div>
-    );
-  };
+  const AbstractCard = ({ pub }: { pub: typeof abstracts[0] }) => (
+    <PubContent pub={pub} />
+  );
 
   const ToolCard = ({ tool }: { tool: typeof tools[0] }) => (
     <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200">
