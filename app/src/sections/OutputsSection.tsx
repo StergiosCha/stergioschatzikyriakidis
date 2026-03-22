@@ -192,7 +192,6 @@ const OutputsSection = () => {
   return (
     <section
       ref={sectionRef}
-      id="outputs"
       className="relative z-[60] pb-32"
       style={{ backgroundColor: '#E9E6E1', paddingTop: '6rem' }}
     >
@@ -231,6 +230,9 @@ const OutputsSection = () => {
           <ResearchMap />
         </div>
       </div>
+
+      {/* Scroll anchor for "See selected publications" links */}
+      <div id="outputs" style={{ scrollMarginTop: '2rem' }} />
 
       <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
