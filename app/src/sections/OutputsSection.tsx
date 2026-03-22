@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image, ChevronDown, Newspaper, Map } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
 import { conferenceTalks, invitedTalks, posters } from '../data/talks';
@@ -18,6 +18,8 @@ const OutputsSection = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState('publications');
+  const [showNews, setShowNews] = useState(false);
+  const [showResearchMap, setShowResearchMap] = useState(false);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -195,41 +197,57 @@ const OutputsSection = () => {
       className="relative z-[60] pb-32"
       style={{ backgroundColor: '#E9E6E1', paddingTop: '6rem' }}
     >
-      {/* News & Updates */}
-      <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-12">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="label text-xs">Latest News</span>
-          <div className="flex-1 h-px bg-[#111]/10" />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          {news.slice(0, 4).map((item, idx) => (
-            <div key={idx} className="output-item bg-white/60 rounded-lg p-4 border border-[#111]/5 hover:border-[#D06D48]/30 transition-all duration-200">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-[10px] font-mono font-medium text-[#D06D48] bg-[#D06D48]/10 px-2 py-0.5 rounded">{item.date}</span>
-                <span className="text-[10px] font-mono text-[#6E6A63] uppercase">{item.type}</span>
-              </div>
-              <p className="text-xs text-[#111] leading-relaxed">
-                {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#D06D48] transition-colors">
-                    {item.text} →
-                  </a>
-                ) : item.text}
-              </p>
-            </div>
-          ))}
-        </div>
+      {/* Toggle buttons for News & Research Map */}
+      <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-8 flex flex-wrap gap-3">
+        <button
+          onClick={() => setShowNews(!showNews)}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#111]/10 bg-white/60 hover:bg-white/80 hover:border-[#D06D48]/30 transition-all duration-200 text-xs font-medium text-[#111]"
+        >
+          <Newspaper size={14} className="text-[#D06D48]" />
+          Latest News
+          <ChevronDown size={14} className={`text-[#6E6A63] transition-transform duration-200 ${showNews ? 'rotate-180' : ''}`} />
+        </button>
+        <button
+          onClick={() => setShowResearchMap(!showResearchMap)}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#111]/10 bg-white/60 hover:bg-white/80 hover:border-[#D06D48]/30 transition-all duration-200 text-xs font-medium text-[#111]"
+        >
+          <Map size={14} className="text-[#D06D48]" />
+          Research Landscape
+          <ChevronDown size={14} className={`text-[#6E6A63] transition-transform duration-200 ${showResearchMap ? 'rotate-180' : ''}`} />
+        </button>
       </div>
 
-      {/* Interactive Research Map */}
-      <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-12">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="label text-xs">Research Landscape</span>
-          <div className="flex-1 h-px bg-[#111]/10" />
+      {/* News & Updates - Collapsible */}
+      {showNews && (
+        <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {news.slice(0, 4).map((item, idx) => (
+              <div key={idx} className="output-item bg-white/60 rounded-lg p-4 border border-[#111]/5 hover:border-[#D06D48]/30 transition-all duration-200">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] font-mono font-medium text-[#D06D48] bg-[#D06D48]/10 px-2 py-0.5 rounded">{item.date}</span>
+                  <span className="text-[10px] font-mono text-[#6E6A63] uppercase">{item.type}</span>
+                </div>
+                <p className="text-xs text-[#111] leading-relaxed">
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#D06D48] transition-colors">
+                      {item.text} →
+                    </a>
+                  ) : item.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="bg-white/40 rounded-xl p-6 border border-[#111]/5">
-          <ResearchMap />
+      )}
+
+      {/* Interactive Research Map - Collapsible */}
+      {showResearchMap && (
+        <div className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto mb-8">
+          <div className="bg-white/40 rounded-xl p-6 border border-[#111]/5">
+            <ResearchMap />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Scroll anchor for "See selected publications" links */}
       <div id="outputs" style={{ scrollMarginTop: '2rem' }} />
