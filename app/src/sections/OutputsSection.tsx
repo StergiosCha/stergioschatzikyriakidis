@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useState } from 'react';
+import { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image } from 'lucide-react';
@@ -16,6 +16,15 @@ const OutputsSection = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState('publications');
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const tab = (e as CustomEvent).detail;
+      if (tab) setActiveTab(tab);
+    };
+    window.addEventListener('switchOutputTab', handler);
+    return () => window.removeEventListener('switchOutputTab', handler);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {

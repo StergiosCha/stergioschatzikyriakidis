@@ -60,7 +60,8 @@ const SoftwareSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const scrollToSoftware = () => {
+  const scrollToOutputsTab = (tab: string) => {
+    window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: tab }));
     const element = document.getElementById('outputs');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -125,7 +126,7 @@ const SoftwareSection = () => {
             href="#outputs"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSoftware();
+              scrollToOutputsTab('software');
             }}
             className="btn-primary"
           >
@@ -136,7 +137,7 @@ const SoftwareSection = () => {
             href="#outputs"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSoftware();
+              scrollToOutputsTab('software');
             }}
             className="btn-secondary"
           >

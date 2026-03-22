@@ -18,8 +18,13 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string, tab?: string) => {
     setIsOpen(false);
+
+    if (tab) {
+      window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: tab }));
+    }
+
     const element = document.getElementById(id);
     if (!element) return;
 
@@ -41,7 +46,9 @@ const Navigation = () => {
   const navLinks = [
     { label: 'Bio', id: 'bio' },
     { label: 'Research', id: 'research' },
-    { label: 'Software', id: 'software' },
+    { label: 'Publications', id: 'outputs', tab: 'publications' },
+    { label: 'Talks', id: 'outputs', tab: 'talks' },
+    { label: 'Software', id: 'outputs', tab: 'software' },
     { label: 'Contact', id: 'contact' },
   ];
 
@@ -68,7 +75,7 @@ const Navigation = () => {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => scrollToSection(link.id, link.tab)}
                 className="text-sm font-medium text-[#111] hover:opacity-70 transition-opacity"
               >
                 {link.label}
@@ -113,7 +120,7 @@ const Navigation = () => {
               {navLinks.map((link) => (
                 <button
                   key={link.id}
-                  onClick={() => scrollToSection(link.id)}
+                  onClick={() => scrollToSection(link.id, link.tab)}
                   className="px-5 py-3 text-left text-base font-medium text-[#111] hover:bg-[#111]/5 transition-colors border-l-2 border-transparent hover:border-[#D06D48]"
                 >
                   {link.label}
