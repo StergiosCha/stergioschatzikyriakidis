@@ -52,7 +52,7 @@ const Navigation = () => {
     { label: 'Research', id: 'research' },
     { label: 'Publications', id: 'outputs', tab: 'publications' },
     { label: 'Talks', id: 'outputs', tab: 'talks' },
-    { label: 'Software', id: 'outputs', tab: 'software' },
+    { label: 'Software', id: 'software' },
     { label: 'News', id: 'news-research' },
     { label: 'Contact', id: 'contact' },
   ];
