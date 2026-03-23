@@ -15,6 +15,24 @@ const BioSection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  const scrollToNovelist = () => {
+    const element = document.getElementById('novelist');
+    if (!element) return;
+    const allTriggers = ScrollTrigger.getAll();
+    const pinTrigger = allTriggers.find(
+      (st) => st.vars.pin && st.trigger === element
+    );
+    if (pinTrigger) {
+      const target = pinTrigger.start + (pinTrigger.end - pinTrigger.start) * 0.5;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+      setTimeout(() => ScrollTrigger.update(), 50);
+      setTimeout(() => ScrollTrigger.update(), 200);
+      setTimeout(() => ScrollTrigger.update(), 500);
+    } else {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useLayoutEffect(() => {
     if (isMobile) return;
     const ctx = gsap.context(() => {
@@ -78,7 +96,7 @@ const BioSection = () => {
         </div>
         <p className="mt-4 text-[#6E6A63] text-sm">
           I am also a novelist.{' '}
-          <a href="#novelist" onClick={(e) => { e.preventDefault(); document.getElementById('novelist')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-[#D06D48] hover:underline">
+          <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-[#D06D48] hover:underline">
             See here
           </a>
         </p>
@@ -119,7 +137,7 @@ const BioSection = () => {
           </a>
           <p className="text-[#6E6A63]" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
             I am also a novelist.{' '}
-            <a href="#novelist" onClick={(e) => { e.preventDefault(); document.getElementById('novelist')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-[#D06D48] hover:underline">
+            <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-[#D06D48] hover:underline">
               See here
             </a>
           </p>
