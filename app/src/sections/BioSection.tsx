@@ -76,6 +76,12 @@ const BioSection = () => {
             Google Scholar
           </a>
         </div>
+        <p className="mt-4 text-[#6E6A63] text-sm">
+          I am also a novelist.{' '}
+          <a href="#novelist" onClick={(e) => { e.preventDefault(); document.getElementById('novelist')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-[#D06D48] hover:underline">
+            See here
+          </a>
+        </p>
       </section>
     );
   }
@@ -106,11 +112,17 @@ const BioSection = () => {
             I was the Associate Director of the Center for Linguistic Theory and Studies in Probability (CLASP).
           </p>
         </div>
-        <div ref={ctaRef} className="absolute flex gap-4" style={{ left: '46vw', top: '72vh' }}>
+        <div ref={ctaRef} className="absolute flex flex-col gap-3" style={{ left: '46vw', top: '72vh' }}>
           <a href="https://scholar.google.com/scholar?q=Stergios+Chatzikyriakidis" target="_blank" rel="noopener noreferrer" className="btn-primary">
             <FileText size={18} />
             Google Scholar
           </a>
+          <p className="text-[#6E6A63]" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
+            I am also a novelist.{' '}
+            <a href="#novelist" onClick={(e) => { e.preventDefault(); document.getElementById('novelist')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-[#D06D48] hover:underline">
+              See here
+            </a>
+          </p>
         </div>
       </div>
     </section>
