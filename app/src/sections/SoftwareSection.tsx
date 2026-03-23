@@ -54,12 +54,12 @@ const SoftwareSection = () => {
         </h2>
         <div ref={bodyRef}>
           <p className="text-[#111] leading-relaxed text-base">
-            We build resources for under-resourced languages and neural-symbolic NLP: dialect
+            I build resources for under-resourced languages and neural-symbolic NLP: dialect
             identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
             with a focus on Greek and dialectal varieties.
           </p>
           <p className="text-[#111] leading-relaxed mt-4 text-base">
-            Our tools include AI research assistants, classical philology platforms, text editors
+            My tools include AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.
           </p>
@@ -91,12 +91,12 @@ const SoftwareSection = () => {
         </h2>
         <div ref={bodyRef} className="absolute" style={{ left: '8vw', top: '38vh', width: '44vw' }}>
           <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            We build resources for under-resourced languages and neural-symbolic NLP: dialect
+            I build resources for under-resourced languages and neural-symbolic NLP: dialect
             identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
             with a focus on Greek and dialectal varieties.
           </p>
           <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            Our tools include AI research assistants, classical philology platforms, text editors
+            My tools include AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.
           </p>
