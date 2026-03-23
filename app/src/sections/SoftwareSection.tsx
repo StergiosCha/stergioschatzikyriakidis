@@ -59,7 +59,7 @@ const SoftwareSection = () => {
             with a focus on Greek and dialectal varieties.
           </p>
           <p className="text-[#111] leading-relaxed mt-4 text-base">
-            My tools include AI research assistants, classical philology platforms, text editors
+            These include AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.
           </p>
@@ -96,7 +96,7 @@ const SoftwareSection = () => {
             with a focus on Greek and dialectal varieties.
           </p>
           <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            My tools include AI research assistants, classical philology platforms, text editors
+            These include AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.
           </p>
