@@ -53,12 +53,12 @@ const ResearchSection = () => {
         <h2 ref={headlineRef} className="text-[#111] mb-6">Research interests</h2>
         <div ref={bodyRef}>
           <p className="text-[#111] leading-relaxed text-base">
-            My research interests lie at the intersection of Natural Language Processing (NLP) and
-            Theoretical Linguistics. My work spans Natural Language Inference, Dialogue Modelling,
-            Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic Parsing, Sentiment
-            Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive Theorem Proving for
-            natural language semantics, Computational Dialectology, Constructive Type-Theoretical
-            Semantics and their computational implementation.
+            My research interests lie at the intersection of Natural Language Processing (NLP),
+            Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
+            Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
+            Parsing, Sentiment Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive
+            Theorem Proving for natural language semantics, Computational Dialectology, Constructive
+            Type-Theoretical Semantics and their computational implementation.
           </p>
           <p className="text-[#111] leading-relaxed mt-4 text-base">
             I also work on Probabilistic Semantics, developing NLP resources for under-resourced
@@ -88,12 +88,12 @@ const ResearchSection = () => {
         <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '52vw', top: '18vh', width: '40vw' }}>Research interests</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>
           <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            My research interests lie at the intersection of Natural Language Processing (NLP) and
-            Theoretical Linguistics. My work spans Natural Language Inference, Dialogue Modelling,
-            Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic Parsing, Sentiment
-            Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive Theorem Proving for
-            natural language semantics, Computational Dialectology, Constructive Type-Theoretical
-            Semantics and their computational implementation.
+            My research interests lie at the intersection of Natural Language Processing (NLP),
+            Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
+            Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
+            Parsing, Sentiment Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive
+            Theorem Proving for natural language semantics, Computational Dialectology, Constructive
+            Type-Theoretical Semantics and their computational implementation.
           </p>
           <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I also work on Probabilistic Semantics, developing NLP resources for under-resourced
