@@ -236,7 +236,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <BookOpen size={16} className="text-[#D06D48]" />
-                      A. Monographs (1-4)
+                      A. Monographs
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -251,7 +251,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <BookOpen size={16} className="text-[#D06D48]" />
-                      B. Book Chapters (5-12)
+                      B. Book Chapters
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -266,7 +266,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Users size={16} className="text-[#D06D48]" />
-                      C. Edited Books/Volumes (13-24)
+                      C. Edited Books/Volumes
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -281,7 +281,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <FileText size={16} className="text-[#D06D48]" />
-                      D. Journal Papers (25-49)
+                      D. Journal Papers
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -299,7 +299,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Mic size={16} className="text-[#D06D48]" />
-                      E. Conference Proceedings (50-108)
+                      E. Conference Proceedings
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
@@ -314,7 +314,7 @@ const OutputsSection = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <ExternalLink size={16} className="text-[#D06D48]" />
-                      F. Peer-Reviewed Abstracts (109-139)
+                      F. Peer-Reviewed Abstracts
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="grid grid-cols-1 gap-1">
