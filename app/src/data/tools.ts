@@ -99,6 +99,13 @@ export const tools: Tool[] = [
     githubUrl: "https://github.com/gu-clasp/anvec-metaphor/",
     category: "code"
   },
+  {
+    name: "TextCraft Terminography",
+    description: "AI-assisted terminography platform: automatic term extraction from corpora (PDF/DOCX/CSV) per ISO 1087-1:2000, neuro-symbolic definition evaluation, RAG pipeline with OpenAI embeddings, multi-LLM support (Gemini, Claude, GPT-4o, DeepSeek), ELETO terminology scraper. Role: Main developer.",
+    platformUrl: null,
+    githubUrl: "https://github.com/StergiosCha/term_extraction",
+    category: "application"
+  },
   // Datasets (from CV)
   {
     name: "HeptaTax",
