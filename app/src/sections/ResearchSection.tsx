@@ -48,7 +48,7 @@ const ResearchSection = () => {
     return (
       <section ref={sectionRef} id="research" className="bg-[#E9E6E1] px-6 py-16">
         <div className="w-full aspect-[4/3] max-h-[40vh] rounded-lg overflow-hidden mb-8">
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" className="img-cover" />
+          <img ref={photoRef} src="/stergioschatzikyriakidis/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <h2 ref={headlineRef} className="text-[#111] mb-6">Research interests</h2>
         <div ref={bodyRef}>
@@ -83,7 +83,7 @@ const ResearchSection = () => {
     <section ref={sectionRef} id="research" className="pinned-section z-30" style={{ backgroundColor: '#E9E6E1' }}>
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '10vw', top: '30vh', width: '36vw', height: '52vh', borderRadius: '10px' }}>
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" className="img-cover" />
+          <img ref={photoRef} src="/stergioschatzikyriakidis/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '52vw', top: '18vh', width: '40vw' }}>Research interests</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>
