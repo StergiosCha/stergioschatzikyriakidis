@@ -155,23 +155,12 @@ const OutputsSection = () => {
   );
 
   const ToolCard = ({ tool }: { tool: typeof tools[0] }) => (
-    <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200 flex flex-col justify-between h-full">
-      <div>
-        {tool.imageUrl && (
-          <div className="w-full aspect-[16/9] mb-3 rounded-lg overflow-hidden border border-[#111]/10 bg-white shadow-inner">
-            <img 
-              src={tool.imageUrl} 
-              alt={`${tool.name} preview`} 
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-            />
-          </div>
-        )}
-        <h4 className="font-display font-semibold text-[#111] text-sm mb-1 leading-snug">
-          {tool.name}
-        </h4>
-        <p className="text-xs text-[#6E6A63] mb-2 leading-snug">{tool.description}</p>
-      </div>
-      <div className="flex gap-3 flex-wrap mt-2">
+    <div className="output-item p-3 rounded-lg hover:bg-[#111]/5 transition-all duration-200">
+      <h4 className="font-display font-semibold text-[#111] text-sm mb-1 leading-snug">
+        {tool.name}
+      </h4>
+      <p className="text-xs text-[#6E6A63] mb-2 leading-snug">{tool.description}</p>
+      <div className="flex gap-3 flex-wrap">
         {tool.platformUrl && (
           <a
             href={tool.platformUrl}

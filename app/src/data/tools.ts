@@ -3,7 +3,6 @@ export interface Tool {
   description: string;
   platformUrl?: string | null;
   githubUrl?: string | null;
-  imageUrl?: string | null;
   category: 'application' | 'dataset' | 'code' | 'model';
 }
 
@@ -14,7 +13,6 @@ export const tools: Tool[] = [
     description: "A unified portal hosting 10 containerized AI applications (~200k lines of code) for Modern Greek linguistics, classical studies, and digital humanities research, developed with cloud computing support from Microsoft. Role: Principal Architect & Main Developer.",
     platformUrl: "https://greek-app-heaven-portal.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/greek-app-heaven",
-    imageUrl: "/stergioschatzikyriakidis/images/greek-nlp-swiss-knife.png",
     category: "application"
   },
   // Software Systems (from CV)
@@ -30,7 +28,6 @@ export const tools: Tool[] = [
     description: "AI platform for classical philology: (1) Translation between 18 ancient languages, (2) Knowledge graph extraction (RDF/TTL), (3) Zeugma neuro-symbolic reasoning (LLM+Prolog), (4) Emotion knowledge graphs, (5) Semantic analysis. Role: Main developer.",
     platformUrl: "https://medea-bvca.onrender.com",
     githubUrl: "https://github.com/StergiosCha/MEDEA/",
-    imageUrl: "/stergioschatzikyriakidis/images/software-medea.png",
     category: "application"
   },
   {
