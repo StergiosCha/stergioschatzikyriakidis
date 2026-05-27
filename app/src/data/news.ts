@@ -7,10 +7,34 @@ export interface NewsItem {
 
 export const news: NewsItem[] = [
   {
+    date: "2026-04",
+    text: "Completed a prestigious invited lecture tour across leading universities in China and Hong Kong, presenting research on LLMs, formal semantics, and neural-symbolic systems at ECNU, BNU, KELKIP (Chongqing), Shenzhen, and HK PolyU.",
+    link: null,
+    type: "talk"
+  },
+  {
+    date: "2026-02",
+    text: "Invited speaker at CLARIN Strategy Days (Athens) on 'CLARIN's Users and their Needs'.",
+    link: "https://www.clarin.eu/",
+    type: "talk"
+  },
+  {
+    date: "2025-11",
+    text: "Delivered invited and plenary lectures at Patras LanguageTech, OUP Handbook of Greek Linguistics conference (Thessaloniki), and presented the TermCraft terminological platform at the 15th Conference on Greek Language and Terminology.",
+    link: null,
+    type: "talk"
+  },
+  {
     date: "2025-09",
     text: "New paper accepted: Italian and Turkish loanwords detection in Greek dialects at ICGL17, Cambridge",
     link: null,
     type: "paper"
+  },
+  {
+    date: "2025-08",
+    text: "Plenary talk on 'AI, Large Language Models and Under-resourced Languages' at the 6th Summer School, International Summer University, Albania.",
+    link: null,
+    type: "talk"
   },
   {
     date: "2025",
