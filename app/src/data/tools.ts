@@ -12,7 +12,7 @@ export const tools: Tool[] = [
     name: "Greek NLP Swiss Knife",
     description: "A unified portal hosting 10 containerized AI applications (~200k lines of code) for Modern Greek linguistics, classical studies, and digital humanities research, developed with cloud computing support from Microsoft. Role: Principal Architect & Main Developer.",
     platformUrl: "https://greek-app-heaven-portal.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/greek-app-heaven",
+    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
     category: "application"
   },
   // Software Systems (from CV)
