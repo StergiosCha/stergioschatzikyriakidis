@@ -122,7 +122,7 @@ const HeroSection = () => {
         <div className="w-full aspect-[3/4] max-h-[50vh] rounded-lg overflow-hidden mb-8">
           <img
             ref={portraitRef}
-            src="/stergioschatzikyriakidis/images/hero-portrait.jpg"
+            src="/images/hero-portrait.jpg"
             alt="Stergios Chatzikyriakidis"
             className="img-cover"
           />
@@ -189,7 +189,7 @@ const HeroSection = () => {
         >
           <img
             ref={portraitRef}
-            src="/stergioschatzikyriakidis/images/hero-portrait.jpg"
+            src="/images/hero-portrait.jpg"
             alt="Stergios Chatzikyriakidis"
             className="img-cover"
           />

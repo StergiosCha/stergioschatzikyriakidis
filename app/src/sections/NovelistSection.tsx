@@ -40,7 +40,7 @@ const NovelistSection = () => {
     return (
       <section ref={sectionRef} id="novelist" className="bg-[#E9E6E1] px-6 py-16">
         <div className="w-full aspect-[3/4] max-h-[50vh] rounded-lg overflow-hidden mb-8">
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img ref={photoRef} src="/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <h2 ref={headlineRef} className="text-[#111] mb-6">Novelist</h2>
         <div ref={bodyRef}>
@@ -67,7 +67,7 @@ const NovelistSection = () => {
     <section ref={sectionRef} id="novelist" className="pinned-section z-50" style={{ backgroundColor: '#E9E6E1' }}>
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '6vw', top: '15vh', width: '40vw', height: '70vh', borderRadius: '10px' }}>
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img ref={photoRef} src="/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '52vw', top: '18vh' }}>Novelist</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>

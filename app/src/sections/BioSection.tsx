@@ -63,7 +63,7 @@ const BioSection = () => {
         <div className="w-full aspect-[3/4] max-h-[50vh] rounded-lg overflow-hidden mb-8">
           <img
             ref={portraitRef}
-            src="/stergioschatzikyriakidis/images/bio-portrait.jpg"
+            src="/images/bio-portrait.jpg"
             alt="Stergios Chatzikyriakidis"
             className="img-cover"
           />
@@ -113,7 +113,7 @@ const BioSection = () => {
     >
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '8vw', top: '18vh', width: '34vw', height: '64vh', borderRadius: '10px' }}>
-          <img ref={portraitRef} src="/stergioschatzikyriakidis/images/bio-portrait.jpg" alt="Stergios Chatzikyriakidis" className="img-cover" />
+          <img ref={portraitRef} src="/images/bio-portrait.jpg" alt="Stergios Chatzikyriakidis" className="img-cover" />
         </div>
         <span ref={labelRef} className="label absolute" style={{ left: '46vw', top: '14vh' }}>About</span>
         <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '46vw', top: '20vh' }}>Background</h2>

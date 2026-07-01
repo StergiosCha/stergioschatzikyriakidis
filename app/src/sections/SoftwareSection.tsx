@@ -75,7 +75,7 @@ const SoftwareSection = () => {
           </a>
         </div>
         <div className="w-full aspect-[4/3] max-h-[40vh] rounded-lg overflow-hidden mt-8">
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img ref={photoRef} src="/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
       </section>
     );
@@ -112,7 +112,7 @@ const SoftwareSection = () => {
           </a>
         </div>
         <div className="absolute overflow-hidden" style={{ left: '56vw', top: '18vh', width: '36vw', height: '60vh', borderRadius: '10px' }}>
-          <img ref={photoRef} src="/stergioschatzikyriakidis/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img ref={photoRef} src="/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
       </div>
     </section>
