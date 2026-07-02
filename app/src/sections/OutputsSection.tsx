@@ -9,7 +9,6 @@ import type { Talk } from '../data/talks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
-import MetricsBand from '../components/MetricsBand';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -279,7 +278,6 @@ const OutputsSection = () => {
       style={{ backgroundColor: 'var(--bg-primary)', paddingTop: '6rem' }}
     >
       <div id="outputs" className="px-[4vw] lg:px-[6vw] max-w-[1800px] mx-auto" style={{ scrollMarginTop: '2rem' }}>
-        <MetricsBand />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column - Header */}
           <div ref={headerRef} className="lg:col-span-3 mb-8 lg:mb-0 lg:sticky lg:top-8 lg:self-start">
