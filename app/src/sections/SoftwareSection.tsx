@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Database } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,9 +14,10 @@ const SoftwareSection = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const reducedMotion = usePrefersReducedMotion();
 
   useLayoutEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -34,7 +36,7 @@ const SoftwareSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, [isMobile, reducedMotion]);
 
   const scrollToOutputsTab = (tab: string) => {
     window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: tab }));
@@ -46,19 +48,19 @@ const SoftwareSection = () => {
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} id="software" className="bg-[#E9E6E1] px-6 py-16">
-        <h2 ref={headlineRef} className="text-[#111] mb-6">
+      <section ref={sectionRef} id="software" className="bg-paper px-6 py-16">
+        <h2 ref={headlineRef} className="text-ink mb-6">
           Software, Apps
           <br />
           & Datasets
         </h2>
         <div ref={bodyRef}>
-          <p className="text-[#111] leading-relaxed text-base">
+          <p className="text-ink leading-relaxed text-base">
             I build resources for under-resourced languages and neural-symbolic NLP: dialect
             identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
             with a focus on Greek and dialectal varieties.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4 text-base">
+          <p className="text-ink leading-relaxed mt-4 text-base">
             These include the <strong>Greek NLP Swiss Knife</strong> portal, AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.
@@ -82,20 +84,20 @@ const SoftwareSection = () => {
   }
 
   return (
-    <section ref={sectionRef} id="software" className="pinned-section z-40" style={{ backgroundColor: '#E9E6E1' }}>
+    <section ref={sectionRef} id="software" className="pinned-section z-40" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="section-content">
-        <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '8vw', top: '16vh', width: '46vw' }}>
+        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '8vw', top: '16vh', width: '46vw' }}>
           Software, Apps
           <br />
           & Datasets
         </h2>
         <div ref={bodyRef} className="absolute" style={{ left: '8vw', top: '38vh', width: '44vw' }}>
-          <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I build resources for under-resourced languages and neural-symbolic NLP: dialect
             identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
             with a focus on Greek and dialectal varieties.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             These include the <strong>Greek NLP Swiss Knife</strong> portal, AI research assistants, classical philology platforms, text editors
             with grammatical analysis, linguistic distance calculators, and comprehensive datasets
             for Greek dialectology and natural language inference.

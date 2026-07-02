@@ -7,6 +7,7 @@ import BioSection from './sections/BioSection';
 import ResearchSection from './sections/ResearchSection';
 import SoftwareSection from './sections/SoftwareSection';
 import NovelistSection from './sections/NovelistSection';
+import LiveAppsSection from './sections/LiveAppsSection';
 import OutputsSection from './sections/OutputsSection';
 import NewsResearchSection from './sections/NewsResearchSection';
 import ContactSection from './sections/ContactSection';
@@ -32,6 +33,7 @@ function App() {
         <ResearchSection />
         <SoftwareSection />
         <NovelistSection />
+        <LiveAppsSection />
         <OutputsSection />
         <NewsResearchSection />
         <ContactSection />

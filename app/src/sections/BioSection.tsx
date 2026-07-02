@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FileText } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,7 @@ const BioSection = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const reducedMotion = usePrefersReducedMotion();
 
   const scrollToNovelist = () => {
     const element = document.getElementById('novelist');
@@ -34,7 +36,7 @@ const BioSection = () => {
   };
 
   useLayoutEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -55,11 +57,11 @@ const BioSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, [isMobile, reducedMotion]);
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} id="bio" className="bg-[#E9E6E1] px-6 py-16">
+      <section ref={sectionRef} id="bio" className="bg-paper px-6 py-16">
         <div className="w-full aspect-[3/4] max-h-[50vh] rounded-lg overflow-hidden mb-8">
           <img
             ref={portraitRef}
@@ -69,15 +71,15 @@ const BioSection = () => {
           />
         </div>
         <span ref={labelRef} className="label">About</span>
-        <h2 ref={headlineRef} className="text-[#111] mt-2 mb-6">Background</h2>
+        <h2 ref={headlineRef} className="text-ink mt-2 mb-6">Background</h2>
         <div ref={bodyRef}>
-          <p className="text-[#111] leading-relaxed text-base">
+          <p className="text-ink leading-relaxed text-base">
             I am a Professor of Computational Linguistics at the University of Crete. I earned my BA in
             Greek Philology specializing in Linguistics from Aristotle University, Thessaloniki. I continued
             my studies obtaining an MSc in Computational Linguistics and Formal Grammar, and a PhD in Linguistics,
             both from King&apos;s College, London.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4 text-base">
+          <p className="text-ink leading-relaxed mt-4 text-base">
             I have worked at Royal Holloway, University of London, the French National Centre for Scientific
             Research (CNRS), the Open University of Cyprus and the University of Gothenburg. From 2016 until 2021,
             I was the Associate Director of the Center for Linguistic Theory and Studies in Probability (CLASP).
@@ -94,9 +96,9 @@ const BioSection = () => {
             Google Scholar
           </a>
         </div>
-        <p className="mt-4 text-[#6E6A63] text-sm">
+        <p className="mt-4 text-mut text-sm">
           I am also a novelist.{' '}
-          <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-[#D06D48] hover:underline">
+          <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-terra hover:underline">
             See here
           </a>
         </p>
@@ -109,22 +111,22 @@ const BioSection = () => {
       ref={sectionRef}
       id="bio"
       className="pinned-section z-20"
-      style={{ backgroundColor: '#E9E6E1' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '8vw', top: '18vh', width: '34vw', height: '64vh', borderRadius: '10px' }}>
           <img ref={portraitRef} src="/images/bio-portrait.jpg" alt="Stergios Chatzikyriakidis" className="img-cover" />
         </div>
         <span ref={labelRef} className="label absolute" style={{ left: '46vw', top: '14vh' }}>About</span>
-        <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '46vw', top: '20vh' }}>Background</h2>
+        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '46vw', top: '20vh' }}>Background</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '46vw', top: '34vh', width: '44vw' }}>
-          <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I am a Professor of Computational Linguistics at the University of Crete. I earned my BA in
             Greek Philology specializing in Linguistics from Aristotle University, Thessaloniki. I continued
             my studies obtaining an MSc in Computational Linguistics and Formal Grammar, and a PhD in Linguistics,
             both from King&apos;s College, London.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I have worked at Royal Holloway, University of London, the French National Centre for Scientific
             Research (CNRS), the Open University of Cyprus and the University of Gothenburg. From 2016 until 2021,
             I was the Associate Director of the Center for Linguistic Theory and Studies in Probability (CLASP).
@@ -135,9 +137,9 @@ const BioSection = () => {
             <FileText size={18} />
             Google Scholar
           </a>
-          <p className="text-[#6E6A63]" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
+          <p className="text-mut" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
             I am also a novelist.{' '}
-            <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-[#D06D48] hover:underline">
+            <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-terra hover:underline">
               See here
             </a>
           </p>

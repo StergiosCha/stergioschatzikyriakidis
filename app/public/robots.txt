@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stergioscha.github.io/stergioschatzikyriakidis/sitemap.xml
+Sitemap: https://stergioschatzikyriakidis.org/sitemap.xml

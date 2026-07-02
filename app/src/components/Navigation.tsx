@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 
@@ -8,6 +8,18 @@ gsap.registerPlugin(ScrollTrigger);
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(() =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+  );
+
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    try {
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    } catch { /* noop */ }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +65,7 @@ const Navigation = () => {
     { label: 'Publications', id: 'outputs', tab: 'publications' },
     { label: 'Talks', id: 'outputs', tab: 'talks' },
     { label: 'Software', id: 'software' },
+    { label: 'Live demos', id: 'demos' },
     { label: 'News', id: 'news-research' },
     { label: 'Contact', id: 'contact' },
   ];
@@ -62,7 +75,7 @@ const Navigation = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#E9E6E1]/95 backdrop-blur-md py-3'
+            ? 'bg-paper/95 backdrop-blur-md py-3'
             : 'bg-transparent py-5'
         }`}
       >
@@ -70,7 +83,7 @@ const Navigation = () => {
           {/* Wordmark */}
           <button
             onClick={() => scrollToSection('hero')}
-            className="font-display text-sm lg:text-base font-semibold text-[#111] hover:opacity-70 transition-opacity"
+            className="font-display text-sm lg:text-base font-semibold text-ink hover:opacity-70 transition-opacity"
           >
             Stergios Chatzikyriakidis
           </button>
@@ -81,20 +94,36 @@ const Navigation = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id, link.tab)}
-                className="text-sm font-medium text-[#111] hover:opacity-70 transition-opacity"
+                className="text-sm font-medium text-ink hover:opacity-70 transition-opacity"
               >
                 {link.label}
               </button>
             ))}
+            <button
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className="md:hidden p-2 text-[#111] hover:bg-[#111]/5 rounded-lg transition-colors"
-          >
-            <Menu size={20} />
-          </button>
+          {/* Mobile: theme toggle + menu button */}
+          <div className="md:hidden flex items-center gap-1">
+            <button
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
+            >
+              <Menu size={20} />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -103,18 +132,18 @@ const Navigation = () => {
         <div className="fixed inset-0 z-[100] md:hidden">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-[#111]/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-ink/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
           
           {/* Menu Panel */}
-          <div className="absolute right-0 top-0 h-full w-[280px] bg-[#E9E6E1] shadow-2xl">
+          <div className="absolute right-0 top-0 h-full w-[280px] bg-paper shadow-2xl">
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[#111]/10">
-              <span className="font-display text-sm font-semibold text-[#111]">Menu</span>
+            <div className="flex items-center justify-between px-5 py-4 border-b border-ink/10">
+              <span className="font-display text-sm font-semibold text-ink">Menu</span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 text-[#111] hover:bg-[#111]/5 rounded-lg transition-colors"
+                className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
               >
                 <X size={18} />
               </button>
@@ -126,7 +155,7 @@ const Navigation = () => {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id, link.tab)}
-                  className="px-5 py-3 text-left text-base font-medium text-[#111] hover:bg-[#111]/5 transition-colors border-l-2 border-transparent hover:border-[#D06D48]"
+                  className="px-5 py-3 text-left text-base font-medium text-ink hover:bg-ink/5 transition-colors border-l-2 border-transparent hover:border-terra"
                 >
                   {link.label}
                 </button>
@@ -134,8 +163,8 @@ const Navigation = () => {
             </nav>
             
             {/* Footer */}
-            <div className="absolute bottom-0 left-0 right-0 px-5 py-4 border-t border-[#111]/10">
-              <p className="text-xs text-[#6E6A63] leading-relaxed">
+            <div className="absolute bottom-0 left-0 right-0 px-5 py-4 border-t border-ink/10">
+              <p className="text-xs text-mut leading-relaxed">
                 Professor of Computational Linguistics
                 <br />
                 University of Crete

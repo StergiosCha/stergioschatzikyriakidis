@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,9 +14,10 @@ const ResearchSection = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const isMobile = useIsMobile();
+  const reducedMotion = usePrefersReducedMotion();
 
   useLayoutEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -34,7 +36,7 @@ const ResearchSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, [isMobile, reducedMotion]);
 
   const scrollToOutputs = () => {
     window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: 'publications' }));
@@ -46,13 +48,13 @@ const ResearchSection = () => {
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} id="research" className="bg-[#E9E6E1] px-6 py-16">
+      <section ref={sectionRef} id="research" className="bg-paper px-6 py-16">
         <div className="w-full aspect-[4/3] max-h-[40vh] rounded-lg overflow-hidden mb-8">
           <img ref={photoRef} src="/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
-        <h2 ref={headlineRef} className="text-[#111] mb-6">Research interests</h2>
+        <h2 ref={headlineRef} className="text-ink mb-6">Research interests</h2>
         <div ref={bodyRef}>
-          <p className="text-[#111] leading-relaxed text-base">
+          <p className="text-ink leading-relaxed text-base">
             My research interests lie at the intersection of Natural Language Processing (NLP),
             Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
             Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
@@ -60,7 +62,7 @@ const ResearchSection = () => {
             Theorem Proving for natural language semantics, Computational Dialectology, Constructive
             Type-Theoretical Semantics and their computational implementation.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4 text-base">
+          <p className="text-ink leading-relaxed mt-4 text-base">
             I also work on Probabilistic Semantics, developing NLP resources for under-resourced
             languages, and exploring the interaction between symbolic logic-based approaches and
             Machine Learning/Deep Learning methods for linguistic problems.
@@ -80,14 +82,14 @@ const ResearchSection = () => {
   }
 
   return (
-    <section ref={sectionRef} id="research" className="pinned-section z-30" style={{ backgroundColor: '#E9E6E1' }}>
+    <section ref={sectionRef} id="research" className="pinned-section z-30" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '10vw', top: '30vh', width: '36vw', height: '52vh', borderRadius: '10px' }}>
           <img ref={photoRef} src="/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
-        <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '52vw', top: '18vh', width: '40vw' }}>Research interests</h2>
+        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '52vw', top: '18vh', width: '40vw' }}>Research interests</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>
-          <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             My research interests lie at the intersection of Natural Language Processing (NLP),
             Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
             Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
@@ -95,7 +97,7 @@ const ResearchSection = () => {
             Theorem Proving for natural language semantics, Computational Dialectology, Constructive
             Type-Theoretical Semantics and their computational implementation.
           </p>
-          <p className="text-[#111] leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I also work on Probabilistic Semantics, developing NLP resources for under-resourced
             languages, and exploring the interaction between symbolic logic-based approaches and
             Machine Learning/Deep Learning methods for linguistic problems.

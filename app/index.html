@@ -8,19 +8,25 @@
     <meta name="keywords" content="Stergios Chatzikyriakidis, Computational Linguistics, NLP, Natural Language Processing, Neuro-Symbolic AI, Type Theory, University of Crete, CLASP, Greek NLP, Formal Semantics" />
     <meta name="author" content="Stergios Chatzikyriakidis" />
     <meta name="google-site-verification" content="IiV-GD2WCfG1ehp752H8Q4RDAEhNhE4BjATw7tXu4m4" />
-    <link rel="canonical" href="https://stergioscha.github.io/stergioschatzikyriakidis/" />
+    <link rel="canonical" href="https://stergioschatzikyriakidis.org/" />
+    <meta name="theme-color" content="#E9E6E1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Stergios Chatzikyriakidis — Professor of Computational Linguistics" />
     <meta property="og:description" content="Academic website of Stergios Chatzikyriakidis, Professor of Computational Linguistics at the University of Crete. Research in NLP, Neuro-Symbolic AI, and Theoretical Linguistics." />
-    <meta property="og:url" content="https://stergioscha.github.io/stergioschatzikyriakidis/" />
+    <meta property="og:url" content="https://stergioschatzikyriakidis.org/" />
+    <meta property="og:image" content="https://stergioschatzikyriakidis.org/images/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Stergios Chatzikyriakidis — Professor of Computational Linguistics" />
     <meta name="twitter:description" content="Academic website of Stergios Chatzikyriakidis. Research in NLP, Neuro-Symbolic AI, Type-Theoretic Semantics, and Computational Dialectology." />
+    <meta name="twitter:image" content="https://stergioschatzikyriakidis.org/images/og-card.png" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -33,7 +39,7 @@
         "@type": "Organization",
         "name": "University of Crete"
       },
-      "url": "https://stergioscha.github.io/stergioschatzikyriakidis/",
+      "url": "https://stergioschatzikyriakidis.org/",
       "sameAs": [
         "https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en",
         "https://www.researchgate.net/profile/Stergios-Chatzikyriakidis",
@@ -42,6 +48,16 @@
       ],
       "knowsAbout": ["Natural Language Processing", "Neuro-Symbolic AI", "Computational Linguistics", "Type Theory", "Formal Semantics", "Greek NLP", "Dialogue Modelling"]
     }
+    </script>
+    <!-- Set theme before paint to avoid flash -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) { /* noop */ }
+      })();
     </script>
   </head>
   <body>

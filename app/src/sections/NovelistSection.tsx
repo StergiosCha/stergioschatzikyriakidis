@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,9 +14,10 @@ const NovelistSection = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const isMobile = useIsMobile();
+  const reducedMotion = usePrefersReducedMotion();
 
   useLayoutEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -34,17 +36,17 @@ const NovelistSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, [isMobile, reducedMotion]);
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} id="novelist" className="bg-[#E9E6E1] px-6 py-16">
+      <section ref={sectionRef} id="novelist" className="bg-paper px-6 py-16">
         <div className="w-full aspect-[3/4] max-h-[50vh] rounded-lg overflow-hidden mb-8">
           <img ref={photoRef} src="/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
-        <h2 ref={headlineRef} className="text-[#111] mb-6">Novelist</h2>
+        <h2 ref={headlineRef} className="text-ink mb-6">Novelist</h2>
         <div ref={bodyRef}>
-          <p className="text-[#111] leading-relaxed text-base">
+          <p className="text-ink leading-relaxed text-base">
             Beyond academia, I write fiction. I have published four novels in Greek and three
             short story collections (one in English).
           </p>
@@ -64,14 +66,14 @@ const NovelistSection = () => {
   }
 
   return (
-    <section ref={sectionRef} id="novelist" className="pinned-section z-50" style={{ backgroundColor: '#E9E6E1' }}>
+    <section ref={sectionRef} id="novelist" className="pinned-section z-50" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="section-content">
         <div className="absolute overflow-hidden" style={{ left: '6vw', top: '15vh', width: '40vw', height: '70vh', borderRadius: '10px' }}>
           <img ref={photoRef} src="/images/novelist-collage.jpg" alt="Book covers" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
-        <h2 ref={headlineRef} className="absolute text-[#111]" style={{ left: '52vw', top: '18vh' }}>Novelist</h2>
+        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '52vw', top: '18vh' }}>Novelist</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>
-          <p className="text-[#111] leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             Beyond academia, I write fiction. I have published four novels in Greek and three
             short story collections (one in English).
           </p>

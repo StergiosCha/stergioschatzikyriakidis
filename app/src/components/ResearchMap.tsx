@@ -169,7 +169,7 @@ const areas: ResearchArea[] = [
 
 const methodMeta: Record<string, { label: string; color: string; bg: string }> = {
   computational: { label: 'Computational', color: '#D06D48', bg: 'rgba(208,109,72,0.06)' },
-  formal: { label: 'Formal', color: '#6E6A63', bg: 'rgba(110,106,99,0.06)' },
+  formal: { label: 'Formal', color: 'var(--text-secondary)', bg: 'rgba(110,106,99,0.06)' },
   bridge: { label: 'Bridge', color: '#9E7B5A', bg: 'rgba(158,123,90,0.06)' },
 };
 
@@ -207,10 +207,10 @@ const ResearchMap = () => {
                 }}
               >
                 <div className="w-2 h-2 rounded-full mb-2" style={{ backgroundColor: meta.color }} />
-                <div className="text-[12px] font-semibold text-[#111] leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <div className="text-[12px] font-semibold text-ink leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {area.label}
                 </div>
-                <div className="text-[10px] text-[#6E6A63] mt-1">{area.publications.length} papers</div>
+                <div className="text-[10px] text-mut mt-1">{area.publications.length} papers</div>
               </button>
             );
           })}
@@ -242,10 +242,10 @@ const ResearchMap = () => {
                 }}
               >
                 <div className="w-2 h-2 rounded-full mb-2" style={{ backgroundColor: meta.color }} />
-                <div className="text-[12px] font-semibold text-[#111] leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <div className="text-[12px] font-semibold text-ink leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {area.label}
                 </div>
-                <div className="text-[10px] text-[#6E6A63] mt-1">{area.publications.length} papers</div>
+                <div className="text-[10px] text-mut mt-1">{area.publications.length} papers</div>
               </button>
             );
           })}
@@ -257,7 +257,7 @@ const ResearchMap = () => {
         {Object.entries(methodMeta).map(([key, m]) => (
           <div key={key} className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: m.color }} />
-            <span className="text-[10px] text-[#6E6A63] uppercase tracking-wide font-medium">{m.label}</span>
+            <span className="text-[10px] text-mut uppercase tracking-wide font-medium">{m.label}</span>
           </div>
         ))}
       </div>
@@ -265,26 +265,26 @@ const ResearchMap = () => {
       {/* Detail panel */}
       {selected && (
         <div
-          className="rounded-lg border-l-4 bg-white/80 p-5 sm:p-6"
+          className="rounded-lg border-l-4 bg-surface/80 p-5 sm:p-6"
           style={{ borderLeftColor: methodMeta[selected.methodology].color }}
         >
           <div className="mb-4">
-            <h3 className="text-base sm:text-lg font-bold text-[#111]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <h3 className="text-base sm:text-lg font-bold text-ink" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               {selected.label}
             </h3>
-            <p className="text-sm text-[#6E6A63] leading-relaxed mt-1">{selected.description}</p>
+            <p className="text-sm text-mut leading-relaxed mt-1">{selected.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-4 border-t border-[#E9E6E1]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-4 border-t border-paper">
             <div className="md:col-span-2">
-              <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">Key Publications</h4>
+              <h4 className="text-xs font-bold text-ink uppercase tracking-tight mb-3">Key Publications</h4>
               <div className="space-y-2">
                 {selected.publications.map(pub => (
                   <div key={pub.number} className="flex items-baseline gap-2">
-                    <span className="text-[11px] font-mono font-semibold text-[#D06D48] bg-[#D06D48]/10 px-1.5 py-0.5 rounded flex-shrink-0">
+                    <span className="text-[11px] font-mono font-semibold text-terra bg-terra/10 px-1.5 py-0.5 rounded flex-shrink-0">
                       #{pub.number}
                     </span>
-                    <span className="text-xs text-[#111] leading-relaxed">{pub.title}</span>
+                    <span className="text-xs text-ink leading-relaxed">{pub.title}</span>
                   </div>
                 ))}
               </div>
@@ -293,16 +293,16 @@ const ResearchMap = () => {
             <div className="space-y-4">
               {selected.software && selected.software.length > 0 && (
                 <div>
-                  <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">Software</h4>
+                  <h4 className="text-xs font-bold text-ink uppercase tracking-tight mb-3">Software</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {selected.software.map(s => (
-                      <span key={s} className="text-[11px] bg-[#111]/5 text-[#6E6A63] px-2 py-1 rounded font-medium">{s}</span>
+                      <span key={s} className="text-[11px] bg-ink/5 text-mut px-2 py-1 rounded font-medium">{s}</span>
                     ))}
                   </div>
                 </div>
               )}
               <div>
-                <h4 className="text-xs font-bold text-[#111] uppercase tracking-tight mb-3">Connected Areas</h4>
+                <h4 className="text-xs font-bold text-ink uppercase tracking-tight mb-3">Connected Areas</h4>
                 <div className="flex flex-wrap gap-1.5">
                   {selected.connections.map(cid => {
                     const cn = areas.find(a => a.id === cid);
@@ -327,7 +327,7 @@ const ResearchMap = () => {
       )}
 
       {!selected && (
-        <p className="text-center text-xs text-[#6E6A63] py-1">Click any area to explore publications and connections</p>
+        <p className="text-center text-xs text-mut py-1">Click any area to explore publications and connections</p>
       )}
     </div>
   );

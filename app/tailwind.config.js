@@ -5,6 +5,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        paper: "rgb(var(--c-paper) / <alpha-value>)",
+        mut: "rgb(var(--c-muted) / <alpha-value>)",
+        terra: "rgb(var(--c-terra) / <alpha-value>)",
+        terradark: "rgb(var(--c-terra-dark) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

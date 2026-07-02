@@ -4,11 +4,20 @@
 :root {
   /* Colors */
   --bg-primary: #E9E6E1;
+  --bg-alt: #DDD9D2;
   --bg-secondary: #111111;
   --accent: #D06D48;
   --text-primary: #111111;
   --text-secondary: #6E6A63;
   --text-light: #E9E6E1;
+  --btn-hover: #333;
+  /* RGB channels for Tailwind alpha-aware colors */
+  --c-ink: 17 17 17;
+  --c-paper: 233 230 225;
+  --c-muted: 110 106 99;
+  --c-terra: 208 109 72;
+  --c-terra-dark: 184 90 56;
+  --c-surface: 255 255 255;
   
   /* Typography */
   --font-display: 'Space Grotesk', sans-serif;
@@ -18,6 +27,24 @@
   /* Spacing */
   --section-padding: 8vh 8vw;
   --safe-zone: 8vw;
+}
+
+/* Dark theme */
+.dark {
+  --bg-primary: #161412;
+  --bg-alt: #1E1B18;
+  --bg-secondary: #E9E6E1;
+  --accent: #D06D48;
+  --text-primary: #E9E6E1;
+  --text-secondary: #A29D94;
+  --text-light: #161412;
+  --btn-hover: #D6D2CB;
+  --c-ink: 233 230 225;
+  --c-paper: 22 20 18;
+  --c-muted: 162 157 148;
+  --c-terra: 208 109 72;
+  --c-terra-dark: 224 130 92;
+  --c-surface: 40 37 33;
 }
 
 * {
@@ -31,6 +58,7 @@ html {
 }
 
 body {
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -115,7 +143,7 @@ p {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  background-color: #333;
+  background-color: var(--btn-hover);
 }
 
 .btn-secondary {
@@ -130,14 +158,14 @@ p {
   font-weight: 500;
   border-radius: 8px;
   text-decoration: none;
-  border: 1px solid rgba(17, 17, 17, 0.22);
+  border: 1px solid rgb(var(--c-ink) / 0.22);
   transition: transform 0.2s ease, background-color 0.2s ease;
   cursor: pointer;
 }
 
 .btn-secondary:hover {
   transform: translateY(-2px);
-  background-color: rgba(17, 17, 17, 0.05);
+  background-color: rgb(var(--c-ink) / 0.05);
 }
 
 /* Links */
@@ -154,7 +182,7 @@ p {
 
 /* Cards */
 .card {
-  background: white;
+  background: rgb(var(--c-surface));
   border-radius: 10px;
   padding: 24px;
   box-shadow: 0 18px 40px rgba(17, 17, 17, 0.10);
@@ -179,6 +207,11 @@ p {
   opacity: 0.04;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.dark .grain-overlay {
+  mix-blend-mode: screen;
+  opacity: 0.05;
 }
 
 /* Scrollbar */

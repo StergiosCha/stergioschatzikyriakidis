@@ -26,14 +26,14 @@ export const tools: Tool[] = [
   {
     name: "MEDEA-NEUMOUSA",
     description: "AI platform for classical philology: (1) Translation between 18 ancient languages, (2) Knowledge graph extraction (RDF/TTL), (3) Zeugma neuro-symbolic reasoning (LLM+Prolog), (4) Emotion knowledge graphs, (5) Semantic analysis. Role: Main developer.",
-    platformUrl: "https://medea-bvca.onrender.com",
+    platformUrl: "https://greek-app-heaven-medea.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/MEDEA/",
     category: "application"
   },
   {
     name: "Plot Analyzer",
     description: "Bidirectional neuro-symbolic narrative analysis platform with 8-stage hybrid architecture: neural perception via LLMs, symbolic reasoning based on 5 narrative theories (Aristotelian Poetics, Russian Formalism, etc.), bidirectional feedback loop, 14-type conflict taxonomy, and chunking & reconciliation for long texts. Role: Main developer.",
-    platformUrl: null,
+    platformUrl: "https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/plot_analyzer",
     category: "application"
   },
@@ -54,14 +54,14 @@ export const tools: Tool[] = [
   {
     name: "NATS",
     description: "NLP analysis suite: document embeddings, NER (19 types), network analysis. Role: Main developer.",
-    platformUrl: null,
+    platformUrl: "https://greek-app-heaven-nats.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/NATS",
     category: "application"
   },
   {
     name: "Linguistic Distance Calculator",
     description: "7-dimension language distance measurement. Role: Main developer.",
-    platformUrl: "https://linguisticdistance-production.up.railway.app",
+    platformUrl: "https://greek-app-heaven-linguistic.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/linguistic-distance",
     category: "application"
   },
@@ -110,8 +110,36 @@ export const tools: Tool[] = [
   {
     name: "TextCraft Terminography",
     description: "AI-assisted terminography platform: automatic term extraction from corpora (PDF/DOCX/CSV) per ISO 1087-1:2000, neuro-symbolic definition evaluation, RAG pipeline with OpenAI embeddings, multi-LLM support (Gemini, Claude, GPT-4o, DeepSeek), ELETO terminology scraper. Role: Main developer.",
-    platformUrl: null,
+    platformUrl: "https://greek-app-heaven-terminography.livelyhill-85880e66.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/term_extraction",
+    category: "application"
+  },
+  {
+    name: "Svarna: Greek Corpus Workbench",
+    description: "Corpus linguistics workbench for Modern Greek: KWIC concordancing, frequency and n-gram analysis, discourse markers, keyness (log-likelihood), regex search, and LLM-assisted pragmatic analysis over 500M+ words across six corpora. Role: Main developer.",
+    platformUrl: "https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecontainerapps.io",
+    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+    category: "application"
+  },
+  {
+    name: "Greek Rhyme System",
+    description: "AI-powered identification and generation of rhyme patterns in Modern Greek poetry: full rhyme taxonomy (M/F2/F3, RICH, IDV, MOS, IMP), multi-LLM analysis with RAG corpus retrieval and a deterministic phonological verification loop. Role: Main developer.",
+    platformUrl: "https://greek-app-heaven-rhyme.livelyhill-85880e66.westeurope.azurecontainerapps.io",
+    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+    category: "application"
+  },
+  {
+    name: "Greek Dialect Generator",
+    description: "Text generation in four Greek dialects (Pontic, Cretan, Northern Greek, Cypriot) using LoRA adapters fine-tuned on GRDD+ (23k+ examples) over Llama 3.1, Llama 3, and Krikri base models, served with 4-bit quantization. Role: Main developer.",
+    platformUrl: "https://dialect-gen-cpu.blackplant-0f676054.westeurope.azurecontainerapps.io",
+    githubUrl: "https://github.com/StergiosCha/krikri_dialectal",
+    category: "application"
+  },
+  {
+    name: "Voyant-NLP",
+    description: "Text analysis and embeddings lab: word frequencies, concordance, collocates, Word2Vec/FastText training with analogies, NER, POS tagging, topic modeling, sentiment analysis, and document clustering. Role: Main developer.",
+    platformUrl: "https://greek-app-heaven-voyant.livelyhill-85880e66.westeurope.azurecontainerapps.io",
+    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
     category: "application"
   },
   // Datasets (from CV)
