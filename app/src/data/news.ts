@@ -7,6 +7,12 @@ export interface NewsItem {
 
 export const news: NewsItem[] = [
   {
+    date: "2026-07",
+    text: "New preprint on arXiv: Svarna, an open corpus workbench for Modern Greek — 507M+ words and ~29M sentences across five registers, free and open source.",
+    link: "https://arxiv.org/abs/2607.00970",
+    type: "paper"
+  },
+  {
     date: "2026-04",
     text: "Completed a prestigious invited lecture tour across leading universities in China and Hong Kong, presenting research on LLMs, formal semantics, and neural-symbolic systems at ECNU, BNU, KELKIP (Chongqing), Shenzhen, and HK PolyU.",
     link: null,

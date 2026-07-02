@@ -3,6 +3,7 @@ export interface LiveApp {
   tagline: string;
   url: string;
   githubUrl?: string | null;
+  paperUrl?: string | null;
   glyph: string;
   tags: string[];
 }
@@ -14,6 +15,7 @@ export const featuredApp: LiveApp = {
     "Concordancing, frequencies, discourse markers, keyness and LLM-assisted analysis over 500M+ words of Modern Greek, live in your browser.",
   url: "https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecontainerapps.io",
   githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+  paperUrl: "https://arxiv.org/abs/2607.00970",
   glyph: "Σ",
   tags: ["KWIC", "Frequencies", "Keyness", "LLM Analysis"],
 };

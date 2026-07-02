@@ -137,6 +137,17 @@ const LiveAppsSection = () => {
             <div className="max-w-2xl">
               <h3 className="font-display font-semibold text-ink text-base lg:text-lg">{featuredApp.name}</h3>
               <p className="text-mut text-sm leading-relaxed mt-1">{featuredApp.tagline}</p>
+              {featuredApp.paperUrl && (
+                <a
+                  href={featuredApp.paperUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-2 text-xs text-terra hover:underline"
+                >
+                  <ExternalLink size={12} />
+                  Read the paper (arXiv:2607.00970)
+                </a>
+              )}
             </div>
             <div className="flex flex-wrap gap-2">
               {featuredApp.tags.map((t) => (
