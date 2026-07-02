@@ -87,7 +87,7 @@ const BioSection = () => {
         </div>
         <div ref={ctaRef} className="mt-6">
           <a
-            href="https://scholar.google.com/scholar?q=Stergios+Chatzikyriakidis"
+            href="https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
@@ -133,7 +133,7 @@ const BioSection = () => {
           </p>
         </div>
         <div ref={ctaRef} className="absolute flex flex-col gap-3" style={{ left: '46vw', top: '72vh' }}>
-          <a href="https://scholar.google.com/scholar?q=Stergios+Chatzikyriakidis" target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <a href="https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="btn-primary">
             <FileText size={18} />
             Google Scholar
           </a>
