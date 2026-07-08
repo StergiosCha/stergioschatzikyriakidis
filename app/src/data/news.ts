@@ -20,7 +20,7 @@ export const news: NewsItem[] = [
   },
   {
     date: "2026-04",
-    text: "Completed a prestigious invited lecture tour across leading universities in China and Hong Kong, presenting research on LLMs, formal semantics, and neural-symbolic systems at ECNU, BNU, KELKIP (Chongqing), Shenzhen, and HK PolyU.",
+    text: "Completed an invited lecture tour across leading universities in China and Hong Kong, presenting research on LLMs, formal semantics, and neural-symbolic systems at ECNU, BNU, KELKIP (Chongqing), Shenzhen, and HK PolyU.",
     link: null,
     type: "talk"
   },
