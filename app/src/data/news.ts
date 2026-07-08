@@ -13,6 +13,12 @@ export const news: NewsItem[] = [
     type: "paper"
   },
   {
+    date: "2026-07",
+    text: "Paper published in Frontiers in Artificial Intelligence: 'Neuro-symbolic NLP: taxonomy, assessment, and directions' (with Shalom Lappin).",
+    link: "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1797587/full",
+    type: "paper"
+  },
+  {
     date: "2026-04",
     text: "Completed a prestigious invited lecture tour across leading universities in China and Hong Kong, presenting research on LLMs, formal semantics, and neural-symbolic systems at ECNU, BNU, KELKIP (Chongqing), Shenzhen, and HK PolyU.",
     link: null,
@@ -51,12 +57,6 @@ export const news: NewsItem[] = [
   {
     date: "2026",
     text: "Dependent Types and Continuations published in Journal of Mathematical Structures in Computer Science, CUP",
-    link: null,
-    type: "paper"
-  },
-  {
-    date: "2026",
-    text: "Neuro-Symbolic NLP: Taxonomy, Assessment, and Directions — submitted to Frontiers in AI",
     link: null,
     type: "paper"
   },
