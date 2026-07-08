@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image, Search, X, Copy, Check, Link2 } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, Users, Mic, Github, Globe, Cpu, Download, MessageSquare, Star, Image, Search, X, Copy, Check } from 'lucide-react';
 import { publications, abstracts, getPublicationsByType } from '../data/publications';
 import { tools, getToolsByCategory } from '../data/tools';
 import { conferenceTalks, invitedTalks, posters } from '../data/talks';
@@ -56,17 +56,6 @@ const OutputsSection = () => {
     };
     window.addEventListener('switchOutputTab', handler);
     return () => window.removeEventListener('switchOutputTab', handler);
-  }, []);
-
-  // Deep-link support: #pub-<slug> anchors
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.startsWith('#pub-')) {
-      // activeTab already defaults to 'publications'
-      window.setTimeout(() => {
-        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 500);
-    }
   }, []);
 
   useLayoutEffect(() => {
@@ -154,11 +143,6 @@ const OutputsSection = () => {
       setCopiedKey(`${slug}:bib`);
       window.setTimeout(() => setCopiedKey(null), 1600);
     };
-    const copyLink = () => {
-      navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#pub-${slug}`);
-      setCopiedKey(`${slug}:link`);
-      window.setTimeout(() => setCopiedKey(null), 1600);
-    };
     return (
       <div id={`pub-${slug}`} style={{ scrollMarginTop: '6rem' }} className="output-item p-3 rounded-lg hover:bg-ink/5 transition-all duration-200">
         <div className="flex gap-2 items-start">
@@ -204,14 +188,6 @@ const OutputsSection = () => {
                 >
                   {copiedKey === `${slug}:bib` ? <Check size={12} /> : <Copy size={12} />}
                   {copiedKey === `${slug}:bib` ? 'Copied' : 'BibTeX'}
-                </button>
-                <button
-                  onClick={copyLink}
-                  title="Copy a direct link to this publication"
-                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-ink/10 text-ink text-xs font-medium rounded hover:bg-ink/20 transition-colors"
-                >
-                  {copiedKey === `${slug}:link` ? <Check size={12} /> : <Link2 size={12} />}
-                  {copiedKey === `${slug}:link` ? 'Copied' : 'Cite link'}
                 </button>
               </div>
           </div>

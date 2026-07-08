@@ -14,7 +14,7 @@ export const featuredApp: LiveApp = {
   tagline:
     "Concordancing, frequencies, discourse markers, keyness and LLM-assisted analysis over 500M+ words of Modern Greek, live in your browser.",
   url: "https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecontainerapps.io",
-  githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+  githubUrl: "https://github.com/StergiosCha/SVARNA_CORPUS_APP",
   paperUrl: "https://arxiv.org/abs/2607.00970",
   glyph: "Σ",
   tags: ["KWIC", "Frequencies", "Keyness", "LLM Analysis"],
@@ -26,7 +26,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "The portal: ten containerized research platforms for Modern Greek linguistics, classical studies, and digital humanities.",
     url: "https://greek-app-heaven-portal.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+    githubUrl: null,
     glyph: "Α",
     tags: ["10 Platforms", "Portal", "Azure"],
   },
@@ -35,7 +35,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "Neuro-symbolic AI for classical studies: translation across 18 ancient languages, knowledge graphs, and Prolog-based reasoning.",
     url: "https://greek-app-heaven-medea.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/MEDEA/",
+    githubUrl: null,
     glyph: "☤",
     tags: ["Ancient Languages", "Knowledge Graphs", "Zeugma"],
   },
@@ -44,7 +44,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "Identify and generate rhyme patterns in Modern Greek poetry with multi-LLM analysis and phonological verification.",
     url: "https://greek-app-heaven-rhyme.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+    githubUrl: null,
     glyph: "♫",
     tags: ["Rhyme Taxonomy", "RAG", "Verification Loop"],
   },
@@ -71,7 +71,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "Measure linguistic distance across seven dimensions for eleven language pairs, from Ancient to Modern Greek and beyond.",
     url: "https://greek-app-heaven-linguistic.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/linguistic-distance",
+    githubUrl: "https://github.com/StergiosCha/linguistic_distance",
     glyph: "Δ",
     tags: ["7 Dimensions", "WALS", "URIEL+"],
   },
@@ -89,7 +89,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "Text analysis and embeddings lab: Word2Vec/FastText training, topics, sentiment, POS tagging, and clustering.",
     url: "https://greek-app-heaven-voyant.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/GreekNLP-SwissKnife",
+    githubUrl: null,
     glyph: "⚙",
     tags: ["Word2Vec", "Topics", "KWIC"],
   },
@@ -98,7 +98,7 @@ export const liveApps: LiveApp[] = [
     tagline:
       "AI-assisted terminography: term extraction, ISO 1087-compliant definitions, and neuro-symbolic validation.",
     url: "https://greek-app-heaven-terminography.livelyhill-85880e66.westeurope.azurecontainerapps.io",
-    githubUrl: "https://github.com/StergiosCha/term_extraction",
+    githubUrl: null,
     glyph: "☶",
     tags: ["ISO 1087", "RAG", "Symbolic Parser"],
   },
