@@ -53,7 +53,7 @@ const NovelistSection = () => {
         </div>
         <a
           ref={ctaRef}
-          href="https://stergios.chatzikyriakidis.org"
+          href="https://stergioscha.github.io/stergios/"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary mt-6 inline-flex"
@@ -78,7 +78,7 @@ const NovelistSection = () => {
             short story collections (one in English).
           </p>
         </div>
-        <a ref={ctaRef} href="https://stergios.chatzikyriakidis.org" target="_blank" rel="noopener noreferrer" className="btn-primary absolute" style={{ left: '52vw', top: '68vh' }}>
+        <a ref={ctaRef} href="https://stergioscha.github.io/stergios/" target="_blank" rel="noopener noreferrer" className="btn-primary absolute" style={{ left: '52vw', top: '68vh' }}>
           Visit my literary site
           <ExternalLink size={18} />
         </a>
