@@ -74,15 +74,18 @@ const BioSection = () => {
         <h2 ref={headlineRef} className="text-ink mt-2 mb-6">Background</h2>
         <div ref={bodyRef}>
           <p className="text-ink leading-relaxed text-base">
-            I am a Professor of Computational Linguistics at the University of Crete. I earned my BA in
-            Greek Philology specializing in Linguistics from Aristotle University, Thessaloniki. I continued
-            my studies obtaining an MSc in Computational Linguistics and Formal Grammar, and a PhD in Linguistics,
-            both from King&apos;s College, London.
+            I am a Professor of Computational Linguistics at the University of Crete, where I direct the
+            Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
+            the founder of SimasiaAI. My work spans formal semantics and type theory, the reasoning and
+            evaluation of large language models, and NLP for Greek dialects and low-resource varieties.
           </p>
           <p className="text-ink leading-relaxed mt-4 text-base">
-            I have worked at Royal Holloway, University of London, the French National Centre for Scientific
-            Research (CNRS), the Open University of Cyprus and the University of Gothenburg. From 2016 until 2021,
-            I was the Associate Director of the Center for Linguistic Theory and Studies in Probability (CLASP).
+            I earned my BA in Greek Philology specializing in Linguistics from Aristotle University,
+            Thessaloniki, and hold an MSc in Computational Linguistics and Formal Grammar and a PhD in
+            Linguistics, both from King&apos;s College, London. I have worked at Royal Holloway, University of
+            London, the French National Centre for Scientific Research (CNRS), the Open University of Cyprus
+            and the University of Gothenburg. From 2016 until 2021, I was the Associate Director of the Center
+            for Linguistic Theory and Studies in Probability (CLASP).
           </p>
         </div>
         <div ref={ctaRef} className="mt-6">
@@ -121,15 +124,18 @@ const BioSection = () => {
         <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '46vw', top: '20vh' }}>Background</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '46vw', top: '34vh', width: '44vw' }}>
           <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I am a Professor of Computational Linguistics at the University of Crete. I earned my BA in
-            Greek Philology specializing in Linguistics from Aristotle University, Thessaloniki. I continued
-            my studies obtaining an MSc in Computational Linguistics and Formal Grammar, and a PhD in Linguistics,
-            both from King&apos;s College, London.
+            I am a Professor of Computational Linguistics at the University of Crete, where I direct the
+            Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
+            the founder of SimasiaAI. My work spans formal semantics and type theory, the reasoning and
+            evaluation of large language models, and NLP for Greek dialects and low-resource varieties.
           </p>
           <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I have worked at Royal Holloway, University of London, the French National Centre for Scientific
-            Research (CNRS), the Open University of Cyprus and the University of Gothenburg. From 2016 until 2021,
-            I was the Associate Director of the Center for Linguistic Theory and Studies in Probability (CLASP).
+            I earned my BA in Greek Philology specializing in Linguistics from Aristotle University,
+            Thessaloniki, and hold an MSc in Computational Linguistics and Formal Grammar and a PhD in
+            Linguistics, both from King&apos;s College, London. I have worked at Royal Holloway, University of
+            London, the French National Centre for Scientific Research (CNRS), the Open University of Cyprus
+            and the University of Gothenburg. From 2016 until 2021, I was the Associate Director of the Center
+            for Linguistic Theory and Studies in Probability (CLASP).
           </p>
         </div>
         <div ref={ctaRef} className="absolute flex flex-col gap-3" style={{ left: '46vw', top: '72vh' }}>
