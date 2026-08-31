@@ -76,16 +76,14 @@ const BioSection = () => {
           <p className="text-ink leading-relaxed text-base">
             I am a Professor of Computational Linguistics at the University of Crete, where I direct the
             Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
-            the founder of SimasiaAI. My work spans formal semantics and type theory, the reasoning and
-            evaluation of large language models, and NLP for Greek dialects and low-resource varieties.
+            founder of SimasiaAI. I work on formal semantics, LLM evaluation and reasoning, and NLP for Greek
+            dialects.
           </p>
           <p className="text-ink leading-relaxed mt-4 text-base">
-            I earned my BA in Greek Philology specializing in Linguistics from Aristotle University,
-            Thessaloniki, and hold an MSc in Computational Linguistics and Formal Grammar and a PhD in
-            Linguistics, both from King&apos;s College, London. I have worked at Royal Holloway, University of
-            London, the French National Centre for Scientific Research (CNRS), the Open University of Cyprus
-            and the University of Gothenburg. From 2016 until 2021, I was the Associate Director of the Center
-            for Linguistic Theory and Studies in Probability (CLASP).
+            I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
+            King&apos;s College, London, after a BA in Greek Philology from Aristotle University, Thessaloniki.
+            I have worked at Royal Holloway, CNRS, the Open University of Cyprus and the University of
+            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021.
           </p>
         </div>
         <div ref={ctaRef} className="mt-6">
@@ -126,16 +124,14 @@ const BioSection = () => {
           <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I am a Professor of Computational Linguistics at the University of Crete, where I direct the
             Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
-            the founder of SimasiaAI. My work spans formal semantics and type theory, the reasoning and
-            evaluation of large language models, and NLP for Greek dialects and low-resource varieties.
+            founder of SimasiaAI. I work on formal semantics, LLM evaluation and reasoning, and NLP for Greek
+            dialects.
           </p>
           <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I earned my BA in Greek Philology specializing in Linguistics from Aristotle University,
-            Thessaloniki, and hold an MSc in Computational Linguistics and Formal Grammar and a PhD in
-            Linguistics, both from King&apos;s College, London. I have worked at Royal Holloway, University of
-            London, the French National Centre for Scientific Research (CNRS), the Open University of Cyprus
-            and the University of Gothenburg. From 2016 until 2021, I was the Associate Director of the Center
-            for Linguistic Theory and Studies in Probability (CLASP).
+            I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
+            King&apos;s College, London, after a BA in Greek Philology from Aristotle University, Thessaloniki.
+            I have worked at Royal Holloway, CNRS, the Open University of Cyprus and the University of
+            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021.
           </p>
         </div>
         <div ref={ctaRef} className="absolute flex flex-col gap-3" style={{ left: '46vw', top: '72vh' }}>
