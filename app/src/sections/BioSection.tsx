@@ -133,18 +133,18 @@ const BioSection = () => {
             I have worked at Royal Holloway, CNRS, the Open University of Cyprus and the University of
             Gothenburg, where I was Associate Director of CLASP from 2016 to 2021.
           </p>
-        </div>
-        <div ref={ctaRef} className="absolute flex flex-col gap-3" style={{ left: '46vw', top: '72vh' }}>
-          <a href="https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="btn-primary">
-            <FileText size={18} />
-            Google Scholar
-          </a>
-          <p className="text-mut" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
-            I am also a novelist.{' '}
-            <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-terra hover:underline">
-              See here
+          <div ref={ctaRef} className="flex flex-col gap-3 items-start mt-10">
+            <a href="https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <FileText size={18} />
+              Google Scholar
             </a>
-          </p>
+            <p className="text-mut" style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}>
+              I am also a novelist.{' '}
+              <a href="#novelist" onClick={(e) => { e.preventDefault(); scrollToNovelist(); }} className="text-terra hover:underline">
+                See here
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
