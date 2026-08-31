@@ -76,8 +76,9 @@ const BioSection = () => {
           <p className="text-ink leading-relaxed text-base">
             I am a Professor of Computational Linguistics at the University of Crete, where I direct the
             Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
-            founder of SimasiaAI. I work on formal semantics, LLM evaluation and reasoning, and NLP for Greek
-            dialects.
+            founder of SimasiaAI. My work lies at the intersection of NLP, formal semantics and type theory,
+            the reasoning and evaluation of large language models, computational dialectology and low-resource
+            varieties.
           </p>
           <p className="text-ink leading-relaxed mt-4 text-base">
             I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
@@ -124,8 +125,9 @@ const BioSection = () => {
           <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I am a Professor of Computational Linguistics at the University of Crete, where I direct the
             Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
-            founder of SimasiaAI. I work on formal semantics, LLM evaluation and reasoning, and NLP for Greek
-            dialects.
+            founder of SimasiaAI. My work lies at the intersection of NLP, formal semantics and type theory,
+            the reasoning and evaluation of large language models, computational dialectology and low-resource
+            varieties.
           </p>
           <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
             I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
