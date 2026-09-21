@@ -8,6 +8,7 @@ import ResearchSection from './sections/ResearchSection';
 import SoftwareSection from './sections/SoftwareSection';
 import NovelistSection from './sections/NovelistSection';
 import LiveAppsSection from './sections/LiveAppsSection';
+import TeachingSection from './sections/TeachingSection';
 import OutputsSection from './sections/OutputsSection';
 import NewsResearchSection from './sections/NewsResearchSection';
 import ContactSection from './sections/ContactSection';
@@ -34,6 +35,7 @@ function App() {
         <SoftwareSection />
         <NovelistSection />
         <LiveAppsSection />
+        <TeachingSection />
         <OutputsSection />
         <NewsResearchSection />
         <ContactSection />

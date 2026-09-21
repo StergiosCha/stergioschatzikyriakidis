@@ -118,6 +118,24 @@ Edit the CSS variables in `/src/App.css`:
 }
 ```
 
+## Teaching material
+
+The Teaching section links to the static CLARIN:EL workshop at
+`/teaching/clarin-2026/`. Files under `public/teaching/` are included by Vite in
+the existing GitHub Pages deployment. The interactive document opens as a full
+page and links to the existing apps.
+
+To refresh the published material from the local workshop source folder:
+
+```sh
+python ../scripts/prepare_clarin_materials.py /path/to/clarin_summer_school_2026
+npm run build
+```
+
+The preparation script uses Python's standard library. It publishes the eleven
+worked examples, both slide decks and their font/figure dependencies. The
+instructor's preparation checklist and personal slide cues are excluded.
+
 ## License
 
 © Stergios Chatzikyriakidis. All rights reserved.

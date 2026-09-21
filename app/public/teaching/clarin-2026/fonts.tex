@@ -1,0 +1,6 @@
+% Bundle fonts so XeLaTeX does not depend on operating-system font registration.
+\usepackage{fontspec}
+\setmainfont{Carlito}[Path=fonts/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\setsansfont{Carlito}[Path=fonts/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\setmonofont{DejaVuSansMono}[Path=fonts/,Extension=.ttf,UprightFont=*,BoldFont=*-Bold,ItalicFont=*-Oblique,BoldItalicFont=*-BoldOblique,Scale=0.82]
+\newfontfamily\porson{GFSPorson.otf}[Path=fonts/]

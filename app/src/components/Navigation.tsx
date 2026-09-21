@@ -66,6 +66,7 @@ const Navigation = () => {
     { label: 'Talks', id: 'outputs', tab: 'talks' },
     { label: 'Software', id: 'software' },
     { label: 'Live demos', id: 'demos' },
+    { label: 'Teaching', id: 'teaching' },
     { label: 'News', id: 'news-research' },
     { label: 'Contact', id: 'contact' },
   ];
@@ -79,22 +80,22 @@ const Navigation = () => {
             : 'bg-transparent py-5'
         }`}
       >
-        <div className="px-6 lg:px-[8vw] flex items-center justify-between">
+        <div className="px-6 xl:px-[4vw] flex items-center justify-between gap-4">
           {/* Wordmark */}
           <button
             onClick={() => scrollToSection('hero')}
-            className="font-display text-sm lg:text-base font-semibold text-ink hover:opacity-70 transition-opacity"
+            className="font-display text-sm lg:text-base font-semibold text-ink hover:opacity-70 transition-opacity shrink-0"
           >
             Stergios Chatzikyriakidis
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden xl:flex items-center gap-4 2xl:gap-6" aria-label="Main navigation">
             {navLinks.map((link) => (
               <button
-                key={link.id}
+                key={link.label}
                 onClick={() => scrollToSection(link.id, link.tab)}
-                className="text-sm font-medium text-ink hover:opacity-70 transition-opacity"
+                className="text-sm font-medium text-ink hover:opacity-70 transition-opacity whitespace-nowrap"
               >
                 {link.label}
               </button>
@@ -109,7 +110,7 @@ const Navigation = () => {
           </nav>
 
           {/* Mobile: theme toggle + menu button */}
-          <div className="md:hidden flex items-center gap-1">
+          <div className="xl:hidden flex items-center gap-1">
             <button
               onClick={toggleTheme}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -119,6 +120,7 @@ const Navigation = () => {
             </button>
             <button
               onClick={() => setIsOpen(true)}
+              aria-label="Open navigation menu"
               className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
             >
               <Menu size={20} />
@@ -129,7 +131,7 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] md:hidden">
+        <div className="fixed inset-0 z-[100] xl:hidden">
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-ink/20 backdrop-blur-sm"
@@ -143,6 +145,7 @@ const Navigation = () => {
               <span className="font-display text-sm font-semibold text-ink">Menu</span>
               <button
                 onClick={() => setIsOpen(false)}
+                aria-label="Close navigation menu"
                 className="p-2 text-ink hover:bg-ink/5 rounded-lg transition-colors"
               >
                 <X size={18} />
@@ -153,7 +156,7 @@ const Navigation = () => {
             <nav className="flex flex-col py-4">
               {navLinks.map((link) => (
                 <button
-                  key={link.id}
+                  key={link.label}
                   onClick={() => scrollToSection(link.id, link.tab)}
                   className="px-5 py-3 text-left text-base font-medium text-ink hover:bg-ink/5 transition-colors border-l-2 border-transparent hover:border-terra"
                 >
