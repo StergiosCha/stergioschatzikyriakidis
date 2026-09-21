@@ -57,14 +57,14 @@ const ContactSection = () => {
         </div>
         <a
           ref={emailRef}
-          href="mailto:stergios.chatzikyriakidis@uoc.gr"
+          href="mailto:schatzikyriakidis@athenarc.gr"
           className="text-paper hover:text-terra transition-colors mt-6 text-base"
         >
-          stergios.chatzikyriakidis@uoc.gr
+          schatzikyriakidis@athenarc.gr
         </a>
         <div ref={ctaRef} className="mt-6">
           <a
-            href="mailto:stergios.chatzikyriakidis@uoc.gr"
+            href="mailto:schatzikyriakidis@athenarc.gr"
             className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors"
           >
             <Mail size={18} />
@@ -96,11 +96,11 @@ const ContactSection = () => {
             Greece
           </p>
         </div>
-        <a ref={emailRef} href="mailto:stergios.chatzikyriakidis@uoc.gr" className="absolute text-paper hover:text-terra transition-colors" style={{ left: '8vw', top: '54vh', fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-          stergios.chatzikyriakidis@uoc.gr
+        <a ref={emailRef} href="mailto:schatzikyriakidis@athenarc.gr" className="absolute text-paper hover:text-terra transition-colors" style={{ left: '8vw', top: '54vh', fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          schatzikyriakidis@athenarc.gr
         </a>
         <div ref={ctaRef} className="absolute flex gap-4" style={{ left: '8vw', top: '64vh' }}>
-          <a href="mailto:stergios.chatzikyriakidis@uoc.gr" className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors">
+          <a href="mailto:schatzikyriakidis@athenarc.gr" className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors">
             <Mail size={18} />
             Send email
           </a>

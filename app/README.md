@@ -133,8 +133,9 @@ npm run build
 ```
 
 The preparation script uses Python's standard library. It publishes the eleven
-worked examples, both slide decks and their font/figure dependencies. The
-instructor's preparation checklist and personal slide cues are excluded.
+worked examples, both slide PDFs and their font/figure dependencies. Editable
+LaTeX sources, the instructor's preparation checklist and personal slide cues
+are excluded.
 
 ## License
 

@@ -7,14 +7,7 @@ The demonstration works offline. External app and source links need internet.
 Each activity includes exact inputs, prompts, saved responses and detailed explanations.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on PDFs are accompanied by their editable LaTeX sources.
-Unzip slide_sources.zip, then build with a TeX Live installation containing XeLaTeX,
-latexmk, Beamer, metropolis, TikZ, booktabs and tabularx:
-
-    latexmk -xelatex clarin_talk.tex
-    latexmk -xelatex hands_on_slides.tex
-
-Fonts and the three graph figures used in the slides are bundled with the sources.
+The talk and hands-on slides are available as PDFs.
 The worked_examples.md file contains the complete example explanations and source credits.
 The interactive demonstration includes later rehearsal results than the slide decks,
 including Northern and Cypriot generations recorded on 21 September.

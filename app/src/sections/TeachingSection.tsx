@@ -55,7 +55,7 @@ export default function TeachingSection() {
           </div>
           <div className="border-t lg:border-t-0 lg:border-l border-ink/10 pt-6 lg:pt-0 lg:pl-8 space-y-5">
             <div className="flex gap-3"><BookOpen className="text-terra shrink-0 mt-1" size={20} aria-hidden="true" /><div><h4 className="text-base leading-normal text-ink mb-1">Work through eleven activities</h4><p className="text-sm text-mut">Complete texts, copyable prompts, saved outputs, interactive graphs and links to the existing apps.</p></div></div>
-            <div className="flex gap-3"><Download className="text-terra shrink-0 mt-1" size={20} aria-hidden="true" /><div><h4 className="text-base leading-normal text-ink mb-1">Keep the material</h4><p className="text-sm text-mut">Both slide decks, their LaTeX sources and an offline workshop bundle.</p><a href={`${workshop}#downloads`} className="inline-flex text-sm text-terra underline underline-offset-4 mt-3">Browse downloads</a></div></div>
+            <div className="flex gap-3"><Download className="text-terra shrink-0 mt-1" size={20} aria-hidden="true" /><div><h4 className="text-base leading-normal text-ink mb-1">Keep the material</h4><p className="text-sm text-mut">Both slide decks, complete worked examples and an offline workshop bundle.</p><a href={`${workshop}#downloads`} className="inline-flex text-sm text-terra underline underline-offset-4 mt-3">Browse downloads</a></div></div>
           </div>
         </article>
       </div>

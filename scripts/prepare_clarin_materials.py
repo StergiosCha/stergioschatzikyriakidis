@@ -15,6 +15,9 @@ SITE = Path(__file__).resolve().parents[1]
 WORKSHOP = Path(sys.argv[1]).expanduser().resolve()
 OUT = SITE / 'app/public/teaching/clarin-2026'
 OUT.mkdir(parents=True, exist_ok=True)
+# Editable slide sources stay in the local workshop folder.
+for path in list(OUT.rglob('*.tex')) + [OUT / 'slide_sources.zip']:
+    path.unlink(missing_ok=True)
 
 original = (WORKSHOP / 'hands_on_live.html').read_text()
 pattern = r'(<script id="workshop-data" type="application/json">)(.*?)(</script>)'
@@ -58,7 +61,7 @@ script = re.sub(r'^  if\(a===\'(?:preparation|cues)\'\).*?\n', '', script, flags
 script = script.replace('Complete instructor chapter, including', 'Complete worked example, including')
 script = script.replace(' / complete instructor chapter', ' / complete worked example')
 script = script.replace('<p class="funding">', '<p><a class="text-button" href="index.html">Workshop overview, slides and downloads ↗</a></p><p class="funding">')
-library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['slide_sources.zip','LaTeX sources and bundled fonts'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
+library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
 '''
 script = re.sub(r'function library\(\)\{.*?\n(?=function normalize)', lambda _: library, script, flags=re.S)
 
@@ -75,10 +78,9 @@ assert '\u2014' not in result and '/Users/' not in result
 assert not re.search(r'(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{30,})', result)
 (OUT / 'demo.html').write_text(result)
 
-sources = ['clarin_talk.tex', 'hands_on_slides.tex', 'fonts.tex']
-sources += [str(p.relative_to(WORKSHOP)) for p in sorted((WORKSHOP / 'fonts').iterdir()) if p.suffix in ['.ttf', '.otf'] or 'LICENSE' in p.name]
-sources += ['zeugma_materials/' + kind + '_graph.pdf' for kind in ['short', 'focus', 'full']]
-files = sources + ['clarin_talk.pdf', 'hands_on_slides.pdf', 'funding_acknowledgment.md', 'references.bib']
+files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'funding_acknowledgment.md', 'references.bib']
+files += [str(p.relative_to(WORKSHOP)) for p in sorted((WORKSHOP / 'fonts').iterdir()) if p.suffix in ['.ttf', '.otf'] or 'LICENSE' in p.name]
+files += ['zeugma_materials/' + kind + '_graph.pdf' for kind in ['short', 'focus', 'full']]
 files += re.findall(r'!\[[^\]]*\]\(([^)]+)\)', public_notes)
 for name in sorted(set(files)):
     source = (WORKSHOP / name).resolve()
@@ -96,14 +98,7 @@ The demonstration works offline. External app and source links need internet.
 Each activity includes exact inputs, prompts, saved responses and detailed explanations.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on PDFs are accompanied by their editable LaTeX sources.
-Unzip slide_sources.zip, then build with a TeX Live installation containing XeLaTeX,
-latexmk, Beamer, metropolis, TikZ, booktabs and tabularx:
-
-    latexmk -xelatex clarin_talk.tex
-    latexmk -xelatex hands_on_slides.tex
-
-Fonts and the three graph figures used in the slides are bundled with the sources.
+The talk and hands-on slides are available as PDFs.
 The worked_examples.md file contains the complete example explanations and source credits.
 The interactive demonstration includes later rehearsal results than the slide decks,
 including Northern and Cypriot generations recorded on 21 September.
@@ -115,10 +110,8 @@ of Greek), making Svarna, GPT-4.1 fine-tuning and the Greek NLP Swiss Knife poss
 Public material: https://stergioschatzikyriakidis.org/teaching/clarin-2026/
 '''
 (OUT / 'README.md').write_text(readme)
-with zipfile.ZipFile(OUT / 'slide_sources.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-    for name in sources + ['README.md']:
-        archive.write(OUT / name, name)
 assert (OUT / 'index.html').exists(), 'Create the workshop landing page first.'
+assert not list(OUT.rglob('*.tex')) and not (OUT / 'slide_sources.zip').exists()
 with zipfile.ZipFile(OUT / 'workshop_bundle.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
     for path in sorted(OUT.rglob('*')):
         if path.is_file() and path.name not in ['workshop_bundle.zip', 'manifest.json']:
