@@ -39,6 +39,11 @@ data.pop('preparation', None)
 data['notes'] = {m['id']: data['notes'][m['id']] for m in data['modules']}
 for name in ['preparation_guide.md', 'hands_on_notes.md']:
     data['assets'].pop(name, None)
+# These internal templates were removed from the workshop library on request.
+for name in ['05_zero_shot_algorithm.txt', '06_mosaic_enhanced.txt',
+             '07_verification_correction.txt', '08_rag_generic_examples.txt',
+             '09_mosaic_phonetic_insertion.txt']:
+    data['assets'].pop('rhyme_identification_prompts/' + name, None)
 data['assets']['worked_examples.md'] = public_notes
 # Retain source file/line citations without publishing machine-local hyperlinks.
 data['assets']['rhyme_identification_prompts.md'] = re.sub(
