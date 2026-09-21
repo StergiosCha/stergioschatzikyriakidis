@@ -54,6 +54,8 @@ data['assets']['rhyme_identification_prompts.md'] = re.sub(
     lambda m: m[1] + ' (source: `' + m[2] + '`)',
     data['assets']['rhyme_identification_prompts.md'])
 data['publicEdition'] = True
+pdf_versions = {name: hashlib.sha256((WORKSHOP / name).read_bytes()).hexdigest()[:12]
+                for name in ['clarin_talk.pdf', 'hands_on_slides.pdf']}
 
 script = re.search(r'<script>(.*?)</script>', original, re.S)[1]
 script = re.sub(r'<button[^>]+data-action="(?:preparation|cues)"[^>]*>.*?</button>', '', script)
@@ -64,6 +66,8 @@ script = script.replace('<p class="funding">', '<p><a class="text-button" href="
 library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
 '''
 script = re.sub(r'function library\(\)\{.*?\n(?=function normalize)', lambda _: library, script, flags=re.S)
+for name, version in pdf_versions.items():
+    script = script.replace("['" + name + "',", "['" + name + '?v=' + version + "',")
 
 encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
 result = re.sub(pattern, lambda m: m[1] + encoded + m[3], original, flags=re.S)
@@ -77,6 +81,12 @@ assert 'data-action="cues"' not in result and 'US$15' not in result
 assert '\u2014' not in result and '/Users/' not in result
 assert not re.search(r'(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{30,})', result)
 (OUT / 'demo.html').write_text(result)
+versions = {**pdf_versions, 'demo.html': hashlib.sha256(result.encode()).hexdigest()[:12]}
+landing = (OUT / 'index.html').read_text()
+for name, version in versions.items():
+    landing = re.sub(r'href="' + re.escape(name) + r'(?:\?v=[^"#]*)?(#[^"]*)?"',
+                     lambda m: 'href="' + name + '?v=' + version + (m[1] or '') + '"', landing)
+(OUT / 'index.html').write_text(landing)
 
 files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'funding_acknowledgment.md', 'references.bib']
 files += [str(p.relative_to(WORKSHOP)) for p in sorted((WORKSHOP / 'fonts').iterdir()) if p.suffix in ['.ttf', '.otf'] or 'LICENSE' in p.name]
