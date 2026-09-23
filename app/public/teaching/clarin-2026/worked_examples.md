@@ -2,7 +2,7 @@
 
 Stergios Chatzikyriakidis, ILSP. CLARIN:EL Summer School, 24 September 2026.
 
-Complete texts, prompts, recorded outputs and explanations for the eleven activities. Evidence is dated; unverified claims remain marked [VERIFY]. Use the interactive workshop for embedded graphs, searchable records and links to the apps.
+Complete texts, prompts, recorded outputs and explanations for the eleven activities. Recorded results retain their dates and source credits.
 
 ## A. Rhyme: the worked example was already in the prompt
 
@@ -10,10 +10,7 @@ Complete texts, prompts, recorded outputs and explanations for the eleven activi
 App: <https://greek-app-heaven-rhyme.livelyhill-85880e66.westeurope.azurecontainerapps.io>.
 
 
-The object of the demonstration is the four-line Seferis stanza below. First let
-the class assess a few-shot result. Then reveal that both tested rhyme pairs were supplied
-in the prompt. Change to Zero-Shot Structured and finally enable phonological verification.
-The demonstration concerns evidence and evaluation design as well as rhyme recognition.
+The four-line Seferis stanza below provides a comparison of Few-Shot, Zero-Shot Structured and phonological verification. Both tested rhyme pairs occur in the Few-Shot prompt. The comparison concerns evidence and evaluation design as well as rhyme recognition.
 
 ### Exact input and reference analysis
 
@@ -47,20 +44,18 @@ can generate plausible terminology without a stable phonological comparison. The
 observed prompt overlap, rather than an assertion about hidden training data, is the
 specific reason this first result is not an independent test.
 
-### Controls and branching script
+### Comparing the three configurations
 
 1. Select one available model associated with the authorised key. Record its displayed
    name. [VERIFY: the live model and its three outputs have not been selected or observed.]
 2. Set **Few-Shot**, **RAG off**, **verification off**, paste the exact stanza and click
    **Ανάλυση (Analyze)**. The verification box is normally selected, so explicitly clear it.
-3. Save the complete result. If correct, invite: “There you go, no need for symbolic
-   verification!” Then ask whether success on this poem predicts success on another.
-   If wrong, inspect that actual error and continue with the prompt reveal.
-4. Show the two Seferis examples in the prompt below. Its line numbers 5 to 8 refer to the
+3. Save the complete result. Does success on this poem predict success on another?
+   Compare the returned labels with the reference analysis.
+4. Read the two Seferis examples in the prompt below. Its line numbers 5 to 8 refer to the
    source poem, while the pasted input numbers the same four lines 1 to 4.
 5. Select **Zero-Shot Structured**, keep the same model and both switches off, then run
-   the same input. Save it. Identify the exact changed claim. If it is correct, say so;
-   the next check still has value. Do not repeat requests until the desired error appears.
+   the same input. Save it. Identify the exact changed claim. A correct answer is also a result; the verification comparison still has value.
 6. Keep that strategy and model, turn **verification on**, leave RAG off and Analyze.
    Read **INITIAL LLM ANALYSIS**, **PHONOLOGICAL VERIFICATION**, then
    **LLM REFLECTION & CORRECTION**. This starts a fresh initial model analysis; it does
@@ -715,9 +710,9 @@ Open [Emotion Knowledge Graph](https://greek-app-heaven-medea.livelyhill-85880e6
 
 The teaching point is that theory changes the structure of the question, not merely the length of the answer. The model is asked to relate an emotion to a situation, an interpretation and a possible response. Treat the richer account as a hypothesis to inspect; additional fields are not by themselves evidence of greater accuracy. This is the app's implementation inspired by Cairns, not a claim that every field or rule is a verbatim formulation from Cairns.
 
-Ask: **Does putting away the sword mean that the anger has disappeared?** The end of the passage says that Achilles has not ceased from his wrath. Distinguish an action tendency from a completed action. Ask whether the model keeps the emotions of Achilles, Agamemnon and the gods separate, and whether it invents an unsupported emotion such as fear merely to explain obedience.
+**Does putting away the sword mean that the anger has disappeared?** The end of the passage says that Achilles has not ceased from his wrath. Distinguish an action tendency from a completed action. Consider whether the model keeps the emotions of Achilles, Agamemnon and the gods separate, and whether it invents an unsupported emotion such as fear merely to explain obedience.
 
-**Observed in rehearsal:** Standard added relief and described grief as resolved. Cairns added the honour/status appraisals, but also cited “Burning with rage”, “Filled with grief” and “Seized by anger”, examples present in the prompt and absent from the passage. Show the richer structure first, then ask participants to locate each alleged quotation in the source. This makes the power and the risks of theory-rich prompting visible in the actual output.
+**Observed in rehearsal:** Standard added relief and described grief as resolved. Cairns added the honour/status appraisals, but also cited “Burning with rage”, “Filled with grief” and “Seized by anger”, examples present in the prompt and absent from the passage. Compare the richer structure with the source and locate each alleged quotation. This makes the power and the risks of theory-rich prompting visible in the actual output.
 
 #### Why use this page for the comparison?
 
@@ -745,7 +740,7 @@ The live page also has **Normal (Basic LLM Extraction)** and **Cairns (Enhanced 
 
 For NeSy4, the live UI contains **Shape 1**, **Shape 2** and **Shape 3** dialogue displays. Proposed ontology changes are review items, not automatic app changes. In the source, disabling the feedback checkbox skips negotiation but does not disable all model calls for the critic and patch proposal. Do not describe that checkbox as switching the whole NeSy4 process off.
 
-A blank feedback result can mean no actionable inconsistency was detected. Do not invent a correction to make the demonstration work. Distinguish a changed score, a reclassified emotion and a genuine correction supported by the passage. Ask whether an over-simple rule can be wrong even when it is applied consistently.
+A blank feedback result can mean no actionable inconsistency was detected. Do not invent a correction to make the demonstration work. Distinguish a changed score, a reclassified emotion and a genuine correction supported by the passage. Consider whether an over-simple rule can be wrong even when it is applied consistently.
 
 All four NeSy API runs completed. NeSy1 and NeSy2 took about 25 and 18 seconds; both relabelled explicitly stated grief as anger during feedback. NeSy3 took about 19 seconds and fired no rules. NeSy4 took about 60 seconds, defended six free-reading interpretations and proposed four ontology amendments. Its defence of explicitly stated wonder is a useful example of challenging an incomplete grammar. Inspect the separate critic's replacement of care with pity as well. The main NeSy4 result remains the baseline; dialogue findings are not automatically incorporated into it. Saved responses are in `evidence/medea_rehearsal_20260916/`.
 
@@ -774,7 +769,7 @@ All requests and responses are in `evidence/medea_rehearsal_20260916/`. Each run
 
 ### What to show in the emotion exercise
 
-**Standard:** The passage ends with Achilles continuing his wrath. The output nevertheless adds relief and says grief is resolved by relief as Athene calms him. Ask participants to distinguish restraint from emotional resolution.
+**Standard:** The passage ends with Achilles continuing his wrath. The output nevertheless adds relief and says grief is resolved by relief as Athene calms him. Distinguish restraint from emotional resolution.
 
 **Cairns:** The output adds useful appraisals such as “I have been disrespected” and “My status is challenged”. However, its `textual_evidence` includes “Burning with rage”, “Filled with grief” and “Seized by anger”. All three appear in the local prompt's worked examples and none occurs in the submitted passage. “Shrouded in sorrow” is also absent from the passage; the prompt has the related example “Shrouded in grief”. This is evidence consistent with prompt-example contamination, not a controlled causal test. Physiological details such as increased heart rate and tears also exceed the text. Theory gives a richer analytical structure, which still needs checking against the passage.
 
@@ -782,7 +777,7 @@ All requests and responses are in `evidence/medea_rehearsal_20260916/`. Each run
 
 **NeSy3:** The labels are wrath, grief, indignation and helplessness. The displayed grammar compliance is 1.0, with no rule firings. This is compatibility with the representation's categories, not verified historical or literary accuracy. The constrained extraction misses the explicitly named wonder and adds interpretations such as helplessness that require discussion.
 
-**NeSy4:** The free reading recovers wonder, care and Achilles' continuing wrath. Its dialogue defends wonder using “Achilles was seized with wonder” and proposes a new wonder family. This is a strong example of questioning the grammar's coverage. The separate critic revises care to pity and obedience to submission to fit the vocabulary. Ask whether those revisions preserve the interpretation. The main four-emotion result remains the baseline; the dialogue and critic results are separate, not an automatically corrected final graph. The ontology proposals were not applied.
+**NeSy4:** The free reading recovers wonder, care and Achilles' continuing wrath. Its dialogue defends wonder using “Achilles was seized with wonder” and proposes a new wonder family. This is a strong example of questioning the grammar's coverage. The separate critic revises care to pity and obedience to submission to fit the vocabulary. Consider whether those revisions preserve the interpretation. The main four-emotion result remains the baseline; the dialogue and critic results are separate, not an automatically corrected final graph. The ontology proposals were not applied.
 
 
 
@@ -1060,24 +1055,24 @@ Return ONLY JSON, no markdown.
 ```
 
 
-### Teaching sequence and interpretation key
+### Comparing the analyses
 
 1. Read the threat to Briseis, Achilles' contemplated killing, his grief, Athene's
    intervention, explicit wonder, and the final persistence of wrath. Establish the
    distinction between an emotion, an action tendency and a completed action.
-2. Show Standard's relief and resolved-grief claims. Ask for the sentence supporting
+2. Read Standard's relief and resolved-grief claims. Locate the sentence supporting
    emotional resolution. Putting the sword away does not itself establish that anger ended.
-3. Show the added honour/status appraisals in Cairns. They make a theory-guided reading
+3. Read the added honour/status appraisals in Cairns. They make a theory-guided reading
    more inspectable. Then search for “Burning with rage”, “Filled with grief” and
    “Seized by anger”: the alleged evidence comes from prompt examples, not this input.
 4. For NeSy1 and NeSy2, follow the same entity ID through the inconsistency and feedback
-   records below. The explicit grief is relabelled anger. Ask whether the dependency rule,
+   records below. The explicit grief is relabelled anger. Consider whether the dependency rule,
    extraction or attribution needed revision. A resolved flag is not a historical verdict.
 5. For NeSy3, read the four returned labels and the empty trace. Compliance 1.0 with no
-   fired rule does not establish completeness. Ask where the explicit wonder went.
+   fired rule does not establish completeness. Consider where the explicit wonder went.
 6. For NeSy4, read the wonder defence, all dialogue decisions, critic revisions and patch
    proposals below. Separate the baseline, free reading, critic and proposed amendments.
-   Ask whether care entails pity and whether chosen obedience is helpless submission.
+   Consider whether care entails pity and whether chosen obedience is helpless submission.
 7. A proposed ontology extension needs human review. Do not describe its proposal as
    an applied rule change. The output's six defences and four proposals belong to this run.
 
@@ -3037,7 +3032,7 @@ model statements to assess, including invented details and unsupported quotation
 
 Open [Zeugma](https://greek-app-heaven-medea.livelyhill-85880e66.westeurope.azurecontainerapps.io/zeugma). Switch to Thucydides 2.2, the Theban attack on Plataea. **Use `medea_zeugma_passage_short_en.txt` for the tested working sequence.** It is a verbatim selection beginning “a Theban force”, omitting the chronological opening. The complete passage and Greek remain in `medea_zeugma_passage_en.txt` and `medea_zeugma_passage_grc.txt`.
 
-Use one instructor-controlled extraction for the room: the existing backend stores a shared Prolog graph. Participants work in pairs to examine the text and propose queries; simultaneous extractions could overwrite the graph.
+The backend stores a shared Prolog graph. Use one shared extraction for these queries; simultaneous extractions can overwrite it.
 
 1. Paste the passage into **Step 1: Ancient Text for Graph Extraction**. Keep **Reasoning Mode: Basic - General logical reasoning** and choose the provider.
 2. Select **Step 1: Extract Knowledge Graph**. Read the extraction output and **Available Predicates**. No passage selector or automatic historical-violation button is required by this plan.
@@ -3364,7 +3359,7 @@ checks whether relation endpoints exist and assigns the contradiction count zero
 not verify the historical meaning against the passage. A sound inference over a false
 or oversimplified premise can give a wrong historical answer.
 
-Ask: “What assertion would preserve the invitation, its speaker and its intended outcome?”
+“What assertion would preserve the invitation, its speaker and its intended outcome?”
 A proposed representation should describe an invitation event and the membership it seeks,
 without asserting achieved membership. That is a design suggestion for discussion, not an
 additional predicate returned by this extraction.
@@ -3601,7 +3596,7 @@ This is workshop fiction, not a published literary source. Preserve its five par
 
 Nature language remains present in a metaphor and in a statement of absence. Extracting a mention of reeds or frogs is therefore not automatically an error. First decide whether the research question concerns mentions, literal entities in the current scene, remembered environments, or figurative language. Judge the output against that declared annotation policy.
 
-The final paragraph supports overlapping economic, affective and environmental interpretations. A single attitude or positive/negative tone can erase that complexity. Ask students to propose a better annotation before looking for agreement with the model.
+The final paragraph supports overlapping economic, affective and environmental interpretations. A single attitude or positive/negative tone can erase that complexity. Propose a better annotation before looking for agreement with the model.
 
 
 
@@ -3999,7 +3994,7 @@ Observed browser completion: 36.271 seconds; HTTP 200.
 
 ### What to challenge in the actual output
 
-The original-fiction run assigns harvesting nets to flora. Ask whether the category captures a plant, a material object, or contextual association. Nature presence 0.75 and metaphorical usage 0.4 are model scores, not annotation accuracy. The 500-word run gives 0.9 and 0.6 for a different text; those numbers are not a controlled improvement. Use the explanations and extracted strings above to locate each claim in its source.
+The original-fiction run assigns harvesting nets to flora. Consider whether the category captures a plant, a material object, or contextual association. Nature presence 0.75 and metaphorical usage 0.4 are model scores, not annotation accuracy. The 500-word run gives 0.9 and 0.6 for a different text; those numbers are not a controlled improvement. Use the explanations and extracted strings above to locate each claim in its source.
 
 
 ## E. Voyant-NLP: literal search and an unsuitable sentiment default
@@ -4015,8 +4010,8 @@ Use the complete polytonic story in `papadiamantis_seal.txt`. Source and transcr
 2. Open **Concordance**. In **Search word or phrase...**, enter `φώκια` and click **Search**. The tested result was zero matches.
 3. Search `φώκ`. The tested result was three passages containing `φώκη` or `φώκης`.
 4. Search `φωκ`. This finds one additional passage containing `φωκῶν`. The unaccented search fragment matters. The two searches together recover four explicit word-form matches, not every reference to the animal.
-5. Read the contexts against the complete story: feeding, hearing music, finding the drowned child, lamenting, and the fisherman translating the animal's lament. Ask how a search result supports an interpretation, and what it cannot establish.
-6. Optional reveal: open **Sentiment & Clusters**, then click **Analyze** under **Sentiment Analysis**. The tested output had average polarity and subjectivity both zero, and every returned segment also scored zero. Ask whether a story about bereavement and drowning has thereby been demonstrated to be emotionally neutral.
+5. Read the contexts against the complete story: feeding, hearing music, finding the drowned child, lamenting, and the fisherman translating the animal's lament. Consider how a search result supports an interpretation, and what it cannot establish.
+6. Open **Sentiment & Clusters**, then click **Analyze** under **Sentiment Analysis**. The tested output had average polarity and subjectivity both zero, and every returned segment also scored zero. Consider whether a story about bereavement and drowning has thereby been demonstrated to be emotionally neutral.
 
 The source implements literal case-insensitive substring concordance. It does not automatically group historical spellings, accent variants or inflections. Its sentiment endpoint uses default TextBlob sentiment, whose default analyzer is English-oriented, on Greek text. This provides a concrete explanation for questioning the scores. A sentiment score is also a different construct from grief, mourning or literary tone.
 
@@ -4338,7 +4333,7 @@ App: <https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecont
 
 Separate app: https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecontainerapps.io
 
-Svarna searches existing indexed corpora. Its database selector advertises available **corpus**, **literature** and **dialectal** databases. The tested exercise used **corpus** only. Literature is a useful future extension for this audience; dialectal work can be left to the later session.
+Svarna searches existing indexed corpora. Its database selector advertises available **corpus**, **literature** and **dialectal** databases. The tested exercise used **corpus** only. The other databases support separate literature and dialectal investigations.
 
 1. Keep the top database selector on **corpus**. Open **Concordancer**.
 2. Enter `λοιπόν`. Under **Corpus**, select **europarl**. Leave Register and Mode unrestricted and Speaker empty. Click the search button beside the query field.
@@ -4366,7 +4361,7 @@ Browser-checked on 19 September 2026, starting at the demos page. This is a shor
 2. In **Concordancer**, search `ίντα` with **Corpus** set to **grdd_cretan**. The browser returned 333 matching rows in 1.470 seconds.
 3. Change **Corpus** to **grdd_cypriot** and repeat. The browser returned 179 matching rows in 1.722 seconds.
 4. Compare direct questions, embedded questions and exclamations. For example, the Cretan selection includes `ίντα μιλείς;` and `και δεν κατέχω, ίντα να πω`, while the Cypriot selection includes `Ίντα κλαίεις;` and `Ίντα μμάθκια!!`. The second Cretan quotation is a fragment of a longer retrieved line.
-5. Ask which surrounding forms support a dialect identification, whether one Modern Greek gloss works in every example, and whether genre or spelling differences might explain some contrasts. The Cretan sample includes verse; some Cypriot rows contain web residue such as `Διαγραφή`. These are not controlled, balanced samples.
+5. Consider which surrounding forms support a dialect identification, whether one Modern Greek gloss works in every example, and whether genre or spelling differences might explain some contrasts. The Cretan sample includes verse; some Cypriot rows contain web residue such as `Διαγραφή`. These are not controlled, balanced samples.
 
 The live dialectal inventory lists Cretan, Eptanisian, Griko, Northern, Pontic, Cypriot, Katharevousa, Maniot and Tsakonian collections. Katharevousa is a historical language variety, not a regional dialect. Do not interpret a row's collection label as a guaranteed linguistic classification of every word in it.
 
@@ -4815,7 +4810,7 @@ These payloads were captured before model submission, with the key omitted. The 
 
 ### Discussion and fallback
 
-Read “Συμφωνούμε, λοιπόν.” as a candidate inferential use and “Λοιπόν;” as underdetermined without interactional context. Those are instructor interpretations to discuss, not saved LLM labels. A corpus name does not force a pragmatic function. For ίντα, ask whether interrogative and exclamatory uses occur in both varieties and whether a single form can identify one dialect. If the provider rejects the key, use the exact retrieved sentences and classification categories above for human annotation. Do not substitute an invented model answer or describe the selected corpus as the full LLM sample.
+Read “Συμφωνούμε, λοιπόν.” as a candidate inferential use and “Λοιπόν;” as underdetermined without interactional context. These are suggested interpretations, not saved LLM labels. A corpus name does not force a pragmatic function. For ίντα, consider whether interrogative and exclamatory uses occur in both varieties and whether a single form can identify one dialect. If the provider rejects the key, use the exact retrieved sentences and classification categories above for human annotation. Do not substitute an invented model answer or describe the selected corpus as the full LLM sample.
 
 
 ## G. PlotAnalyzer: theory-guided reading, rules and feedback
@@ -4824,7 +4819,7 @@ Read “Συμφωνούμε, λοιπόν.” as a candidate inferential use an
 App: <https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontainerapps.io>. The complete Greek story is in section D.
 
 
-### Main NeSy walkthrough
+### NeSy analysis
 
 Open [PlotAnalyzer](https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontainerapps.io) from the Svarna demos page. Have an authorized OpenRouter key available for this app. A direct Google AI Studio key cannot be pasted into the OpenRouter field.
 
@@ -4836,9 +4831,9 @@ Open [PlotAnalyzer](https://greek-app-heaven-plot.livelyhill-85880e66.westeurope
 6. A rerun makes a new initial model call. Do not attribute every difference between runs to feedback. The within-run trace is the evidence for a particular feedback revision. If the system finds no inconsistency, it may make no feedback call.
 7. Keep the input, model and engine settings fixed. Select **Russian Formalism**, analyze, and export as `plot_formalism_feedback_on.json`. Compare the questions, evidence and reasons, not overall grades across different schemas.
 
-Suggested narration: “First the model offers a reading. Then a theory, encoded as rules, challenges relationships within it. We can inspect the objection and the response. Now we ask whether the revision better explains the story, and whether the rule was suitable in the first place.”
 
-Timing: setup and first reading 1:30; source and rule inspection 1:30; feedback trace 2:00; theory comparison 2:00. Model waiting time may require starting the run before discussing the source. Do not launch all five theories with Contrastive during this short sequence.
+
+
 
 
 
@@ -4858,7 +4853,7 @@ Read the Greek story first. Under an Aristotelian reading, consider suffering, r
 
 The grandmother continues lamenting earlier losses, while the reader knows that the child has drowned. She interprets the splash differently. The seal receives a lament in human words. Distinguish character recognition, reader knowledge and narrative framing instead of merging them into one recognition score.
 
-The app's Aristotelian dependency is labelled “Suffering needs Flaw: the error must precede its consequences”. Ask whose error counts and whether suffering in this story should depend on a flaw at all. Under Russian Formalism, ask how the animal's voice, the presentation of simultaneous sounds and the translated lament affect perception. These are instructor reading questions, not model outputs or a gold standard.
+The app's Aristotelian dependency is labelled “Suffering needs Flaw: the error must precede its consequences”. Consider whose error counts and whether suffering in this story should depend on a flaw at all. Under Russian Formalism, consider how the animal's voice, the presentation of simultaneous sounds and the translated lament affect perception. These questions concern the interpretation of the source; they are not model outputs or a gold standard.
 
 The interface and engine mechanism have been checked against source. The saved live runs remain keyword-only. No completed NeSy run on this story is claimed: it requires a working OpenRouter credential. The successful direct Gemini tests in other apps do not establish access to OpenRouter. If no authorized key is available, use the complete story, the two actual theory prompts and the encoded rule for a guided reading, without presenting invented scores or corrections.
 
@@ -7393,7 +7388,7 @@ App: <https://greek-app-heaven-terminography.livelyhill-85880e66.westeurope.azur
 
 Upload `termguard_stratigraphy.txt`, a 234-word original English teaching corpus. It is an invented excavation record with working definitions, not a published archaeological terminology standard. It distinguishes a cut, the interface left by removing material, from a fill, the deposit occupying it. It also introduces contexts, finds, residual finds and intrusive finds.
 
-Before using a model, ask participants to assess these instructor-written candidate definitions of **cut**:
+Before using a model, assess these instructor-written candidate definitions of **cut**:
 
 | Candidate | Discussion based on the supplied corpus |
 | --- | --- |
@@ -7401,7 +7396,7 @@ Before using a model, ask participants to assess these instructor-written candid
 | an interface created by the removal of material | Gives a category and a distinguishing characteristic consistent with this corpus. |
 | a deposit that occupies a pit | Has a plausible definitional form but describes material rather than the interface. It confuses cut and fill. |
 
-These are discussion examples, **not model outputs or measured parser results**. Ask which problems a check for circularity or a category-plus-characteristic structure could detect. What further evidence would establish whether the chosen category is correct?
+These are discussion examples, **not model outputs or measured parser results**. Consider which problems a check for circularity or a category-plus-characteristic structure could detect. What further evidence would establish whether the chosen category is correct?
 
 
 
@@ -7444,7 +7439,7 @@ For this small comparison, use the feedback-loop controls. The per-term **Run** 
 
 `termguard_prompts.md` contains the exact templates returned by the live project's settings API. Zero-shot asks for a definition with a domain and term. **Persona (ISO)** adds an intensional-definition framework, substitution, formatting instructions, an earthquake example and optical/mechanical mouse examples. The settings label and API key call this template `few-shot`, while the participant dropdown calls it **Persona (ISO)**. Describe it as the app's ISO-inspired prompt, not independently verified wording of the standard.
 
-The live settings separately list circularity, genus, differentia, negation, encyclopedic style, conciseness and genus-in-termbase checks. They are an implementation of selected criteria. Their existence does not establish that a returned definition is factually correct. The pending comparison should ask whether the retrieved corpus improves the category choice and whether feedback repairs a real defect or merely changes surface form. Do not change both strategy and retrieval in a single comparison.
+The live settings separately list circularity, genus, differentia, negation, encyclopedic style, conciseness and genus-in-termbase checks. They are an implementation of selected criteria. Their existence does not establish that a returned definition is factually correct. The comparison examines whether the retrieved corpus improves the category choice and whether feedback repairs a real defect or merely changes surface form. Do not change both strategy and retrieval in a single comparison.
 
 
 
@@ -7664,7 +7659,7 @@ The response explicitly gives `available_dimensions: 6`, `dimension_count: 7` an
 
 ### Questions and source coverage
 
-Ask students to choose a historical question first, then identify the relevant evidence.
+Choose a historical question first, then identify the relevant evidence.
 
 - **Vocabulary form versus historical relationship:** why can a cognate have a different written form? What would accent marks, orthographic conventions, inflection or incorrect concept alignment do to a character-edit score?
 - **Grammar versus corpus composition:** the syntactic run used 5,000 sentences from `grc_perseus-ud-train.conllu` and 4,324 from `el_gdt-ud-train.conllu`. What would need checking about genre, period, sampling and annotation before attributing every difference to language change?
@@ -7709,7 +7704,7 @@ returned 0.2528; that uses a different selection. Missing phonology must not ent
 The current repair passed automatic initialization, a single selected dimension, selections
 without Lexical, and charts. Thirty concurrent WALS participants all succeeded; full
 seven-dimension and chart concurrency remain untested. If the app stalls, use the complete
-CSV above. Ask participants to choose dimensions for a historical question, state their
+CSV above. Choose dimensions for a historical question, state their
 weights and explain the consequences of missing or overlapping evidence.
 
 The earlier three-dimension request failure described in the source notes occurred before
@@ -7767,14 +7762,14 @@ For Cypriot, select **Κυπριακά / Cypriot** and enter exactly:
 
 Keep **Llama 3.1 / 8B Instruct**, use **Tokens: 80**, **Temp: 0.75** and **Top-p: 0.90**, then click **Generate**. Wait for one request to finish before submitting the next. Eighty is the app's default output limit; the earlier Cretan and Pontic rehearsals deliberately used 40. The two new prompts are Stergios's exact instructions on 21 September. Full records and actual outputs are in `evidence/dialect_rehearsal_20260921/record.json` and `dialect_generator_outputs.md`.
 
-In the HTML, choose **Northern selection** or **Cypriot selection** to view the matching prompt and saved result. **Copy input & open app** copies that selection's prompt. Ask whether the response follows the instruction and, for Cypriot, whether it forms a coherent story. Check dialectal features separately from instruction following and truncation. These prompts and lengths differ from the village examples, so the four samples do not constitute a controlled quality comparison.
+In the HTML, choose **Northern selection** or **Cypriot selection** to view the matching prompt and saved result. **Copy input & open app** copies that selection's prompt. Consider whether the response follows the instruction and, for Cypriot, whether it forms a coherent story. Check dialectal features separately from instruction following and truncation. These prompts and lengths differ from the village examples, so the four samples do not constitute a controlled quality comparison.
 
 
 
 
 ### Read the answer before giving it a label
 
-Ask pairs to annotate the returned text, using three columns:
+Annotate the returned text, using three columns:
 
 | What I can point to in the output | Evidence or explanation | Uncertain or needs checking |
 | --- | --- | --- |
@@ -7942,15 +7937,14 @@ This is the beginning of a narrative, ending at the incomplete word **Μό**. Fo
 Evidence: `evidence/dialect_rehearsal_20260921/record.json`, `cypriot.png`, `cypriot_prompt.txt` and `cypriot_output.txt`. Both new runs used the existing local CPU model without an external token-billed provider. Hosting cost was not separately measured. No app or deployment settings were changed.
 
 
-### Presenter handling
+### Reading the generated text
 
 The Cretan and Pontic runs on 19 September took roughly five minutes each after model
 loading. The Northern and Cypriot follow-up uses the different prompts and token limit
 recorded above. These runs are examples to inspect, not a controlled comparison of dialect
-quality. A four-minute module should use saved output or a request started beforehand. Do not change
-base models mid-demonstration or invite thirty concurrent CPU requests.
+quality. The saved outputs preserve the completed requests and their timings.
 
-Ask what supports a dialectal identification: morphology, syntax and contextual usage,
+Consider what supports a dialectal identification: morphology, syntax and contextual usage,
 not the dropdown label or a familiar place name. The Cretan-selected response shifts to
 self-introduction and Venice; the Pontic fragment has no completed sentence. A maximum
 of 40 new tokens can contribute to truncation, but the stream did not report its finish
@@ -7966,7 +7960,7 @@ observation and one question to the 11:30 low-resource-varieties session.
 ## K. NATS: complete network example and every edge context
 
 
-App: <https://greek-app-heaven-nats.livelyhill-85880e66.westeurope.azurecontainerapps.io>. This is a separate prepared activity without numbered slides in the current deck. Use it to replace another activity within the session.
+App: <https://greek-app-heaven-nats.livelyhill-85880e66.westeurope.azurecontainerapps.io>.
 
 
 ### Complete original 470-word fiction
@@ -8036,7 +8030,7 @@ The substring issue is visible in the returned edge contexts and confirmed in th
 
 ### Suggested reveal
 
-Start with the archive triangle: it looks plausible and the passage supports it. Then ask: "Why does Eleni have a connection to Dimitris?" Read its two evidence sentences aloud. Next ask: "Who actually hands Maria the key? Where is that connection?" Finish with the four versions of Nikos and the split forms of Dimitris. The conclusion is that the graph accurately records some textual patterns while the interpretation of those patterns needs linguistic and historical judgement.
+The archive triangle is supported by the passage. Why does Eleni have a connection to Dimitris? Compare its two evidence sentences. Who actually hands Maria the key, and where is that connection? Compare the four versions of Nikos and the split forms of Dimitris. The conclusion is that the graph accurately records some textual patterns while the interpretation of those patterns needs linguistic and historical judgement.
 
 Do not call every co-occurrence edge a model error. Distinguish the representation's limits (negation, relation type, pronouns) from implementation/extraction errors (fragmented identity, substring matches).
 
@@ -8390,7 +8384,7 @@ The archive triangle is useful because the passage supplies shared work and ackn
 The Eleni/Dimitris edge counts two co-occurrences in a denied meeting and a disproved rumour:
 its count is correct for that representation, while interpreting it as two encounters is wrong.
 Andreas hands Maria the key through cross-sentence pronouns, but his node is isolated.
-That is the missing interaction to ask the room to recover by reading.
+The interaction is explicit in the text but absent from the network.
 
 The four versions of Nikos are explicitly the same man in the passage, yet remain separate
 nodes. Inflected Dimitris and Anna names split too. Substring matching also creates a

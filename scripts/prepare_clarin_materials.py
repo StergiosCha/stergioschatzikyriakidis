@@ -26,14 +26,7 @@ assert match, 'The workshop data block is missing.'
 data = json.loads(match[2])
 assert len(data['modules']) == 11 and len(data['dialect']) == 4
 
-notes = (WORKSHOP / 'hands_on_notes.md').read_text()
-chapters = notes[notes.index('## A. '):notes.index('## Final instructor check and evidence trail')]
-public_notes = ('# AI Applications for Language Analysis: worked examples\n\n'
-                'Stergios Chatzikyriakidis, ILSP. CLARIN:EL Summer School, 24 September 2026.\n\n'
-                'Complete texts, prompts, recorded outputs and explanations for the eleven activities. '
-                'Evidence is dated; unverified claims remain marked [VERIFY]. '
-                'Use the interactive workshop for embedded graphs, searchable records and links to the apps.\n\n'
-                + chapters)
+public_notes = (WORKSHOP / 'worked_examples.md').read_text()
 assert 'US$15' not in public_notes and 'preparation_guide' not in public_notes
 (OUT / 'worked_examples.md').write_text(public_notes)
 
