@@ -4,12 +4,13 @@ Stergios Chatzikyriakidis, ILSP. CLARIN:EL Summer School, 24 September 2026.
 
 Open index.html for the workshop page, or demo.html for the interactive material.
 The demonstration works offline. External app and source links need internet.
-Each activity includes exact inputs, prompts, saved responses and detailed explanations.
+Each activity supplies its inputs, instructions and explanations. Recorded outputs are identified.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
 The talk and hands-on slides are available as PDFs. The talk, hands-on slides and interactive workshop were updated on 23 September.
 detector_visuals.pdf contains three larger diagrams explaining perplexity,
 conditional probability curvature and supervised classifier fine-tuning.
+worksheet.pdf and worksheet.md provide the current 45-minute participant route.
 The worked_examples.md file contains the complete example explanations and source credits.
 The interactive demonstration includes Northern and Cypriot generations recorded
 on 21 September. Saved analyses retain their original dates and source credits.

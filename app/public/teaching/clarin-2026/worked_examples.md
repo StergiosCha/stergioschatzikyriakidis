@@ -47,7 +47,7 @@ specific reason this first result is not an independent test.
 ### Comparing the three configurations
 
 1. Select one available model associated with the authorised key. Record its displayed
-   name. [VERIFY: the live model and its three outputs have not been selected or observed.]
+   name. Gemini 3.5 Flash-Lite produced the saved Few-Shot answer on 23 September.
 2. Set **Few-Shot**, **RAG off**, **verification off**, paste the exact stanza and click
    **Ανάλυση (Analyze)**. The verification box is normally selected, so explicitly clear it.
 3. Save the complete result. Does success on this poem predict success on another?
@@ -61,13 +61,57 @@ specific reason this first result is not an independent test.
    **LLM REFLECTION & CORRECTION**. This starts a fresh initial model analysis; it does
    not submit the previous run's saved answer. Compare initial and final within this run.
 7. If the app or model fails, use the exact prompts and preserved verifier result below.
-   There is no saved few-shot or zero-shot model output to substitute as an observed run.
+   The recorded Few-Shot answer appears below. The zero-shot comparison is run in the app.
+
+### Recorded Few-Shot answer, 23 September
+
+Gemini 3.5 Flash-Lite, RAG off, verification off. The live request completed in 14.112 seconds. Both rhyme pairs were already supplied in the prompt.
+
+```text
+Here is the systematic analysis of the rhyme pairs in the provided poem, following your framework:
+
+═══════════════════════════════════════════════════
+PAIR 1: Line 1 & Line 4
+
+- Line 1: "Πάνω στην άμμο την ξανθή" [pa-no stin 'a-mo tin ksan-'Ti]
+- Line 4: "και σβήστηκε η γραφή" [ce 'zvi-sti-ce i Gra-'fi]
+
+→ Classification: M-IDV
+
+Reasoning:
+- Both lines have stress on the final syllable → Masculine (M)
+- Rhyme domain: ['Ti] vs ['fi]
+- Stressed vowels match: [i] = [i] ✓
+- No post-stress consonants in either line
+- Pre-stress vowel: [A] in [ksAn-Ti] matches [A] in [GrA-fi] → IDV (Pre-vowel Identity)
+
+═══════════════════════════════════════════════════
+PAIR 2: Line 2 & Line 3
+
+- Line 2: "γράψαμε τ' όνομά της" ['Gra-psa-me 'to-no-'ma tis]
+- Line 3: "ωραία που φύσηξεν ο μπάτης" [o-'re-a pu 'fi-si-ksen o 'ba-tis]
+
+→ Classification: F2-MOS
+
+Reasoning:
+- Both lines have stress on the penultimate syllable → Feminine-2 (F2)
+- Rhyme domains: ['ma tis] vs ['ba-tis]
+- Stressed vowels match: [a] = [a] ✓
+- Post-stress consonants match: [tis] = [tis] ✓
+- Line 2 rhyme crosses a word boundary (from noun to clitic pronoun: "όνομά" + "της"), whereas Line 3 contains the rhyming material within a single word ("μπάτης") → MOS (Mosaic)
+
+═══════════════════════════════════════════════════
+
+**Summary of Poem Rhyme Scheme:**
+- Line 1 & Line 4: **M-IDV** (ξανθή / γραφή)
+- Line 2 & Line 3: **F2-MOS** (όνομά της / μπάτης)
+```
 
 ### Optional Solomos comparison
 
 These are the two public-domain stanzas requested in the original worksheet. They are
 additional inputs, not the tested Seferis few-shot reveal. The expected stress classes
-were supplied in the handover; a live comparison on them remains [VERIFY].
+are reference classifications for the exercise.
 
 
 ```text
@@ -98,7 +142,7 @@ were supplied in the handover; a live comparison on them remains [VERIFY].
 
 ### Complete prompts and exact verifier output
 
-These templates were exported from the existing local Rhyme source. Exact deployed revision: [VERIFY]. For the first two prompts below, the stanza is filled in and RAG is empty. Other templates retain their runtime placeholders.
+The source prompts below contain the Seferis stanza with RAG off. Examples inside them are supplied to the model.
 
 
 #### Few-Shot: complete demonstration prompt
@@ -269,35 +313,12 @@ Identify any differences:
 ```
 
 
-The report calls its result “GROUND TRUTH”. Explain that this is the output of inspectable phonological rules, whose correctness can itself be assessed. No paid model call produced this saved report.
+The report calls its result “GROUND TRUTH”. Here that label denotes the output of phonological rules, whose correctness can itself be assessed.
 
 
-#### Complete feedback template
+#### Feedback within a verification run
 
-
-```text
-You previously analyzed this Greek poem for rhymes:
-
-{request.text}
-
-Your analysis was:
-{llm_result}
-
-PHONOLOGICAL VERIFICATION RESULTS:
-{verification['verification_summary']}
-
-Please review the verification results and provide a corrected analysis that:
-1. Acknowledges which rhymes you correctly identified
-2. Explains any rhymes you missed
-3. Corrects any false rhymes you claimed
-4. Provides the final corrected rhyme scheme
-
-Be concise and focus on the corrections.
-```
-
-
-Here `{request.text}` is the stanza, `{llm_result}` is the fresh initial answer, and the verification placeholder receives the exact report above. A final LLM correction is still [VERIFY].
-
+The second call receives the poem, the fresh initial answer and the phonological report. Compare all three with the final response. No preselected error is required for this comparison.
 
 #### Additional available template: 02_few_shot_cot.txt
 
@@ -409,11 +430,14 @@ Step 5 - Feature Analysis:
 
 ═══════════════════════════════════════════════════
 
-{rag_context}
+
 
 Now analyze the following poem using the same detailed five-step reasoning. Show your work for each rhyme pair:
 
-{text}
+Πάνω στην άμμο την ξανθή
+γράψαμε τ' όνομά της·
+ωραία που φύσηξεν ο μπάτης
+και σβήστηκε η γραφή.
 ```
 
 
@@ -456,128 +480,23 @@ Check each feature systematically:
 - Format: POSITION-FEATURE1-FEATURE2-...
 - Example: M-TR-S-IDV or F2-MOS-IDV-2W-IMP-C
 
-{rag_context}
+
 
 Now analyze this poem, showing explicit reasoning for each rhyme:
 
-{text}
+Πάνω στην άμμο την ξανθή
+γράψαμε τ' όνομά της·
+ωραία που φύσηξεν ο μπάτης
+και σβήστηκε η γραφή.
 ```
 
 
-#### Additional available template: 05_zero_shot_algorithm.txt
 
 
-```text
-You are analyzing Greek poetry rhyme using this systematic approach:
-
-DETECTION ALGORITHM:
-
-1. **Syllabification**: Break each line into syllables
-2. **Stress Location**: Identify primary stress position (final, penult, antepenult)
-3. **Rhyme Domain Extraction**: 
-   - Start from stressed vowel
-   - Include all sounds to line end
-   - May span word boundaries (MOSAIC)
-4. **Comparison** (scan right-to-left):
-   - Compare stressed vowels
-   - Compare post-stress consonants
-   - Check onset consonants before stressed vowel (RICH detection)
-   - Check vowel before stress (IDV detection)
-5. **Classification**: Apply hierarchical rules
-
-CLASSIFICATION HIERARCHY:
-First: Determine position type
-- Final stress → M (Masculine)
-- Penultimate stress → F2 (Feminine-2)
-- Antepenultimate stress → F3 (Feminine-3)
-
-Then: Check special features
-- Onset matches? → RICH (TR-S, TR-CC, PR-C1, PR-C2)
-- Pre-stress vowel matches? → IDV (or IDV-2W if across words)
-- Crosses word boundary? → MOS
-- Partial sound matching? → IMP (IMP-V, IMP-C, IMP-0F, IMP-0M)
-- Identical repetition? → COPY
-
-COMPARISON WINDOW: Default 4 lines, but scan entire stanza for patterns
-
-{rag_context}
-
-Apply this algorithmic method step-by-step to identify all rhymes in:
-
-{text}
-```
 
 
-#### Additional available template: 06_mosaic_enhanced.txt
 
 
-```text
-Analyze Greek rhyme with PHONETIC PREPROCESSING for MOSAIC detection.
-
-CRITICAL: MOSAIC (MOS) = rhyme crosses word boundaries.
-
-{phonetic_analysis}
-
-MOSAIC DETECTION:
-1. Line ends with SHORT word (της/μου/σου/του/μας/σας/να/θα)?
-2. Rhyme sound includes parts from BOTH last words?
-3. Use PHONETICS, not spelling
-
-TRUE MOSAIC EXAMPLES:
-"όνομά της" [MA-tis] ~ "μπάτης" [BA-tis]  
-→ Rhyme [MA tis] ~ [BA-tis] crosses "ονομά+της"
-
-NOT MOSAIC:
-"καρδιά" ~ "αγαπημένη" - single words
-
-{rag_context}
-
-POEM:
-{text}
-
-OUTPUT:
-1. Line numbers
-2. Phonetic (from preprocessing)
-3. Word boundary check
-4. Classification
-5. Sound-based explanation
-```
-
-
-#### Additional available template: 08_rag_generic_examples.txt
-
-
-```text
-GENERAL RHYME EXAMPLES:
-
-1. M-IDV (Masculine with pre-vowel identity):
-   "ξανθή" [ksan-'Ti] / "γραφή" [Gra-'fi]
-   Final stress, vowel 'i' matches, pre-vowel 'A' matches
-
-2. F2-MOS (Feminine-2 Mosaic):
-   "όνομά της" ['no-ma tis] / "ο μπάτης" [o 'ba-tis]
-   Penultimate stress, crosses word boundaries
-
-3. F3-IMP-V (Feminine-3 Imperfect Vowel):
-   "στόματα" ['sto-ma-ta] / "σώματα" ['so-ma-ta]
-   Antepenultimate stress, vowel variation
-```
-
-
-#### Additional available template: 09_mosaic_phonetic_insertion.txt
-
-
-```text
-PHONETIC ANALYSIS (Stress: {r1['stress_type']} / {r2['stress_type']}):
-
-Line 1 final: "{' | '.join(r1['words'])}"
-  → Sound: {r1['rhyme_domain_phonetic']}
-
-Line 2 final: "{' | '.join(r2['words'])}"
-  → Sound: {r2['rhyme_domain_phonetic']}
-
-MOSAIC CHECK: {"YES - rhyme spans words" if analysis['mosaic_candidate'] else "NO - single word rhyme"}
-```
 
 
 ### Inconsistencies preserved from the source
@@ -714,20 +633,15 @@ The teaching point is that theory changes the structure of the question, not mer
 
 **Observed in rehearsal:** Standard added relief and described grief as resolved. Cairns added the honour/status appraisals, but also cited “Burning with rage”, “Filled with grief” and “Seized by anger”, examples present in the prompt and absent from the passage. Compare the richer structure with the source and locate each alleged quotation. This makes the power and the risks of theory-rich prompting visible in the actual output.
 
-#### Why use this page for the comparison?
+#### What differs between the emotion configurations?
 
-The `/emotions` checkbox switches between the standard extraction endpoint and the enhanced Cairns-prompt endpoint. In the inspected local source, those provide the intended comparison before a separate symbolic grammar stage. The separate **Cairns (Enhanced Framework)** option on the NeSy page already invokes symbolic reasoning in the local implementation, so it is not a clean prompt-only comparison. The local version of that branch also references `entities_response` before defining it; its live runtime status is [VERIFY]. We are not changing the app or relying on that branch.
-
-Selecting the same provider is the available UI control, not proof that precisely the same backend model ran. The service can fall back to another provider. Rehearsal logs confirmed GPT-4o through the existing proxy for all 23 model calls, including feedback. Future runs should record the actual model again. These comparisons are demonstrations, not controlled estimates of the causal effect of prompting alone; the output schema and token limits also differ. The enhanced page's inspected JavaScript omits its language selector from the request, whose backend default is English. The shared English input avoids a language mismatch. Greek-language comparison through that page is [VERIFY].
-
-
-
+The Script-Based Analysis checkbox switches between the Standard and Cairns extraction endpoints. The separate NeSy page adds explicit symbolic processing. The six saved comparisons were made with GPT-4o on 16 September. The current app uses the selected direct provider; those historical records do not imply an Azure or cross-provider fallback today. A new run may use a different model within the selected provider's available models.
 
 ### 2. All four NeSy modes: where does the theory act?
 
 Open [NeSy Emotions](https://greek-app-heaven-medea.livelyhill-85880e66.westeurope.azurecontainerapps.io/emotions-nesy). Paste the same English passage. Set **Genre Context: Epic**, **Language: English** and the same **AI Provider**. Leave **Enable Feedback Loop** on. Select the assigned mode, then **Analyze (Neuro-Symbolic)**. Use **Download JSON** to preserve the result before another run.
 
-Split the room into four groups, one mode per group, with one operator per group. Start the group runs while the instructor presents the standard/Cairns comparison. Every group studies the same passage and reports one rule, change or disagreement. This covers every NeSy mode without requiring everyone to wait through four sequential analyses.
+Compare one symbolic rule, revision or disagreement across the four NeSy modes using the same passage.
 
 | Mode in the live UI | What it adds, according to the source | What the group should inspect |
 |---|---|---|
@@ -782,13 +696,11 @@ All requests and responses are in `evidence/medea_rehearsal_20260916/`. Each run
 
 
 
-### Complete Standard and Cairns prompt templates
+### Complete Standard and Cairns prompts
 
-These are the inspected local templates. Exact deployed prompt revision is [VERIFY]. Runtime text placeholders receive the full English passage above. Read the worked examples as part of the prompt, not as lines from Homer.
-
+The complete English input is inserted below. Schema examples and worked examples belong to the prompt; they are not outputs for this passage.
 
 #### Standard
-
 
 ```text
 Analyze this text for emotional content and return ONLY valid JSON.
@@ -796,7 +708,23 @@ Analyze this text for emotional content and return ONLY valid JSON.
 Extract ALL emotions present, including negative ones like disgust, hatred, contempt, etc.
 
 TEXT TO ANALYZE:
-{text}
+Then the king of men, Agamemnon, answered him:
+
+“Flee then, if your heart urges you; I do not beg you to remain for my sake. With me are others who will honour me, and above all Zeus, the lord of counsel. Most hateful to me are you of all the kings that Zeus nurtures, for always strife is dear to you, and wars and battles. If you are very strong, it was a god, I think, who gave you this gift. Go home with your ships and your companions and lord it over the Myrmidons; for you I care not, nor take heed of your wrath. But I will threaten you thus: as Phoebus Apollo takes from me the daughter of Chryses, her with my ship and my companions I will send back, but I will myself come to your tent and take the fair-cheeked Briseis, your prize, so that you will understand how much mightier I am than you, and another may shrink from declaring himself my equal and likening himself to me to my face.”
+
+So he spoke. Grief came upon the son of Peleus, and within his shaggy breast his heart was divided, whether he should draw his sharp sword from beside his thigh, and break up the assembly, and slay the son of Atreus, or stay his anger and curb his spirit. While he pondered this in mind and heart, and was drawing from its sheath his great sword, Athene came from heaven. The white-armed goddess Hera had sent her forth, for in her heart she loved and cared for both men alike. She stood behind him, and seized the son of Peleus by his fair hair, appearing to him alone. No one of the others saw her. Achilles was seized with wonder, and turned around, and immediately recognized Pallas Athene. Terribly her eyes shone. Then he addressed her with winged words, and said:
+
+“Why now, daughter of aegis-bearing Zeus, have you come? Is it so that you might see the arrogance of Agamemnon, son of Atreus? One thing I will tell you, and I think this will be brought to pass: through his own excessive pride shall he presently lose his life.”
+
+Him then the goddess, bright-eyed Athene, answered:
+
+“I have come from heaven to stay your anger, if you will obey, The goddess white-armed Hera sent me forth, for in her heart she loves and cares for both of you. But come, cease from strife, and do not grasp the sword with your hand. With words indeed taunt him, telling him how it shall be. For thus will I speak, and this thing shall truly be brought to pass. Hereafter three times as many glorious gifts shall be yours on account of this arrogance. But refrain, and obey us.”
+
+In answer to her spoke swift-footed Achilles:
+
+“It is necessary, goddess, to observe the words of you two, however angered a man be in his heart, for is it better so. Whoever obeys the gods, to him do they gladly give ear.”
+
+He spoke, and stayed his heavy hand on the silver hilt, and back into its sheath thrust the great sword, and did not disobey the word of Athene. She returned to Olympus to the palace of aegis-bearing Zeus, to join the company of the other gods. But the son of Peleus again addressed with violent words the son of Atreus, and in no way ceased from his wrath:
 
 Return ONLY this JSON structure with NO additional text:
 {
@@ -881,17 +809,31 @@ sentiment_score: -1.0 to 1.0 (separate from intensity - affects color only)
 Return ONLY JSON, no markdown, no explanations
 ```
 
-
-#### Cairns-enhanced
-
+#### Cairns script-based prompt
 
 ```text
 Analyze this text for emotional content using SCRIPT-BASED REPRESENTATION with METAPHOR DETECTION.
 
 TEXT TO ANALYZE:
-{request.text}
+Then the king of men, Agamemnon, answered him:
 
-LANGUAGE: {detected_language}
+“Flee then, if your heart urges you; I do not beg you to remain for my sake. With me are others who will honour me, and above all Zeus, the lord of counsel. Most hateful to me are you of all the kings that Zeus nurtures, for always strife is dear to you, and wars and battles. If you are very strong, it was a god, I think, who gave you this gift. Go home with your ships and your companions and lord it over the Myrmidons; for you I care not, nor take heed of your wrath. But I will threaten you thus: as Phoebus Apollo takes from me the daughter of Chryses, her with my ship and my companions I will send back, but I will myself come to your tent and take the fair-cheeked Briseis, your prize, so that you will understand how much mightier I am than you, and another may shrink from declaring himself my equal and likening himself to me to my face.”
+
+So he spoke. Grief came upon the son of Peleus, and within his shaggy breast his heart was divided, whether he should draw his sharp sword from beside his thigh, and break up the assembly, and slay the son of Atreus, or stay his anger and curb his spirit. While he pondered this in mind and heart, and was drawing from its sheath his great sword, Athene came from heaven. The white-armed goddess Hera had sent her forth, for in her heart she loved and cared for both men alike. She stood behind him, and seized the son of Peleus by his fair hair, appearing to him alone. No one of the others saw her. Achilles was seized with wonder, and turned around, and immediately recognized Pallas Athene. Terribly her eyes shone. Then he addressed her with winged words, and said:
+
+“Why now, daughter of aegis-bearing Zeus, have you come? Is it so that you might see the arrogance of Agamemnon, son of Atreus? One thing I will tell you, and I think this will be brought to pass: through his own excessive pride shall he presently lose his life.”
+
+Him then the goddess, bright-eyed Athene, answered:
+
+“I have come from heaven to stay your anger, if you will obey, The goddess white-armed Hera sent me forth, for in her heart she loves and cares for both of you. But come, cease from strife, and do not grasp the sword with your hand. With words indeed taunt him, telling him how it shall be. For thus will I speak, and this thing shall truly be brought to pass. Hereafter three times as many glorious gifts shall be yours on account of this arrogance. But refrain, and obey us.”
+
+In answer to her spoke swift-footed Achilles:
+
+“It is necessary, goddess, to observe the words of you two, however angered a man be in his heart, for is it better so. Whoever obeys the gods, to him do they gladly give ear.”
+
+He spoke, and stayed his heavy hand on the silver hilt, and back into its sheath thrust the great sword, and did not disobey the word of Athene. She returned to Olympus to the palace of aegis-bearing Zeus, to join the company of the other gods. But the son of Peleus again addressed with violent words the son of Atreus, and in no way ceased from his wrath:
+
+LANGUAGE: English
 
 CRITICAL: Extract ALL emotions present in the text. Do not limit yourself to 2-3 emotions. 
 If the text contains 5, 10, or 15 different emotions, extract ALL of them with complete scripts.
@@ -1053,7 +995,6 @@ IMPORTANT:
 
 Return ONLY JSON, no markdown.
 ```
-
 
 ### Comparing the analyses
 
@@ -3373,10 +3314,7 @@ that observed error. The generated `allied_with` rule then referred to undefined
 the direct `alliance` property query succeeded. Both exact RDF exports also failed Turtle
 parsing. The records below preserve those strings without repairing them silently.
 
-If live extraction fails or another participant overwrites the graph, work from the saved
-diagrams, facts and answers above. Do not claim that these facts were successfully imported
-through a UI control that has not been tested. All six printed successful answers are
-actual saved query responses, across the original batch and the successful alliance retry.
+The saved diagrams, facts and answers provide a stable record for comparison. All six successful answers are actual query responses from the original batch and the successful alliance retry.
 
 
 #### Exact short returned RDF text
@@ -3554,17 +3492,14 @@ App: <https://greek-app-heaven-nature.livelyhill-85880e66.westeurope.azurecontai
 
 ### Run in the existing app
 
-Open https://greek-app-heaven-nature.livelyhill-85880e66.westeurope.azurecontainerapps.io and use the existing login and provider-key arrangement. The repaired app was tested on 20 September with Claude Sonnet 5, Whole Text, Minimum words 5 and threshold 0.2. It completed in 33.567 seconds, returning nature presence 0.75 and metaphorical usage 0.4. Actual usage was 2,107 input and 1,834 output tokens, approximately US$0.022554 at the documented standard rates. Evidence: `evidence/nature_repair_20260920/live_browser/record.json`. A follow-up test of exactly the first 500 words of Papadiamantis also passed in 36.271 seconds, returning nature presence 0.9 and metaphorical usage 0.6. Paragraph comparison and the complete story remain untested. The deployed Claude output allowance is now 8,192 tokens, with one retry at 16,384 if truncated.
+The saved Claude Sonnet 5 analysis of the 342-word text completed on 20 September in 33.567 seconds, with nature presence 0.75 and metaphorical usage 0.4. The separate 500-word Papadiamantis selection completed in 36.271 seconds, with scores 0.9 and 0.6. These are model judgements for the stated selections.
 
-1. Paste the complete text under **Paste your text here:**.
-2. Choose **Paragraphs** under **Segmentation**, **Minimum words: 20**, and **Nature threshold: 0.2**. Each paragraph exceeds the minimum. These are input settings, not claimed accuracy values.
+1. Paste the complete workshop fiction under **Paste your text here:**.
+2. Choose **Whole Text**, **Minimum words: 5**, and **Nature threshold: 0.2**.
 3. Select the provider and model associated with the key being used. Choose **Analyze Nature Content**.
-4. Inspect the extracted elements, metaphors, personification, religious dimension and quoted nature passages. Compare the displayed extract with the full paragraph.
+4. Inspect the extracted elements, metaphors, personification, religious dimension and quoted passages. Compare every quotation with the source.
 5. Save with **Export JSON** or **Export CSV**. The raw JSON includes results that may be absent from the displayed list because of the threshold.
-6. If comparing segmentation, change only **Segmentation** to **Whole Text**, rerun and preserve both outputs. Record the model actually used. The repaired implementation uses the selected model without silent fallback.
-
-
-
+6. For a segmentation comparison, change only **Segmentation** to **Paragraphs** and preserve both outputs. Record the model used.
 
 ### Complete original teaching passage
 
@@ -3607,29 +3542,12 @@ In the inspected source, the nature percentage is the proportion of successfully
 
 Changing segmentation changes both the model's context and the units counted. A difference between the runs therefore does not establish that either run is more accurate. The purpose is to make the annotation and counting choices visible.
 
-UI evidence: `evidence/nature_ui_check.json`. Source inspected: `GreekNLP-SwissKnife/nature-analysis/main.py`. The targeted model and error-handling repair was deployed on 20 September with Stergios's authorization. The key was not written to source, deployment configuration or evidence.
 
 
-### Reliable rehearsal path and optional comparison
 
-For the already tested run, select **Claude Sonnet 5**, **Whole Text**, minimum words **5**,
-and nature threshold **0.2**, then **Analyze Nature Content**. The original 342-word text
-completed in 33.567 seconds. The first 500 words of Papadiamantis completed in 36.271 seconds.
-Both returned complete visible results. The paragraph comparison remains [VERIFY].
+### Comparing segmentation
 
-Current choices are Claude Sonnet 5 and Opus 5; Gemini 3.8 Flash and 3.5 Flash-Lite;
-GPT-4o and GPT-6 Astra. Only Sonnet 5 produced the two paid Nature examples below.
-Do not imply a completed comparison across all six models.
-
-Claude's output allowance is now 8,192 tokens, with one retry at 16,384 after truncation.
-Errors are displayed explicitly; they no longer become invented zero scores. Actual
-model and usage are recorded. The selected model is not silently replaced. A genuine
-zero from a successful model response remains possible and must be assessed from the text.
-
-The threshold selects segments for display and statistics; it is not a calibrated probability
-threshold. A percentage of segments depends on segmentation and minimum length. The
-whole-text and paragraph versions have different units and denominators. Excluding a failed
-segment from aggregates does not make it a successfully analysed non-nature segment.
+The saved examples use Whole Text. Paragraph segmentation changes the context supplied to the model and the units being counted. Compare extracted passages and explanations before interpreting aggregate differences.
 
 ### Complete Papadiamantis story, reused in Voyant and PlotAnalyzer
 
@@ -3691,10 +3609,7 @@ The grandmother's lament, the shepherd's cheerful music and the granddaughter's 
 
 
 
-For the optional complete-story paragraph run, choose Paragraphs, minimum words 5,
-and threshold 0.2. The minimum retains its short narrative paragraph. That complete-story
-Nature comparison remains [VERIFY]. The tested 500-word selection below must not be
-described as a test of the whole story or its closing seal lament.
+The complete story supplies reading context. The saved Nature output uses only the first 500 words and does not cover the closing seal lament.
 
 Discuss physical sea and rock, funeral imagery, remembered human lives, the shepherd's
 pleasure, the grandmother's grief, and the seal's attributed voice and evening meal.
@@ -3719,15 +3634,23 @@ symbolic verification of its reading.
 ```
 
 
-### Exact Nature prompt from the repaired source
+### Complete Nature prompt for the workshop fiction
 
-`[TEXT SEGMENT]` is replaced by the current segment. The numeric and categorical values in the JSON example are instructions/examples, not measured outputs.
+The complete 342-word workshop fiction is inserted below for Whole Text analysis. The numeric and categorical values in the JSON schema are prompt examples, not measured outputs.
 
 
 ```text
 Αναλύστε αυτό το ελληνικό κείμενο για περιεχόμενο φύσης. Εξάγετε και κατηγοριοποιήστε ΟΛΑ τα στοιχεία φύσης που βρίσκετε.
 
-ΚΕΙΜΕΝΟ: "[TEXT SEGMENT]"
+ΚΕΙΜΕΝΟ: "Όταν η Ελένη επέστρεψε στο χωριό, ο δρόμος προς το λιμάνι μύριζε βρεγμένο χώμα. Τα αλμυρίκια έγερναν πάνω από την άμμο και ένας γλάρος στεκόταν στην άκρη του μόλου. Ο νοτιάς έφερνε μικρά κύματα ως τα σκαλοπάτια των σπιτιών. Πίσω από τις αυλές, τα πεύκα κρατούσαν ακόμη τις σταγόνες της νυχτερινής βροχής. Τίποτε δεν έμοιαζε έκτακτο, κι όμως εκείνη σταμάτησε σαν να έβλεπε τον τόπο πρώτη φορά.
+
+Στο κοινοτικό γραφείο, η υπάλληλος της ζήτησε την ταυτότητά της και τον αριθμό της αίτησης. Η Ελένη περίμενε ώσπου να τελειώσει ένα τηλεφώνημα. Έπειτα παρέλαβε δύο αντίγραφα της απόφασης, υπέγραψε στο σχετικό βιβλίο και ρώτησε πότε είχε εγκριθεί η σύμβαση. Η υπάλληλος της έδειξε την ημερομηνία. Το όνομα του πατέρα της δεν υπήρχε στον κατάλογο των ιδιοκτητών, παρόλο που εμφανιζόταν στο παλαιότερο συμβόλαιο.
+
+Στο καφενείο, η απόφαση είχε σηκώσει θύελλα αντιδράσεων. Ένα κύμα διαμαρτυρίας περνούσε από τραπέζι σε τραπέζι, αλλά κανείς δεν συμφωνούσε για το επόμενο βήμα. Ο αδελφός της έλεγε πως το πρόβλημα είχε βαθιές ρίζες και πως οι υποσχέσεις του προέδρου ήταν μόνο καπνός. Εκείνη άκουγε χωρίς να μιλά. Όταν κάποιος τη ρώτησε αν θα προσέφευγε στο δικαστήριο, απάντησε ότι ήθελε πρώτα να διαβάσει τα έγγραφα.
+
+Το απόγευμα κατέβηκε ξανά στην ακτή. Η θάλασσα την περίμενε θυμωμένη και χτυπούσε επίμονα την κλειστή πόρτα μιας αποθήκης. Στο ρέμα δεν υπήρχαν πια καλάμια. Ο πατέρας της έγραφε στο ημερολόγιό του ότι τις ανοιξιάτικες νύχτες δεν μπορούσε να κοιμηθεί από τα βατράχια. Τώρα ακουγόταν μόνο η αντλία του εργοταξίου. Η Ελένη έψαξε με το βλέμμα τις όχθες, χωρίς να ξέρει αν περίμενε να βρει κάτι ή να επιβεβαιώσει την απουσία του.
+
+Από το ξωκλήσι ακούστηκε η καμπάνα και μια ηλικιωμένη γυναίκα σταυροκοπήθηκε. Λίγο πιο πέρα, ένας εργάτης έδενε κόκκινες κορδέλες στους κορμούς των ελιών που θα κόβονταν για να περάσει ο νέος δρόμος. Η Ελένη θυμήθηκε τη μητέρα της να απλώνει τα δίχτυα για τη συγκομιδή και να παραπονιέται για τη μικρή σοδειά. Για την ίδια, εκείνα τα δέντρα ήταν μαζί δουλειά, περιουσία και μνήμη. Δεν ήξερε ποια από τις τρεις λέξεις θα χωρούσε στην ένσταση."
 
 Απαντήστε ΜΟΝΟ σε έγκυρη μορφή JSON:
 {
@@ -4346,7 +4269,7 @@ The browser requests returned 14,965 matching rows for Europarl and 11,275 for O
 
 Preload the two result pages before a projected demonstration. The browser searches took 32.715 seconds and 20.863 seconds respectively. An earlier Europarl API request timed out at 45 seconds, and the general frequency request timed out at 60 seconds. This is not a demonstrated 30-person workload.
 
-**Frequencies**, **Discourse Markers**, **Text Analysis** and an optional key-based **LLM** layer exist in the live interface. No LLM classification output was obtained; the subsequent real attempt failed authentication. The inspected live frontend requests a fresh sample for LLM classification without carrying over the Concordancer's corpus/register filters, so do not promise that it classifies the same filtered rows students just inspected.
+**Frequencies**, **Discourse Markers**, **Text Analysis** and an optional key-based **LLM** layer exist in the live interface. A three-sentence classification completed on 23 September with Gemini 3.5 Flash-Lite. The inspected live frontend requests a fresh sample for LLM classification without carrying over the Concordancer's corpus/register filters, so do not promise that it classifies the same filtered rows students just inspected.
 
 The public backend's frequency implementation counts matching sentence rows, then divides by the corpus token total. Until deployment equivalence and counting behavior are checked, do not describe its per-million output as a verified lexical occurrence rate. The public README and live database metadata also differ in corpus sizes, so no headline corpus-size claim is needed for this exercise.
 
@@ -4383,7 +4306,7 @@ The actual proposed dialectal input contained six Katharevousa, 28 Cypriot, 13 T
 
 These are LLM interpretations of retrieved corpus evidence. No symbolic checker verifies their linguistic conclusions. They complement the earlier MEDEA demonstration by showing how a supplied classification scheme structures a prompt.
 
-**Execution status:** the dialectal searches completed in the live browser. Both LLM buttons retrieved their source data, and a local interception captured their proposed model inputs without contacting the backend model endpoints. A later real classification request used the existing Gemini environment credential and returned HTTP 500 with Google API_KEY_INVALID in 0.875 seconds. No model output or usage data was returned. Synthesis was not submitted after the failure. The key was not saved or printed; a valid provider key is needed to complete the output rehearsal. See `evidence/svarna_llm_rehearsal_20260919/`. Both public-source prompt templates are in `svarna_llm_prompts.md`.
+The corpus searches and captured input samples below were recorded on 19 September. A three-sentence Google classification completed on 23 September; its actual input and output appear below. The 30-sentence synthesis sample is input evidence, not a generated interpretation.
 
 
 
@@ -4465,20 +4388,16 @@ The following first returned rows are a saved retrieval sample, not a balanced d
 | «Ίντα πράμαν; | grdd_cypriot |
 
 
-### Svarna LLM prompt templates
+### Svarna: complete prompts for the selected examples
 
-Source: the public Svarna backend at https://github.com/StergiosCha/SVARNA_CORPUS_APP/blob/main/main.py, fetched 19 September 2026 and preserved in `evidence/voyant_svarna_source_snapshots_20260919.json`.
-
-These templates are transcribed from the public source. [VERIFY] Exact deployed backend revision. Bracketed capitals indicate runtime substitutions; they are not text the application normally sends. No model output was generated in this check.
-
-The classifier requests one function per sentence, a self-reported confidence and an explanation in Greek. Pattern synthesis requests an English analysis with Greek examples. The live frontend retrieves fresh samples from the selected database, omitting Concordancer corpus/register filters. Individual sentence corpus labels are dropped before submission.
+Assembled from the captured deployed backend and the saved input records. Classification uses the three sentences submitted successfully on 23 September. Synthesis uses the captured 30-sentence sample for ίντα; it is an input example, with no generated synthesis answer attached. The JSON object inside the classification prompt is the requested format, not a result.
 
 #### Marker classification
 
 ```text
 You are an expert in Greek linguistics, specifically discourse marker analysis.
 
-For each sentence below, classify the pragmatic function of the discourse marker "[MARKER]".
+For each sentence below, classify the pragmatic function of the discourse marker "λοιπόν".
 
 Possible functions (adapt based on the marker category):
 - adversative (contrast/opposition)
@@ -4499,7 +4418,9 @@ Return a JSON array with one object per sentence:
 
 Sentences:
 
-[ZERO-BASED NUMBERED SENTENCES, UP TO 50]
+0. ανέπαφοι υπό την έποψιν λοιπόν ταύτην έμενε λοιπόν η ακατάπαυστος εκείνη
+1. κατακλυσμού ηθέλησε λοιπόν ν αντιστή κατ αυτού λοιπόν τότε εξεμάνησαν οι
+2. λοιπόν και ητένισε την πριγκήπισσαν λοιπόν χαίρε ωραία μου είπεν η μπέτσυ
 ```
 
 #### Pattern synthesis
@@ -4507,7 +4428,7 @@ Sentences:
 ```text
 You are an expert in Modern Greek corpus linguistics.
 
-Analyze the usage patterns of "[QUERY]" based on the concordance data below.
+Analyze the usage patterns of "ίντα" based on the concordance data below.
 
 Write a concise linguistic analysis (200-300 words) covering:
 1. Register distribution (where is it most/least frequent and why)
@@ -4517,17 +4438,113 @@ Write a concise linguistic analysis (200-300 words) covering:
 5. Any register-specific variation in meaning or function
 
 Write in English with Greek examples. Be specific and cite examples.
-[FREQUENCY DATA, IF AVAILABLE]
+
+
+Frequency data:
+{
+  "query": "ίντα",
+  "frequencies": [
+    {
+      "corpus": "grdd_cretan",
+      "register": "dialectal",
+      "mode": "written",
+      "raw_count": 333,
+      "total_sentences": 82401,
+      "total_tokens": 1363496,
+      "per_million": 244.23
+    },
+    {
+      "corpus": "grdd_cypriot",
+      "register": "dialectal",
+      "mode": "written",
+      "raw_count": 179,
+      "total_sentences": 95028,
+      "total_tokens": 1205962,
+      "per_million": 148.43
+    },
+    {
+      "corpus": "grdd_tsakonian",
+      "register": "dialectal",
+      "mode": "written",
+      "raw_count": 2,
+      "total_sentences": 37629,
+      "total_tokens": 353452,
+      "per_million": 5.66
+    }
+  ]
+}
 
 Sample concordance lines:
 
-[ONE-BASED NUMBERED SENTENCES, UP TO 30]
+1. και δεν κατέχω, ίντα να πω, κ' ίντα ν' αποφασίσω, κ' ίντα μαντάτο του πηγός σε τούτο να μηνύσω.
+2. ίντα να κάμει, ίντα να πει, κ' ίντα βουλή να πιάσει, κι απιλογιά του βασιλιού να δώσει, πρι' βραδιάσει.
+3. ίντα κακό σου γύρεψα, ίντα κακό γυρεύω, γυρεύω μόνο ταπεινά να σε κρυφολατρεύω.
+4. καλούνται να τριτώσουνε, κι ακούσετε ίντα εγίνη, κ' ίντα κονταροκτύπημα ήτον την ώρα εκείνη.
+5. ήβανε χίλιους λογισμούς, ίντα ν' αποφασίσει, κ' ίντα να κάμει προς αυτόν της αρετής η κρίση.
+6. ίντα.
+7. Ίντα...!
+8. σα φρόνιμος ελόγιαζε, σα γνωστικός εγρίκα, εις ίντα πάθη θέ' να μπει, σ' ίντα καημόν και πρίκα.
+9. Καλάν σιόρ, αφου παρουσιάζει την εκπομπήν Κυπρίων νόστος, ίντα, λαλέι το ο τίτλος, ίντα μασιετε να καλαμαρίσει;
+10. Αρώτούσαν πρώτα ίντα καλόν τζαι ίντα κακόν κάμνει η κάθε ψατζιή πριν να κρίνουν αν πρεπει να ψεκάσουν.
+11. Τζι επολοήθην τζι είπεν της τζιαί λέει τζιαί λαλεί της: - Ίντα ΄σσιεις, ίντα ΄μ ’ πόπαθες, κόρη, τζ’ αναστενάζεις;
+12. ίντα δηγάσαι;
+13. ίντα μιλείς;
+14. Ίντα θαρρείς;
+15. Ίντα??Διαγραφή
+16. Ίντα μμάθκια!!
+17. «Ίντα πράμα;»
+18. «Ίντα ΠΡΑΜΑΝ;
+19. «Ίντα πράμα?»
+20. Ίντα ψυσιη!
+21. Ίντα κλαίεις;
+22. -Ίντα πράμα;
+23. «Ίντα πράμαν;
+24. Ίντα όμορφη;
+25. «Ίντα έεεεεε;»
+26. και δεν κατέχω ίντα να πω, κ' ίντα ν' αποφασίσω, τίνος να κάμω θέλημα, και πάλι ποιού ν' αφήσω.
+27. άχι και ίντα θα γενώ κι’ ίντα στράτα θα πάρω, για να µπορέσω να χωστώ, του κερατά του χάρο.
+28. χριστέ κ’ίντα μου τά ‘μπεψες τσή πέρδικας τα κάλλη και ρίζικο δε μού ‘μπεψες, τα κάλλη’ ίντα τα θέλω;
+29. Με ίντα όπλα.
+30. Ίντα μάρκα ένι?
 ```
 
+### Recorded Google classification, 23 September
+
+Gemini 3.5 Flash-Lite returned the following labels and explanations in 10.980 seconds. Confidence is reported by the model, not independently calibrated. These short corpus windows need wider context to assess their pragmatic interpretation.
+
+**Sentence 1**
+
+```text
+ανέπαφοι υπό την έποψιν λοιπόν ταύτην έμενε λοιπόν η ακατάπαυστος εκείνη
+```
+
+Function: consecutive. Confidence: 0.85.
+
+Το 'λοιπόν' λειτουργεί ως συμπέρασμα (consecutive) που συνδέει τα προηγούμενα δεδομένα με το αποτέλεσμα ότι η κατάσταση έμενε αναπαφής.
+
+**Sentence 2**
+
+```text
+κατακλυσμού ηθέλησε λοιπόν ν αντιστή κατ αυτού λοιπόν τότε εξεμάνησαν οι
+```
+
+Function: consecutive. Confidence: 0.9.
+
+Εκφράζει αιτιολογικό/συμπερασματικό αποτέλεσμα (consecutive) των προηγούμενων γεγονότων, οδηγώντας στην αντίδραση των προσώπων.
+
+**Sentence 3**
+
+```text
+λοιπόν και ητένισε την πριγκήπισσαν λοιπόν χαίρε ωραία μου είπεν η μπέτσυ
+```
+
+Function: temporal. Confidence: 0.8.
+
+Χρησιμοποιείται για να δηλώσει τη μετάβαση σε μια νέα χρονική στιγμή ή δράση στην αφήγηση (temporal/sequential).
 
 ### Every sentence actually prepared for the two LLM requests
 
-These payloads were captured before model submission, with the key omitted. The selected database was retained, but the Concordancer corpus filter was not. A later real classification attempt failed with API_KEY_INVALID. There is no generated classification or synthesis answer to present as observed.
+These payloads were captured before model submission, with the key omitted. The selected database was retained, but the Concordancer corpus filter was not. The later three-sentence classification result is supplied separately; no synthesis output is attached to these captured inputs.
 
 
 #### Marker classification
@@ -4841,7 +4858,7 @@ Open [PlotAnalyzer](https://greek-app-heaven-plot.livelyhill-85880e66.westeurope
 ### Inputs and interpretation
 
 - `papadiamantis_seal.txt`: complete public-domain Greek story, with source and transcription details in `papadiamantis_seal_notes.md`.
-- `plot_papadiamantis_synopsis_en.txt`: a 280-word instructor synopsis prepared for this exercise from that Greek text. It is not a published translation or a substitute edition of the story. It retains the main events, the grandmother's mistaken explanation of the splash, the reader's knowledge, and the seal's translated lament. Details such as the circling schooner are omitted. The synopsis's explanatory language affects keyword scores.
+- `plot_papadiamantis_synopsis_en.txt`: a 280-word English synopsis prepared for this exercise from that Greek text. It is not a published translation or a substitute edition of the story. It retains the main events, the grandmother's mistaken explanation of the splash, the reader's knowledge, and the seal's translated lament. Details such as the circling schooner are omitted. The synopsis's explanatory language affects keyword scores.
 - `plot_keyword_starter.json`: an importable starter computed with the unchanged local keyword engine. It is explicitly labelled as a local result, not a neural result or a prior live export. Its sole workshop purpose is to make the Heuristic result view accessible. All reported results below were recomputed in the live browser after importing it.
 
 Read the Greek story first. Under an Aristotelian reading, consider suffering, reversal, error and recognition. Distinguish what the child, grandmother, reader and seal know. Under Russian Formalism, consider the presentation of simultaneous events, sound, framing, and the animal's lament rendered in human words. These are questions for interpretation, not a gold-standard annotation or a claim that either theory must fit.
@@ -4849,18 +4866,11 @@ Read the Greek story first. Under an Aristotelian reading, consider suffering, r
 
 
 
-### Interpretation and rehearsal status
+### Interpreting the PlotAnalyzer comparison
 
-The grandmother continues lamenting earlier losses, while the reader knows that the child has drowned. She interprets the splash differently. The seal receives a lament in human words. Distinguish character recognition, reader knowledge and narrative framing instead of merging them into one recognition score.
+The grandmother misattributes the splash while the reader learns that the child has drowned. The seal is given a lament in human words. Distinguish character recognition, reader knowledge and narrative framing.
 
-The app's Aristotelian dependency is labelled “Suffering needs Flaw: the error must precede its consequences”. Consider whose error counts and whether suffering in this story should depend on a flaw at all. Under Russian Formalism, consider how the animal's voice, the presentation of simultaneous sounds and the translated lament affect perception. These questions concern the interpretation of the source; they are not model outputs or a gold standard.
-
-The interface and engine mechanism have been checked against source. The saved live runs remain keyword-only. No completed NeSy run on this story is claimed: it requires a working OpenRouter credential. The successful direct Gemini tests in other apps do not establish access to OpenRouter. If no authorized key is available, use the complete story, the two actual theory prompts and the encoded rule for a guided reading, without presenting invented scores or corrections.
-
-If desired, spend thirty seconds on the archived keyword contrast below. A relevant word can be a clue, but an occurrence of “who” is not a character's recognition. The main activity is the model's explanation, the rule's objection and the feedback trace.
-
-
-
+The Aristotelian dependency “Suffering needs Flaw” is the app's operational rule. Whose error counts, and should this story's suffering depend on a flaw? Russian Formalism instead directs attention to devices such as framing and defamiliarization. The saved PlotAnalyzer exports are keyword results. Run the NeSy comparison in the app and inspect its actual feedback; no NeSy output for this story is supplied here.
 
 ### PlotAnalyzer: theory prompts and the feedback mechanism
 
@@ -4989,7 +4999,7 @@ The exact feedback question depends on the current scores and triggered rules. R
 3. The narrator gives the seal a lament in human words. What account of framing or defamiliarization captures this device, and what textual evidence supports it?
 
 
-### Complete English instructor synopsis
+### Complete English synopsis
 
 
 ```text
@@ -5015,8 +5025,6 @@ The following sequence worked without changing the application:
 4. Choose **Aristotelian (Poetics)** and click **Analyze Plot**. Select the result tab labelled **Heuristic**. Inspect **Detailed Element Breakdown** and click **Export** to save JSON.
 5. Replace the input with the English synopsis. Select **Treatment / Summary**, then **Aristotelian (Poetics)**. Analyze and export.
 6. Keep the synopsis and mode fixed. Select **Russian Formalism**, analyze and export again. Interpret changes as effects of different feature definitions, not as calibrated comparisons of literary quality.
-
-The rehearsal also tested the complete Greek story under Freytag in Short Story mode. Reloading the page resets the session, so the starter may be needed again. This additional import step makes the current keyword workflow less suitable for an unsupervised first activity.
 
 
 
@@ -7388,7 +7396,7 @@ App: <https://greek-app-heaven-terminography.livelyhill-85880e66.westeurope.azur
 
 Upload `termguard_stratigraphy.txt`, a 234-word original English teaching corpus. It is an invented excavation record with working definitions, not a published archaeological terminology standard. It distinguishes a cut, the interface left by removing material, from a fill, the deposit occupying it. It also introduces contexts, finds, residual finds and intrusive finds.
 
-Before using a model, assess these instructor-written candidate definitions of **cut**:
+Before using a model, assess these written discussion definitions of **cut**:
 
 | Candidate | Discussion based on the supplied corpus |
 | --- | --- |
@@ -7425,10 +7433,10 @@ The deployed page is the research interface at the root URL. The newer local Rea
 2. Under **Corpus Building**, choose `termguard_stratigraphy.txt`, select **English**, and click **Upload**. The filename should appear below the form.
 3. **API Keys** opens the provider-key dialog. The visible fields are OpenAI, Gemini, Anthropic and OpenRouter. Use an authorised participant or temporary provider key. Reload if availability does not refresh, then check **Select Model** for an enabled entry. A listed model or saved key alone does not establish that inference works. The inspected model list contains Azure and OpenRouter entries; the other dialog fields do not guarantee a matching selectable model.
 4. Expand **Project Settings** to inspect the prompt templates and enabled parser rules. For the recorded attempt we changed only our own project's generation settings: **Temperature** `0.1`, **Max Tokens** `512`, **Top-p** `1`, then **Save Settings**. Leave the prompt templates and parser rules unchanged for a baseline.
-5. Under **Extraction & Experimentation**, select a working model and the uploaded file in **Target File for Extraction**, or keep all files when this is your only upload. Click **Extract Terms**. Inspect the actual term rows, not just the completion alert. **The rehearsal stopped here: zero terms were returned.**
-6. Once extraction works, choose **cut** under **Neuro-Symbolic Feedback Loop**. Keep the same model and **Max Iterations** `2`. Compare **Zero-shot / No RAG**, **Persona (ISO) / No RAG**, then **Persona (ISO) / Keyword RAG**, clicking **Run Feedback Loop** for each. Save or screenshot each result before the next replaces it. These controls exist; their outputs remain **[VERIFY]**.
+5. Under **Extraction & Experimentation**, select a working model and the uploaded file in **Target File for Extraction**, or keep all files when this is your only upload. Click **Extract Terms**. Inspect the actual term rows, not just the completion alert. Check that term rows contain usable results before proceeding to definitions.
+6. Once extraction works, choose **cut** under **Neuro-Symbolic Feedback Loop**. Keep the same model and **Max Iterations** `2`. Compare **Zero-shot / No RAG**, **Persona (ISO) / No RAG**, then **Persona (ISO) / Keyword RAG**, clicking **Run Feedback Loop** for each. Save or screenshot each result before the next replaces it. Evaluate the returned definition against the corpus and the named rules.
 7. For each returned cycle, read the definition and individual check badges. Compare cycle one with any revision. A loop can stop immediately if the first definition passes, so a second cycle or an improvement is not guaranteed. The first cycle of the Zero-shot loop is the baseline; this interface does not supply a separate feedback-off switch for that control.
-8. **JSON** and **CSV** are available under **Results & Verification**. Export before leaving. Export behaviour with generated definitions remains **[VERIFY]**.
+8. **JSON** and **CSV** are available under **Results & Verification**. Export before leaving. Keep the exported result with its source and settings.
 
 For this small comparison, use the feedback-loop controls. The per-term **Run** button in the result table requests the three-strategy by three-retrieval matrix. **Extract Definitions (TAG)** runs a batch across terms. Vector retrieval and **Extract Relations** are further activities, not rehearsed here. Keyword retrieval avoids the additional embedding setup mentioned by the live key dialog.
 
@@ -7444,32 +7452,16 @@ The live settings separately list circularity, genus, differentia, negation, enc
 
 
 
-### TermGuard: prompts retrieved from the live app
+### TermGuard: definition prompts for cut
 
-Source: the rehearsal project settings returned on 19 September 2026 by `/api/projects/1/settings`. These are the actual templates exposed by the deployed app, not templates inferred from newer local source. The failed extraction did not yield a model output.
-
-The definition dropdown calls `few-shot` **Persona (ISO)**. Its examples and rules are the app's interpretation of an ISO-inspired definition task. They have not been checked against the full standard. Placeholders are preserved below.
-
-#### term_extraction
-
-```text
-System: You are an expert terminologist following ISO standards.
-Instructions:
-{guidelines}
-
-{context_block}Text to analyze ({language}):
-{chunk}
-
-Task: Extract domain-specific terms for '{domain}'.
-Output format: A JSON array of strings only.
-```
+These definition prompts come from the saved live project settings. Domain is Archaeological stratigraphy and term is cut. The app labels few-shot as Persona (ISO). Its ISO references are part of the source prompt, not a certification that every encoded rule reproduces the standard.
 
 #### zero-shot
 
 ```text
 Find the definition for the following term:
-Domain: {domain}
-Term: {term}
+Domain: Archaeological stratigraphy
+Term: cut
 Output only the definition text.
 ```
 
@@ -7507,8 +7499,8 @@ Delimiting characteristic: movements are detected by rollers and a ball
 Do not provide encyclopedic explanations; provide only definitions.
 Please find the intensional definitions of the following term:
 
-Domain: {domain}
-Term: {term}
+Domain: Archaeological stratigraphy
+Term: cut
 Definition:
 ```
 
@@ -7527,34 +7519,12 @@ You are a professional terminologist working according to ISO 1087:2019. When de
   - keep the definition concise and clear
 - After completing the reasoning steps internally, output only the final definition, not the reasoning process.
 
-Domain: {domain}
-Term: {term}
+Domain: Archaeological stratigraphy
+Term: cut
 Final Definition:
 ```
 
-#### rag_preamble
-
-```text
-You will receive a user query and a set of retrieved documents.
-Your task is to answer the query using only the information contained in the retrieved documents.
-Follow these steps internally:
-- Read the user query.
-- Examine the retrieved documents and identify the relevant information.
-- If the documents do not contain enough information to answer the query, state this clearly.
-- Synthesize the relevant information into a clear, accurate answer.
-- Do not invent facts or rely on outside knowledge.
-- Output only the final answer in the requested format.
-
-User query:
-{base_prompt}
-
-Retrieved documents:
-{context}
-
-Final answer:
-```
-
-#### Symbolic rules exposed in the same settings
+#### Symbolic rules in the saved project settings
 
 ```json
 {
@@ -7589,28 +7559,11 @@ Final answer:
 }
 ```
 
-These settings list checks and weights. They do not supply the exact deployed parser implementation or establish its correctness. The deployed feedback-revision prompt is not exposed here and has not been recovered. Do not substitute the newer local source and label it as verified live wording.
+A RAG request also includes the passages selected by that run. The complete source corpus is supplied with the example. The three candidate definitions are written discussion examples; they are not a saved model feedback sequence.
 
+### What the definition examples establish
 
-### What was actually observed and what to do if it fails
-
-The browser created a project and uploaded the corpus. Extract Terms reported completed
-with zero terms after 2.681 seconds, while the server logged a provider connection error.
-The term list was empty. No definition generation or feedback comparison followed.
-Therefore there is no observed “bad definition, corrected definition” pair to show.
-
-Use the three candidate definitions printed above as an instructor exercise. “A cut made
-during excavation” is circular. “An interface created by the removal of material” identifies
-a category and distinguishing characteristic supported by the supplied corpus. “A deposit
-that occupies a pit” is fluent and has definitional structure, but confuses cut with fill.
-A structural pass alone does not establish the correct concept or genus.
-
-If inference works during the workshop, save the actual definition and all cycle results.
-Compare Zero-shot / No RAG, Persona (ISO) / No RAG, and Persona (ISO) / Keyword RAG while
-holding the model and two-iteration limit fixed. Change one setting at a time. The first
-cycle can pass immediately; do not promise that every request produces a correction.
-These follow-on outputs and exports remain [VERIFY].
-
+The three candidate definitions were written for discussion. Circularity and a genus/differentia structure can be inspected in the wording. A structurally acceptable definition may still identify the wrong concept. Fresh model-generated definitions and feedback must be checked against the uploaded corpus.
 
 ## I. Linguistic Distance: every score, denominator and caveat
 
@@ -7629,10 +7582,6 @@ App: <https://greek-app-heaven-linguistic.livelyhill-85880e66.westeurope.azureco
 7. **Export Results** remains available for CSV download. Its browser download was tested on 19 September; the saved result is `linguistic_greek_results.csv`.
 
 A separate test simulated thirty concurrent participants, each initializing and requesting WALS for the Greek pair. All thirty succeeded; median total time 5.3665 seconds, 95th percentile 9.743 seconds and maximum 10.053 seconds. This does not establish concurrent seven-dimension analysis or chart generation.
-
-The repair initializes an analyzer on demand in whichever process handles the request, postpones URIEL setup until needed, supports combination from any selected dimensions, and renders bounded-size charts. One Gunicorn worker with four threads replaces four workers within the same Azure CPU and memory limits. Heavy analyses are serialized within each process. Azure minimum/maximum replicas and the scaling threshold were unchanged. Source and deployment details: `app_repairs_20260920.md`.
-
-Historical context: the 19 September rehearsal had a chart timeout and an Analyzer not initialized failure. On 20 September, a single-dimension run exposed a separate display bug: the UI only rendered combined results, which the old backend created only for multiple dimensions. Those defects motivated this repair. The original evidence is retained alongside the successful post-repair checks.
 
 
 
@@ -7667,23 +7616,16 @@ Choose a historical question first, then identify the relevant evidence.
 - **Missing data:** the public file check finds raw Greek ASJP files, but the analyzer log finds only the cleaned Modern Greek file and reports ASJP data unavailable for the pair. File presence does not prove that usable inputs reached the calculation.
 - **Aggregation:** the app gives available dimensions equal weight. Are their scales and evidence comparable? Could dimensions overlap in the information they encode? Which would you retain for your own research question?
 
-An optional arithmetic exercise uses only the saved scores: average lexical, WALS and Grambank. Using full-precision values gives **0.3590** when rounded, compared with **0.3372** for all six available dimensions. This is a calculation from recorded outputs, **not a successful three-dimension app run**. The attempted three-dimension request returned HTTP 400 in 1.133 seconds. The planned WALS/Grambank-only browser check was not submitted after that failure.
+An optional arithmetic exercise averages the saved lexical, WALS and Grambank scores. The full-precision values give **0.3590** when rounded, compared with **0.3372** for all six available dimensions. This is arithmetic on recorded outputs, not a fresh three-dimension app analysis.
 
 
 
 
-### Method limits to explain accurately
+### Method limits
 
-The inspected local `main.py` calculates lexical normalized character-edit distances, WALS and Grambank feature mismatches, a weighted UD feature comparison, URIEL resource distance and cognate-set overlap. Exact local/deployed source identity is **[VERIFY]**. The live log supports the data counts and URIEL operation reported above.
+The dimensions compare different resources and representations. Coverage, alignment, spelling conventions and feature definitions matter. The lexical routine pairs retained entries by line position, so a character-distance score is not by itself a claim about historical cognacy. Treat the dimension profile as resource-dependent evidence.
 
-The local lexical routine pairs words by line position and excludes entries containing spaces. The companion cleaning script truncates long lists to the first 200 nonempty lines rather than checking concept identifiers. This is a reason to audit alignment, not proof that any particular Greek pair is misaligned. **[VERIFY: actual retained word pairs, concept alignment, dataset editions, historical-stage coverage and preprocessing provenance.]** The data themselves were not available inside the authorised local app-source folder and were not independently audited.
-
-The repaired combination routine does not require Lexical Distance. WALS/Grambank-only analysis returned a combined score of 0.2528 in the live browser. Missing values remain N/A in both the table and chart.
-
-The CSV includes the app's hard-coded temporal-depth field. **[VERIFY: historical anchor dates for that field.]** Do not derive a rate of change from it in this exercise. Export uses a shared server filename in the inspected source, so simultaneous export/download behaviour also remains untested.
-
-
-
+No rate of historical change is derived here. The exercise uses the observed component scores and their stated denominators, not the app's temporal-depth metadata.
 
 ### Exact exported values for independent arithmetic
 
@@ -7694,24 +7636,9 @@ Ancient Greek → Modern Greek,Ancient Greek,Modern Greek,Hellenic,2500,0.571313
 ```
 
 
-### Classroom interpretation and fallback
+### Interpreting the profile
 
-The combined value 0.3372 is an equal-weight arithmetic mean of six available dimensions.
-It is not “33.72% of Greek changed”. The lexical/WALS/Grambank mean 0.3590 is instructor
-arithmetic on the full-precision exported values. A post-repair WALS/Grambank-only run
-returned 0.2528; that uses a different selection. Missing phonology must not enter as zero.
-
-The current repair passed automatic initialization, a single selected dimension, selections
-without Lexical, and charts. Thirty concurrent WALS participants all succeeded; full
-seven-dimension and chart concurrency remain untested. If the app stalls, use the complete
-CSV above. Choose dimensions for a historical question, state their
-weights and explain the consequences of missing or overlapping evidence.
-
-The earlier three-dimension request failure described in the source notes occurred before
-the repair. It is not the present readiness status of subset analysis. Dataset alignment,
-editions and provenance still need independent checking. Do not calculate rates of language
-change from the exported hard-coded temporal-depth field.
-
+Choose dimensions appropriate to the historical question and state the weighting. The HTML computes an equal-weight mean of selected saved values. This arithmetic is not a fresh app analysis or the percentage of a language that changed.
 
 ## J. Dialect Generator: exact prompts and recorded generations
 
@@ -7739,9 +7666,7 @@ English gloss: Tell me about your village.
 
 Tokens are model units, not words or sentences. A short token limit can cut a response off. Treat a boundary truncation separately from an error in dialectal grammar. The model is sampled; identical settings do not guarantee identical text. Do not switch base models during this short activity because a different model may have to load.
 
-The intended comparison changes only the dialect selector. Read-only inspection of the deployed code confirms that each selected base model uses one adapter across all four dialects. The selector changes the prompt prefix. For this Cretan run, the full user instruction is exactly **Γράψε στην Κρητικά διάλεκτο: Πες μου για το χωριό σου**. For Pontic it uses **Ποντιακά** in the same position. The grammatical wording is preserved from the app. See `dialect_generator_prompts.md` for all four prompts and the chat-template behaviour. Training configuration and training/test overlap remain [VERIFY].
-
-The permitted local Swiss Knife checkout lists `dialect-gen` in its README, but that source directory is absent. The deployed source was therefore inspected read-only through Azure. No unrelated Dropbox folder was accessed.
+The intended comparison changes only the dialect selector. Read-only inspection of the deployed code confirms that each selected base model uses one adapter across all four dialects. The selector changes the prompt prefix. For this Cretan run, the full user instruction is exactly **Γράψε στην Κρητικά διάλεκτο: Πες μου για το χωριό σου**. For Pontic it uses **Ποντιακά** in the same position. The grammatical wording is preserved from the app. See `dialect_generator_prompts.md` for all four prompts and the chat-template behaviour. These inference records do not document the training split.
 
 
 
@@ -7784,11 +7709,11 @@ Do not accept a dialect label as proof. Familiar place names or cultural topics 
 
 ### Compare with attested examples in Svarna
 
-Svarna is a separate corpus application. Choose the **dialectal** database and the matching corpus, such as `grdd_cretan` or `grdd_pontic`, then search a distinctive form from the actual generated output. Inspect the surrounding sentence and source label, not just the hit count. The generated form **ατό** was looked up in `grdd_pontic` through the live browser. The search completed in 1.613 seconds, reporting 1,458 matching rows and returning the first 100. These are matching rows, not a token-frequency count. Returned examples include **Σωστόν έν ατό!** and **Το χρέος ατ ατό έτον κι ατό εποίκεν.** The rows carry Pontic/GRDD+ metadata; item-level bibliographic provenance remains [VERIFY]. This supports the form in the corpus, not the entire generated sentence.
+Svarna is a separate corpus application. Choose the **dialectal** database and the matching corpus, such as `grdd_cretan` or `grdd_pontic`, then search a distinctive form from the actual generated output. Inspect the surrounding sentence and source label, not just the hit count. The generated form **ατό** was looked up in `grdd_pontic` through the live browser. The search completed in 1.613 seconds, reporting 1,458 matching rows and returning the first 100. These are matching rows, not a token-frequency count. Returned examples include **Σωστόν έν ατό!** and **Το χρέος ατ ατό έτον κι ατό εποίκεν.** The rows carry Pontic/GRDD+ metadata; item-level bibliographic provenance is not established by these records. This supports the form in the corpus, not the entire generated sentence.
 
-An already tested comparison is **ίντα** in `grdd_cretan` and `grdd_cypriot`. Both returned examples in the earlier browser rehearsal. This illustrates why a single apparently characteristic word does not establish exclusive dialect identity. It is a previously tested corpus exercise, not a claim that the generator produced that word. For example, a returned Cretan row begins **και δεν κατέχω, ίντα να πω**, while a Cypriot row reads **Ίντα μμάθκια!!**. These are corpus-returned snippets; their item-level bibliographic provenance is [VERIFY].
+An already tested comparison is **ίντα** in `grdd_cretan` and `grdd_cypriot`. Both returned examples in the earlier browser rehearsal. This illustrates why a single apparently characteristic word does not establish exclusive dialect identity. It is a previously tested corpus exercise, not a claim that the generator produced that word. For example, a returned Cretan row begins **και δεν κατέχω, ίντα να πω**, while a Cypriot row reads **Ίντα μμάθκια!!**. These are corpus-returned snippets; the returned corpus labels do not supply a full bibliographic record for each snippet.
 
-The portal describes the generator as fine-tuned with LoRA on GRDD+ and Svarna's dialectal rows carry GRDD+ metadata. Consequently, a matching corpus example should not be treated as an independent held-out evaluation of the model. Exact training/test overlap is [VERIFY]. A failed corpus search likewise does not establish that a form is impossible.
+The portal describes the generator as fine-tuned with LoRA on GRDD+ and Svarna's dialectal rows carry GRDD+ metadata. Consequently, a matching corpus example should not be treated as an independent held-out evaluation of the model. The matching snippet does not establish that it was absent from training data. A failed corpus search likewise does not establish that a form is impossible.
 
 Bring one supported observation and one unresolved question to the 11:30 session with Markantonatou, Bompolas, Stamou and Dimakis. Keep model training and a systematic survey of the varieties for that session.
 
@@ -7814,9 +7739,9 @@ The server constructs the following instruction. The wording below is preserved 
 | Northern | Γράψε στην Βόρεια Ελληνικά διάλεκτο: Πες μου για το χωριό σου |
 | Cypriot | Γράψε στην Κυπριακά διάλεκτο: Πες μου για το χωριό σου |
 
-For Llama 3.1 and Llama 3, this entire string becomes one **user** message, passed through the tokenizer's chat template with `add_generation_prompt=True`. The application supplies no separate system message, worked examples or symbolic feedback. The tokenizer's exact special-token serialization was not captured and remains [VERIFY].
+For Llama 3.1 and Llama 3, this entire string becomes one **user** message, passed through the tokenizer's chat template with `add_generation_prompt=True`. The application supplies no separate system message, worked examples or symbolic feedback. The strings below show the user-message content before tokenizer serialization.
 
-For Krikri, the same constructed string is tokenized directly, without the chat-template branch. Krikri generation was not tested here. Do not substitute the inactive Azure module's continuation prompt: the deployed main application explicitly does not mount that router, and the public OpenAPI inventory exposes only the local generation path.
+For Krikri, the same constructed string is tokenized directly, without the chat-template branch. The saved generations use Llama 3.1.
 
 The registry maps each base model to a single adapter:
 
@@ -7830,7 +7755,7 @@ Changing only the dialect selector changes the prompt while retaining the select
 
 The 19 September rehearsal uses `max_new_tokens=40`, `temperature=0.75` and `top_p=0.9`, corresponding to the visible sliders. The active implementation also sets `do_sample=True` and `repetition_penalty=1.15`. There is no seed control in the inspected UI, so repeats can differ. A stream completion event does not report whether generation ended at the token limit or at an end token.
 
-The source confirms the inference path, not the training procedure. The portal describes GRDD+ fine-tuning; the exact training examples, train/test split and correspondence between training and inference prompts remain [VERIFY].
+The source documents inference. These examples do not establish which training records contributed to a generated phrase.
 
 #### Northern and Cypriot prompts requested on 21 September
 
@@ -7862,10 +7787,9 @@ The browser request records preserve the entered prompt and dialect as separate 
 
 The actual responses and timings are preserved in `evidence/dialect_rehearsal_20260921/record.json` and presented in `dialect_generator_outputs.md`.
 
+### Dialect Generator: recorded outputs
 
-### Dialect Generator: actual rehearsal outputs
-
-The Cretan and Pontic outputs came from the live browser on 19 September 2026. The first cold attempt timed out and produced no captured output. These are the subsequent loaded-model runs. Each uses Llama 3.1 8B Instruct, the village prompt, maximum 40 new tokens, temperature 0.75 and top-p 0.90. Whole-output dialect authenticity remains [VERIFY].
+The Cretan and Pontic outputs came from the live browser on 19 September 2026. The first cold attempt timed out and produced no captured output. These are the subsequent loaded-model runs. Each uses Llama 3.1 8B Instruct, the village prompt, maximum 40 new tokens, temperature 0.75 and top-p 0.90. The selection labels identify the requested varieties; judge the generated forms against the source and corpus evidence.
 
 Control characters are rendered as visible `[U+XXXX]` markers below. The original strings are preserved in the JSON evidence, not silently corrected.
 
@@ -7909,7 +7833,7 @@ Exact recorded output:
 
 App-reported generation: 460.31 seconds. Browser-observed completion: 462.472 seconds. First visible text was observed at 197.055 seconds, with five-second polling. HTTP 200, explicit completion event and no stream-error event. The concatenated streamed tokens match the displayed output exactly.
 
-The output ends in the incomplete word **παράθυ** and does not form a complete passage. Its dialectal correctness remains [VERIFY]. The configured token limit was 80; the app did not return a finish reason or a token-usage count. The initial cold attempt returned HTTP 504 after 240.081 seconds with **stream timeout**, without captured generated text. Its record is preserved separately in `evidence/dialect_rehearsal_20260921/initial_timeout.json`. The successful retry began with Llama already loaded, after Azure CPU metrics had returned to idle.
+The output ends in the incomplete word **παράθυ** and does not form a complete passage. The variety label does not validate the generated wording. The configured token limit was 80; the app did not return a finish reason or a token-usage count. The initial cold attempt returned HTTP 504 after 240.081 seconds with **stream timeout**, without captured generated text. Its record is preserved separately in `evidence/dialect_rehearsal_20260921/initial_timeout.json`. The successful retry began with Llama already loaded, after Azure CPU metrics had returned to idle.
 
 Evidence: `evidence/dialect_rehearsal_20260921/record.json`, `northern.png`, `northern_prompt.txt`, `northern_output.txt`, `health_before_retry.json` and `cpu_before_retry.json`.
 
@@ -7932,10 +7856,9 @@ Exact recorded output:
 
 App-reported generation: 463.71 seconds. Browser-observed completion: 465.771 seconds. First visible text was observed at 195.326 seconds, with five-second polling. HTTP 200, explicit completion event and no stream-error event. The concatenated streamed tokens match the displayed output exactly.
 
-This is the beginning of a narrative, ending at the incomplete word **Μό**. Forms such as **τζαι**, **επήα**, **παραθύριν** and **ούλλον** provide specific material for discussion; whole-output dialectal correctness remains [VERIFY]. The configured token limit was 80; the app did not supply a finish reason or token-usage count. Do not present this fragment as a completed story.
+This is the beginning of a narrative, ending at the incomplete word **Μό**. Forms such as **τζαι**, **επήα**, **παραθύριν** and **ούλλον** provide specific material for discussion; the fragment itself does not establish the correctness of the whole dialectal reading. The configured token limit was 80; the app did not supply a finish reason or token-usage count. Do not present this fragment as a completed story.
 
 Evidence: `evidence/dialect_rehearsal_20260921/record.json`, `cypriot.png`, `cypriot_prompt.txt` and `cypriot_output.txt`. Both new runs used the existing local CPU model without an external token-billed provider. Hosting cost was not separately measured. No app or deployment settings were changed.
-
 
 ### Reading the generated text
 
@@ -8028,14 +7951,9 @@ The substring issue is visible in the returned edge contexts and confirmed in th
 
 
 
-### Suggested reveal
+### Reading the network
 
-The archive triangle is supported by the passage. Why does Eleni have a connection to Dimitris? Compare its two evidence sentences. Who actually hands Maria the key, and where is that connection? Compare the four versions of Nikos and the split forms of Dimitris. The conclusion is that the graph accurately records some textual patterns while the interpretation of those patterns needs linguistic and historical judgement.
-
-Do not call every co-occurrence edge a model error. Distinguish the representation's limits (negation, relation type, pronouns) from implementation/extraction errors (fragmented identity, substring matches).
-
-
-
+Why is Eleni linked to Dimitris? Read the denied meeting and disproved rumour. Who hands Maria the key, and where is that interaction in the network? Compare the different inflected names before treating nodes as distinct people.
 
 ### All returned entity strings, communities and centralities
 

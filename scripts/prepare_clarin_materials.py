@@ -48,7 +48,7 @@ data['assets']['rhyme_identification_prompts.md'] = re.sub(
     data['assets']['rhyme_identification_prompts.md'])
 data['publicEdition'] = True
 pdf_versions = {name: hashlib.sha256((WORKSHOP / name).read_bytes()).hexdigest()[:12]
-                for name in ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf']}
+                for name in ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf', 'worksheet.pdf']}
 
 script = re.search(r'<script>(.*?)</script>', original, re.S)[1]
 script = re.sub(r'<button[^>]+data-action="(?:preparation|cues)"[^>]*>.*?</button>', '', script)
@@ -56,7 +56,7 @@ script = re.sub(r'^  if\(a===\'(?:preparation|cues)\'\).*?\n', '', script, flags
 script = script.replace('Complete instructor chapter, including', 'Complete worked example, including')
 script = script.replace(' / complete instructor chapter', ' / complete worked example')
 script = script.replace('<p class="funding">', '<p><a class="text-button" href="index.html">Workshop overview, slides and downloads ↗</a></p><p class="funding">')
-library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['detector_visuals.pdf','Detector diagrams (PDF)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
+library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Texts, prompts and recorded results retain their source credits.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['detector_visuals.pdf','Detector diagrams (PDF)'],['worksheet.pdf','Participant worksheet (PDF)'],['worksheet.md','Participant worksheet (Markdown)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
 '''
 script = re.sub(r'function library\(\)\{.*?\n(?=function normalize)', lambda _: library, script, flags=re.S)
 for name, version in pdf_versions.items():
@@ -83,7 +83,7 @@ for name, version in versions.items():
                      lambda m: 'href="' + name + '?v=' + version + (m[1] or '') + '"', landing)
 (OUT / 'index.html').write_text(landing)
 
-files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf', 'funding_acknowledgment.md', 'references.bib']
+files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf', 'worksheet.pdf', 'worksheet.md', 'funding_acknowledgment.md', 'references.bib']
 files += [str(p.relative_to(WORKSHOP)) for p in sorted((WORKSHOP / 'fonts').iterdir()) if p.suffix in ['.ttf', '.otf'] or 'LICENSE' in p.name]
 files += ['zeugma_materials/' + kind + '_graph.pdf' for kind in ['short', 'focus', 'full']]
 files += re.findall(r'!\[[^\]]*\]\(([^)]+)\)', public_notes)
@@ -100,12 +100,13 @@ Stergios Chatzikyriakidis, ILSP. CLARIN:EL Summer School, 24 September 2026.
 
 Open index.html for the workshop page, or demo.html for the interactive material.
 The demonstration works offline. External app and source links need internet.
-Each activity includes exact inputs, prompts, saved responses and detailed explanations.
+Each activity supplies its inputs, instructions and explanations. Recorded outputs are identified.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
 The talk and hands-on slides are available as PDFs. The talk, hands-on slides and interactive workshop were updated on 23 September.
 detector_visuals.pdf contains three larger diagrams explaining perplexity,
 conditional probability curvature and supervised classifier fine-tuning.
+worksheet.pdf and worksheet.md provide the current 45-minute participant route.
 The worked_examples.md file contains the complete example explanations and source credits.
 The interactive demonstration includes Northern and Cypriot generations recorded
 on 21 September. Saved analyses retain their original dates and source credits.
