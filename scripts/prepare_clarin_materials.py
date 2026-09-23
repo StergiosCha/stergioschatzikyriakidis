@@ -55,7 +55,7 @@ data['assets']['rhyme_identification_prompts.md'] = re.sub(
     data['assets']['rhyme_identification_prompts.md'])
 data['publicEdition'] = True
 pdf_versions = {name: hashlib.sha256((WORKSHOP / name).read_bytes()).hexdigest()[:12]
-                for name in ['clarin_talk.pdf', 'hands_on_slides.pdf']}
+                for name in ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf']}
 
 script = re.search(r'<script>(.*?)</script>', original, re.S)[1]
 script = re.sub(r'<button[^>]+data-action="(?:preparation|cues)"[^>]*>.*?</button>', '', script)
@@ -63,7 +63,7 @@ script = re.sub(r'^  if\(a===\'(?:preparation|cues)\'\).*?\n', '', script, flags
 script = script.replace('Complete instructor chapter, including', 'Complete worked example, including')
 script = script.replace(' / complete instructor chapter', ' / complete worked example')
 script = script.replace('<p class="funding">', '<p><a class="text-button" href="index.html">Workshop overview, slides and downloads ↗</a></p><p class="funding">')
-library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
+library = '''function library(){modal('The complete material library',`<p>Read, copy or download the complete texts, prompts, saved outputs and explanations. Source credits and unresolved checks are retained.</p><div class="actions"><a class="button secondary small" href="index.html#downloads">Slides and downloads ↗</a></div><label for="asset-filter" class="eyebrow">Find a file</label><input id="asset-filter" class="search-input" placeholder="Prompt, query, graph, response…"><div id="asset-list" class="library-list">${Object.keys(D.assets).sort().map(libraryRow).join('')}</div><details><summary>Download the teaching material</summary>${[['clarin_talk.pdf','Talk slides (PDF)'],['hands_on_slides.pdf','Hands-on slides (PDF)'],['detector_visuals.pdf','Detector diagrams (PDF)'],['worked_examples.md','Complete worked examples (Markdown)'],['workshop_bundle.zip','Offline workshop bundle']].map(([f,label])=>`<p>${external(f,label,'text-button')}</p>`).join('')}</details>`);}
 '''
 script = re.sub(r'function library\(\)\{.*?\n(?=function normalize)', lambda _: library, script, flags=re.S)
 for name, version in pdf_versions.items():
@@ -82,13 +82,15 @@ assert '\u2014' not in result and '/Users/' not in result
 assert not re.search(r'(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{30,})', result)
 (OUT / 'demo.html').write_text(result)
 versions = {**pdf_versions, 'demo.html': hashlib.sha256(result.encode()).hexdigest()[:12]}
+# Version the archive link from its teaching inputs, avoiding a self-hash cycle.
+versions['workshop_bundle.zip'] = hashlib.sha256(''.join(versions.values()).encode()).hexdigest()[:12]
 landing = (OUT / 'index.html').read_text()
 for name, version in versions.items():
     landing = re.sub(r'href="' + re.escape(name) + r'(?:\?v=[^"#]*)?(#[^"]*)?"',
                      lambda m: 'href="' + name + '?v=' + version + (m[1] or '') + '"', landing)
 (OUT / 'index.html').write_text(landing)
 
-files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'funding_acknowledgment.md', 'references.bib']
+files = ['clarin_talk.pdf', 'hands_on_slides.pdf', 'detector_visuals.pdf', 'funding_acknowledgment.md', 'references.bib']
 files += [str(p.relative_to(WORKSHOP)) for p in sorted((WORKSHOP / 'fonts').iterdir()) if p.suffix in ['.ttf', '.otf'] or 'LICENSE' in p.name]
 files += ['zeugma_materials/' + kind + '_graph.pdf' for kind in ['short', 'focus', 'full']]
 files += re.findall(r'!\[[^\]]*\]\(([^)]+)\)', public_notes)
@@ -108,10 +110,12 @@ The demonstration works offline. External app and source links need internet.
 Each activity includes exact inputs, prompts, saved responses and detailed explanations.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on slides are available as PDFs.
+The talk and hands-on slides are available as PDFs. The talk was updated on 23 September.
+detector_visuals.pdf contains three larger diagrams explaining perplexity,
+conditional probability curvature and supervised classifier fine-tuning.
 The worked_examples.md file contains the complete example explanations and source credits.
-The interactive demonstration includes later rehearsal results than the slide decks,
-including Northern and Cypriot generations recorded on 21 September.
+The interactive demonstration includes Northern and Cypriot generations recorded
+on 21 September. Saved analyses retain their original dates and source credits.
 
 Source texts and font licences retain the credits and terms stated with them.
 Funding from Microsoft's LINGUA project supported CoDAG (Computational Dialectal Atlas
@@ -126,7 +130,7 @@ with zipfile.ZipFile(OUT / 'workshop_bundle.zip', 'w', zipfile.ZIP_DEFLATED) as 
     for path in sorted(OUT.rglob('*')):
         if path.is_file() and path.name not in ['workshop_bundle.zip', 'manifest.json']:
             archive.write(path, str(path.relative_to(OUT)))
-manifest = {'edition': '2026-09-21', 'activities': 11, 'dialect_generations': 4,
+manifest = {'edition': '2026-09-23', 'activities': 11, 'dialect_generations': 4,
             'private_checklist_included': False,
             'demo_sha256': hashlib.sha256((OUT / 'demo.html').read_bytes()).hexdigest(),
             'files': {str(p.relative_to(OUT)): p.stat().st_size for p in sorted(OUT.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}
