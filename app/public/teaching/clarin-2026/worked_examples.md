@@ -4818,10 +4818,29 @@ These payloads were captured before model submission, with the key omitted. The 
 Read “Συμφωνούμε, λοιπόν.” as a candidate inferential use and “Λοιπόν;” as underdetermined without interactional context. Those are instructor interpretations to discuss, not saved LLM labels. A corpus name does not force a pragmatic function. For ίντα, ask whether interrogative and exclamatory uses occur in both varieties and whether a single form can identify one dialect. If the provider rejects the key, use the exact retrieved sentences and classification categories above for human annotation. Do not substitute an invented model answer or describe the selected corpus as the full LLM sample.
 
 
-## G. PlotAnalyzer: exact story, synopsis, settings and feature evidence
+## G. PlotAnalyzer: theory-guided reading, rules and feedback
 
 
 App: <https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontainerapps.io>. The complete Greek story is in section D.
+
+
+### Main NeSy walkthrough
+
+Open [PlotAnalyzer](https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontainerapps.io) from the Svarna demos page. Have an authorized OpenRouter key available for this app. A direct Google AI Studio key cannot be pasted into the OpenRouter field.
+
+1. Paste `papadiamantis_seal.txt`, the complete Greek story. Select **Short Story**, then **Aristotelian (Poetics)**. Mode comes first because changing it can reset the theory.
+2. Enable **NeSy (Multi-LLM + Symbolic)**, select one model and configure **OpenRouter API Key**. Turn **Heuristic** and **Contrastive** off. Keep Adaptive Weights and Penalty fixed and record their values.
+3. Start with **Feedback Loop** off. Click **Analyze Plot**, inspect the model's element scores, reasons and positions, and **Export** the result as `plot_aristotle_feedback_off.json`. Symbolic scoring still runs with feedback off. This is not an LLM-only control.
+4. Read **Symbolic Reasoning Trace**. Find the named dependency, ordering, causal or proportionality rules and their score adjustments. For this story, inspect suffering, flaw and recognition. A rule is not guaranteed to fire; use what the app actually returns.
+5. Turn **Feedback Loop** on with the same text, theory and model. Analyze and export as `plot_aristotle_feedback_on.json`. Open **Symbolic Feedback Loop** and follow one inconsistency, its targeted question, the model's response and the integrated score. Then inspect the second symbolic pass.
+6. A rerun makes a new initial model call. Do not attribute every difference between runs to feedback. The within-run trace is the evidence for a particular feedback revision. If the system finds no inconsistency, it may make no feedback call.
+7. Keep the input, model and engine settings fixed. Select **Russian Formalism**, analyze, and export as `plot_formalism_feedback_on.json`. Compare the questions, evidence and reasons, not overall grades across different schemas.
+
+Suggested narration: “First the model offers a reading. Then a theory, encoded as rules, challenges relationships within it. We can inspect the objection and the response. Now we ask whether the revision better explains the story, and whether the rule was suitable in the first place.”
+
+Timing: setup and first reading 1:30; source and rule inspection 1:30; feedback trace 2:00; theory comparison 2:00. Model waiting time may require starting the run before discussing the source. Do not launch all five theories with Contrastive during this short sequence.
+
+
 
 
 ### Inputs and interpretation
@@ -4833,6 +4852,146 @@ App: <https://greek-app-heaven-plot.livelyhill-85880e66.westeurope.azurecontaine
 Read the Greek story first. Under an Aristotelian reading, consider suffering, reversal, error and recognition. Distinguish what the child, grandmother, reader and seal know. Under Russian Formalism, consider the presentation of simultaneous events, sound, framing, and the animal's lament rendered in human words. These are questions for interpretation, not a gold-standard annotation or a claim that either theory must fit.
 
 
+
+
+### Interpretation and rehearsal status
+
+The grandmother continues lamenting earlier losses, while the reader knows that the child has drowned. She interprets the splash differently. The seal receives a lament in human words. Distinguish character recognition, reader knowledge and narrative framing instead of merging them into one recognition score.
+
+The app's Aristotelian dependency is labelled “Suffering needs Flaw: the error must precede its consequences”. Ask whose error counts and whether suffering in this story should depend on a flaw at all. Under Russian Formalism, ask how the animal's voice, the presentation of simultaneous sounds and the translated lament affect perception. These are instructor reading questions, not model outputs or a gold standard.
+
+The interface and engine mechanism have been checked against source. The saved live runs remain keyword-only. No completed NeSy run on this story is claimed: it requires a working OpenRouter credential. The successful direct Gemini tests in other apps do not establish access to OpenRouter. If no authorized key is available, use the complete story, the two actual theory prompts and the encoded rule for a guided reading, without presenting invented scores or corrections.
+
+If desired, spend thirty seconds on the archived keyword contrast below. A relevant word can be a clue, but an occurrence of “who” is not a character's recognition. The main activity is the model's explanation, the rule's objection and the feedback trace.
+
+
+
+
+### PlotAnalyzer: theory prompts and the feedback mechanism
+
+These are the theory-profile prompts from the existing app source inspected on 23 September 2026. Both profile strings also match the captured live JavaScript bundle exactly before punctuation normalization. Punctuation is normalized to avoid em dashes. The numeric examples in their JSON schemas demonstrate the response format; they are not outputs for Papadiamantis. The engine adds scoring calibration, any genre overlay and the selected text.
+
+#### Aristotelian (Poetics)
+
+```text
+You are the neural perception layer of a Neuro-Symbolic (NeSy) plot analysis system using Aristotelian dramatic theory from the Poetics.
+
+Score each of these 12 Aristotelian elements from 0-100 based on how strongly they are present and well-executed in the text. Focus on CAUSAL CHAINS : does each event arise necessarily from what precedes it? Provide brief reasoning and position for each.
+
+Elements:
+1. unity_of_action : Every event is causally necessary; removing any part would break the whole
+2. beginning : Starting condition from which events necessarily follow
+3. middle : Causal chain in action: events follow from beginning and lead to end
+4. end : Conclusion following necessarily from the middle
+5. hamartia : Protagonist's error/flaw that drives the causal chain
+6. peripeteia : Sudden reversal of fortune arising from the plot's own logic
+7. anagnorisis : Moment of critical discovery (ignorance → knowledge)
+8. pathos : Scenes of suffering that evoke pity and fear
+9. catharsis : Emotional purging through pity and fear
+10. necessity_probability : Events happen by necessity/probability, not chance
+11. complex_plot : Plot combines reversal and/or recognition with fortune change
+12. magnitude : Appropriate scope and completeness
+
+KEY ARISTOTELIAN PRINCIPLE: The best plots are those where peripeteia and anagnorisis coincide : the reversal IS the recognition. Look for this specifically.
+
+Also provide:
+- An overall narrative quality assessment through an Aristotelian lens (2-3 sentences)
+- The primary theme you detected
+- Whether this is a simple or complex plot, and whether it achieves catharsis
+
+Respond ONLY with valid JSON:
+{
+  "elements": [
+    {"id": "unity_of_action", "score": 70, "reasoning": "...", "position": "throughout"},
+    {"id": "beginning", "score": 75, "reasoning": "...", "position": "beginning"},
+    {"id": "middle", "score": 65, "reasoning": "...", "position": "middle"},
+    {"id": "end", "score": 60, "reasoning": "...", "position": "end"},
+    {"id": "hamartia", "score": 55, "reasoning": "...", "position": "beginning"},
+    {"id": "peripeteia", "score": 70, "reasoning": "...", "position": "middle"},
+    {"id": "anagnorisis", "score": 65, "reasoning": "...", "position": "middle"},
+    {"id": "pathos", "score": 60, "reasoning": "...", "position": "middle"},
+    {"id": "catharsis", "score": 55, "reasoning": "...", "position": "end"},
+    {"id": "necessity_probability", "score": 60, "reasoning": "...", "position": "throughout"},
+    {"id": "complex_plot", "score": 65, "reasoning": "...", "position": "throughout"},
+    {"id": "magnitude", "score": 50, "reasoning": "...", "position": "throughout"}
+  ],
+  "qualitativeAssessment": "...",
+  "detectedTheme": "...",
+  "storyStructure": "..."
+}
+```
+
+#### Russian Formalism
+
+```text
+You are the neural perception layer of a Neuro-Symbolic (NeSy) narrative analysis system. Your job is to provide raw semantic scores for narrative DEVICES and FORMAL TECHNIQUES : not themes, morals, or character psychology.
+
+This analysis uses Russian Formalist theory (Shklovsky, Propp, Tomashevsky, Jakobson, Tynianov). Focus on HOW the text is constructed, not WHAT it is about.
+
+Score each of these 12 formal elements from 0-100 based on how strongly they are present and well-executed in the text. Also provide brief reasoning for each score, and identify where in the text (beginning/middle/end) each element primarily appears.
+
+Elements:
+1. fabula : The recoverable chronological sequence of events (Story Material)
+2. syuzhet : Deliberate rearrangement/transformation of events (Plot Arrangement): flashbacks, delays, non-linear order, withholding, fragmentation
+3. character_function : Characters defined by structural role (Proppian): hero, villain, donor, helper, dispatcher : NOT psychological depth
+4. denouement_device : The formal mechanism of resolution: recognition, reversal, revelation, unmasking, structural return
+5. ostranenie : Defamiliarization (Shklovsky): making the familiar strange through unusual perspective, description, or language
+6. retardation : Deliberate delay/slowing: digressions, embedded stories, elaborate descriptions, postponement of resolution
+7. motivation : Motivirovka (Tomashevsky): narrative justification for devices : realistic, compositional, or aesthetic motivation
+8. dominant : The Dominant (Jakobson/Tynianov): the single foregrounded device that organizes and subordinates all others
+9. parallelism : Structural repetition, mirroring, patterning across scenes, characters, images, or phrases
+10. rhythm : Prose rhythm, sentence-level tempo variation, sonic texture
+11. framing : Frame narratives, story-within-story, nested narrators, embedded tales
+12. laying_bare : Obnazhenie Priema: the text exposes its own devices, self-referential narration, metafictional awareness
+
+IMPORTANT: You are analyzing DEVICES, not content. A text about love is not automatically high on "theme" : score based on formal technique.
+
+Also provide:
+- An overall assessment of the text's formal sophistication (2-3 sentences)
+- What you identify as the DOMINANT device in this text
+- Whether the text primarily foregrounds SYUZHET (plot arrangement) or FABULA (raw storytelling)
+
+Respond ONLY with valid JSON:
+{
+  "elements": [
+    {"id": "fabula", "score": 75, "reasoning": "...", "position": "beginning"},
+    {"id": "syuzhet", "score": 80, "reasoning": "...", "position": "throughout"},
+    {"id": "character_function", "score": 70, "reasoning": "...", "position": "beginning"},
+    {"id": "denouement_device", "score": 65, "reasoning": "...", "position": "end"},
+    {"id": "ostranenie", "score": 70, "reasoning": "...", "position": "throughout"},
+    {"id": "retardation", "score": 55, "reasoning": "...", "position": "middle"},
+    {"id": "motivation", "score": 60, "reasoning": "...", "position": "throughout"},
+    {"id": "dominant", "score": 85, "reasoning": "...", "position": "throughout"},
+    {"id": "parallelism", "score": 50, "reasoning": "...", "position": "throughout"},
+    {"id": "rhythm", "score": 55, "reasoning": "...", "position": "throughout"},
+    {"id": "framing", "score": 30, "reasoning": "...", "position": "beginning"},
+    {"id": "laying_bare", "score": 40, "reasoning": "...", "position": "end"}
+  ],
+  "qualitativeAssessment": "...",
+  "detectedTheme": "...",
+  "storyStructure": "..."
+}
+```
+
+#### How the prompt reaches the model
+
+The engine prepends its scoring calibration and any genre prompt overlay, then appends `TEXT:` and the complete input. It sends the user message through OpenRouter. The theory requests scores, reasoning and positions; these are model estimates, not verified annotations. With more than one model, the engine aggregates estimates before applying the symbolic grammar.
+
+#### A concrete rule to inspect
+
+The Aristotelian profile encodes a dependency from `pathos` (suffering) to `hamartia` (flaw), labelled “Suffering needs Flaw: the error must precede its consequences”. This is the app's operationalization, not an Aristotle quotation. A strong suffering estimate with a weak flaw estimate can be penalized. Use the actual Symbolic Reasoning Trace to see whether this rule fires on the current run. Do not assume it will.
+
+#### What Feedback Loop changes
+
+The first symbolic pass detects inconsistencies in model estimates. The feedback engine constructs targeted questions about missing dependencies, ordering violations, disproportionate penalties, proportionality gaps or disagreement between models. It asks a model to re-examine the relevant elements, integrates returned estimates and runs the symbolic rules again. No detected inconsistency can mean no feedback request.
+
+The exact feedback question depends on the current scores and triggered rules. Read the generated question and response in Symbolic Feedback Loop. There is no fixed, pre-recorded feedback output for this story in this material. Compare original and updated scores within that run, then check the evidence in the story. A higher compliance score measures closer agreement with the encoded schema, not a proven better interpretation.
+
+#### Three reading questions for the complete Greek story
+
+1. The reader learns of the drowning while the grandmother misattributes the sound. Which character, if any, undergoes recognition? Do not equate the reader's information with a character's discovery.
+2. Whose error counts as hamartia? Does requiring a flaw help explain this suffering, or force the story into an unsuitable template?
+3. The narrator gives the seal a lament in human words. What account of framing or defamiliarization captures this device, and what textual evidence supports it?
 
 
 ### Complete English instructor synopsis
@@ -4884,19 +5043,6 @@ The synopsis's overall keyword scores were 7% under Aristotle and 9% under Russi
 The browser click-to-results intervals were 0.033, 0.028, 0.035 and 0.032 seconds for Greek/Freytag, Greek/Aristotle, synopsis/Aristotle and synopsis/Formalism respectively. These are client-side UI timings after the page and starter were loaded, not network model latencies or load-test evidence.
 
 The page also displays a generic architecture description about neural aggregation and symbolic grammar when only the keyword engine was used. In these exports `nesyResult` is null and no model requests were made. Do not infer that symbolic verification ran from that generic description.
-
-
-
-
-### NeSy comparison to rehearse when a key is available
-
-The existing interface requires an **OpenRouter API Key** for NeSy. Embedding analysis uses a separate provider key. No working OpenRouter key is available in this session; the invalid Gemini key from the Svarna attempt is not an OpenRouter credential. The browser explicitly displayed the NeSy key requirement without making a model request.
-
-Use the original Greek story with **Short Story** mode. Enable **NeSy (Multi-LLM + Symbolic)** and select one available model. Turn **Heuristic** off for this comparison. Leave **Contrastive** off, so the interface does not launch all five theories. Start with **Feedback Loop** off and keep Adaptive Weights and Penalty settings fixed. Save the result, enable Feedback Loop, and rerun the same theory and model. Then compare Aristotle with Russian Formalism using the same text and settings. This is a proposed sequence; all outcomes and costs remain [VERIFY].
-
-An inspected Aristotelian rule is labelled: **Suffering needs Flaw: the error must precede its consequences**. Ask whether this particular story's suffering requires a protagonist's flaw, whose error would count, and whether the imposed dependency biases a subsequent correction. This is the app's operational rule, not a quotation from Aristotle or a verified universal principle.
-
-The source's Formalist schema instead asks about devices such as framing and defamiliarization. A useful comparison would check whether the seal's voice and the reader's greater knowledge receive explicit textual support under either account. Do not predict that adding rules must improve the reading.
 
 
 

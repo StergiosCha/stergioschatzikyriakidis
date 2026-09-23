@@ -7,7 +7,7 @@ The demonstration works offline. External app and source links need internet.
 Each activity includes exact inputs, prompts, saved responses and detailed explanations.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on slides are available as PDFs. The talk was updated on 23 September.
+The talk and hands-on slides are available as PDFs. The talk, hands-on slides and interactive workshop were updated on 23 September.
 detector_visuals.pdf contains three larger diagrams explaining perplexity,
 conditional probability curvature and supervised classifier fine-tuning.
 The worked_examples.md file contains the complete example explanations and source credits.

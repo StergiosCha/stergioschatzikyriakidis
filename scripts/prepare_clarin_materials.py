@@ -79,7 +79,7 @@ result = result.replace('The PDF and Markdown notes in the workshop folder provi
 assert 'preparation_guide' not in result and 'data-action="preparation"' not in result
 assert 'data-action="cues"' not in result and 'US$15' not in result
 assert '\u2014' not in result and '/Users/' not in result
-assert not re.search(r'(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{30,})', result)
+assert not re.search(r'(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{30,}|AQ\.[A-Za-z0-9_-]{30,})', result)
 (OUT / 'demo.html').write_text(result)
 versions = {**pdf_versions, 'demo.html': hashlib.sha256(result.encode()).hexdigest()[:12]}
 # Version the archive link from its teaching inputs, avoiding a self-hash cycle.
@@ -110,7 +110,7 @@ The demonstration works offline. External app and source links need internet.
 Each activity includes exact inputs, prompts, saved responses and detailed explanations.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on slides are available as PDFs. The talk was updated on 23 September.
+The talk and hands-on slides are available as PDFs. The talk, hands-on slides and interactive workshop were updated on 23 September.
 detector_visuals.pdf contains three larger diagrams explaining perplexity,
 conditional probability curvature and supervised classifier fine-tuning.
 The worked_examples.md file contains the complete example explanations and source credits.
