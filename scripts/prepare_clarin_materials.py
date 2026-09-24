@@ -103,7 +103,7 @@ The demonstration works offline. External app and source links need internet.
 Each activity supplies its inputs, instructions and explanations. Recorded outputs are identified.
 Use the existing apps for fresh analyses; their usual access and provider requirements apply.
 
-The talk and hands-on slides are available as PDFs. The talk, hands-on slides and interactive workshop were updated on 23 September.
+The talk, hands-on slides and participant worksheet were recompiled from the current LaTeX sources on 24 September. The interactive workshop retains the material and recorded analyses published on 23 September.
 detector_visuals.pdf contains three larger diagrams explaining perplexity,
 conditional probability curvature and supervised classifier fine-tuning.
 worksheet.pdf and worksheet.md provide the current 45-minute participant route.
@@ -124,7 +124,7 @@ with zipfile.ZipFile(OUT / 'workshop_bundle.zip', 'w', zipfile.ZIP_DEFLATED) as 
     for path in sorted(OUT.rglob('*')):
         if path.is_file() and path.name not in ['workshop_bundle.zip', 'manifest.json']:
             archive.write(path, str(path.relative_to(OUT)))
-manifest = {'edition': '2026-09-23', 'activities': 11, 'dialect_generations': 4,
+manifest = {'edition': '2026-09-24', 'activities': 11, 'dialect_generations': 4,
             'private_checklist_included': False,
             'demo_sha256': hashlib.sha256((OUT / 'demo.html').read_bytes()).hexdigest(),
             'files': {str(p.relative_to(OUT)): p.stat().st_size for p in sorted(OUT.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}
