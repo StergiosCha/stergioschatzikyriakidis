@@ -84,7 +84,8 @@ const BioSection = () => {
             I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
             King&apos;s College, London, after a BA in Greek Philology from Aristotle University, Thessaloniki.
             I have worked at Royal Holloway, CNRS, the Open University of Cyprus and the University of
-            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021.
+            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021. From 2021 to 2026 I was
+            Professor of Computational Linguistics at the University of Crete.
           </p>
         </div>
         <div ref={ctaRef} className="mt-6">
@@ -133,7 +134,8 @@ const BioSection = () => {
             I hold an MSc in Computational Linguistics and Formal Grammar and a PhD in Linguistics, both from
             King&apos;s College, London, after a BA in Greek Philology from Aristotle University, Thessaloniki.
             I have worked at Royal Holloway, CNRS, the Open University of Cyprus and the University of
-            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021.
+            Gothenburg, where I was Associate Director of CLASP from 2016 to 2021. From 2021 to 2026 I was
+            Professor of Computational Linguistics at the University of Crete.
           </p>
           <div ref={ctaRef} className="flex flex-col gap-3 items-start mt-10">
             <a href="https://scholar.google.com/citations?user=dAYpE3MAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="btn-primary">
