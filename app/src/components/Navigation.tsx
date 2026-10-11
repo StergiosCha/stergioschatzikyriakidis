@@ -168,9 +168,9 @@ const Navigation = () => {
             {/* Footer */}
             <div className="absolute bottom-0 left-0 right-0 px-5 py-4 border-t border-ink/10">
               <p className="text-xs text-mut leading-relaxed">
-                Professor of Computational Linguistics
+                Director of Research (Researcher A)
                 <br />
-                University of Crete
+                ILSP, Athena Research Centre
               </p>
             </div>
           </div>

@@ -7,6 +7,12 @@ export interface NewsItem {
 
 export const news: NewsItem[] = [
   {
+    date: "2026-09",
+    text: "Appointed Director of Research (Researcher A) at the Institute for Language and Speech Processing (ILSP), Athena Research Centre, Athens.",
+    link: "https://www.athenarc.gr/",
+    type: "general"
+  },
+  {
     date: "2026-07",
     text: "New preprint on arXiv: Svarna, an open corpus workbench for Modern Greek — 507M+ words and ~29M sentences across five registers, free and open source.",
     link: "https://arxiv.org/abs/2607.00970",

@@ -46,25 +46,25 @@ const ContactSection = () => {
         <h2 ref={headlineRef} className="text-paper mb-6">Contact</h2>
         <div ref={bodyRef}>
           <p className="text-paper/80 leading-relaxed text-base">
-            Department of Philology
+            Institute for Language and Speech Processing
             <br />
-            University of Crete
+            Athena Research Centre
             <br />
-            74100 Gallos, Rethymno
+            Athens
             <br />
             Greece
           </p>
         </div>
         <a
           ref={emailRef}
-          href="mailto:schatzikyriakidis@athenarc.gr"
+          href="mailto:s.chatzikyriakidis@athenarc.gr"
           className="text-paper hover:text-terra transition-colors mt-6 text-base"
         >
-          schatzikyriakidis@athenarc.gr
+          s.chatzikyriakidis@athenarc.gr
         </a>
         <div ref={ctaRef} className="mt-6">
           <a
-            href="mailto:schatzikyriakidis@athenarc.gr"
+            href="mailto:s.chatzikyriakidis@athenarc.gr"
             className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors"
           >
             <Mail size={18} />
@@ -87,20 +87,20 @@ const ContactSection = () => {
         <h2 ref={headlineRef} className="absolute text-paper" style={{ left: '8vw', top: '18vh' }}>Contact</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '8vw', top: '34vh', width: '40vw' }}>
           <p className="text-paper/80 leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            Department of Philology
+            Institute for Language and Speech Processing
             <br />
-            University of Crete
+            Athena Research Centre
             <br />
-            74100 Gallos, Rethymno
+            Athens
             <br />
             Greece
           </p>
         </div>
-        <a ref={emailRef} href="mailto:schatzikyriakidis@athenarc.gr" className="absolute text-paper hover:text-terra transition-colors" style={{ left: '8vw', top: '54vh', fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-          schatzikyriakidis@athenarc.gr
+        <a ref={emailRef} href="mailto:s.chatzikyriakidis@athenarc.gr" className="absolute text-paper hover:text-terra transition-colors" style={{ left: '8vw', top: '54vh', fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
+          s.chatzikyriakidis@athenarc.gr
         </a>
         <div ref={ctaRef} className="absolute flex gap-4" style={{ left: '8vw', top: '64vh' }}>
-          <a href="mailto:schatzikyriakidis@athenarc.gr" className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors">
+          <a href="mailto:s.chatzikyriakidis@athenarc.gr" className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white rounded-lg hover:bg-terradark transition-colors">
             <Mail size={18} />
             Send email
           </a>

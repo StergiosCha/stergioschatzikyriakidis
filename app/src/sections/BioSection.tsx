@@ -74,8 +74,8 @@ const BioSection = () => {
         <h2 ref={headlineRef} className="text-ink mt-2 mb-6">Background</h2>
         <div ref={bodyRef}>
           <p className="text-ink leading-relaxed text-base">
-            I am a Professor of Computational Linguistics at the University of Crete, where I direct the
-            Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
+            I am Director of Research (Researcher A) at the Institute for Language and Speech Processing (ILSP),
+            Athena Research Centre, Athens, and I lead SVARNA, an independent lab for neuro-symbolic NLP. I am also Head of Research at MuVeS AI and
             founder of SimasiaAI. My work lies at the intersection of NLP, formal semantics and type theory,
             the reasoning and evaluation of large language models, computational dialectology and low-resource
             varieties.
@@ -123,8 +123,8 @@ const BioSection = () => {
         <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '46vw', top: '20vh' }}>Background</h2>
         <div ref={bodyRef} className="absolute" style={{ left: '46vw', top: '34vh', width: '44vw' }}>
           <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I am a Professor of Computational Linguistics at the University of Crete, where I direct the
-            Computational Linguistics and Language Technology Lab. I am also Head of Research at MuVeS AI and
+            I am Director of Research (Researcher A) at the Institute for Language and Speech Processing (ILSP),
+            Athena Research Centre, Athens, and I lead SVARNA, an independent lab for neuro-symbolic NLP. I am also Head of Research at MuVeS AI and
             founder of SimasiaAI. My work lies at the intersection of NLP, formal semantics and type theory,
             the reasoning and evaluation of large language models, computational dialectology and low-resource
             varieties.

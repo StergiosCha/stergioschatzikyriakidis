@@ -137,7 +137,7 @@ const HeroSection = () => {
           </h1>
         </div>
         <p ref={subtitleRef} className="text-mut text-sm leading-relaxed mt-4">
-          Professor of Computational Linguistics, University of Crete
+          Director of Research (Researcher A), Institute for Language and Speech Processing, Athena Research Centre
           <br />
           Associate Researcher, Centre for Linguistic Theory and Studies in Probability (CLASP)
         </p>
@@ -224,7 +224,7 @@ const HeroSection = () => {
             lineHeight: '1.6',
           }}
         >
-          Professor of Computational Linguistics, University of Crete
+          Director of Research (Researcher A), Institute for Language and Speech Processing, Athena Research Centre
           <br />
           Associate Researcher, Centre for Linguistic Theory and Studies in Probability (CLASP)
         </p>
