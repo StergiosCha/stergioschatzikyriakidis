@@ -54,6 +54,7 @@ const base = {
   'software.p2.a': 'These include the', 'software.p2.b': 'portal, AI research assistants, classical philology platforms, text editors with grammatical analysis, linguistic distance calculators, and comprehensive datasets for Greek dialectology and natural language inference.',
   'software.cat.application': 'software systems', 'software.cat.dataset': 'datasets', 'software.cat.code': 'code libraries', 'software.cat.model': 'fine-tuned models',
   'software.explore': 'Explore tools', 'software.datasets': 'View datasets', 'software.alt': 'Software tools and platforms collage',
+  'software.map.aria': 'Map of software, apps, datasets and models by category', 'software.map.all': 'all', 'software.map.total': 'tools', 'software.map.open': 'Open the app', 'software.map.github': 'Code on GitHub', 'software.map.live': 'live',
   // novelist
   'novel.kicker': 'beyond academia', 'novel.kickerB': 'fiction', 'novel.title': 'Novelist',
   'novel.text': 'Beyond academia, I write fiction. I have published four novels in Greek and three short story collections (one in English).',

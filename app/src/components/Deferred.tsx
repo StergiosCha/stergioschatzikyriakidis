@@ -52,3 +52,4 @@ export const LazyLingEmbedLab = lazy(() => import('./viz/LingEmbedLab'));
 export const LazyDialectBars = lazy(() => import('./viz/DialectBars'));
 export const LazyResearchNetwork = lazy(() => import('./ResearchNetwork'));
 export const LazyYearChart = lazy(() => import('./viz/YearChart'));
+export const LazyToolMap = lazy(() => import('./viz/ToolMap'));

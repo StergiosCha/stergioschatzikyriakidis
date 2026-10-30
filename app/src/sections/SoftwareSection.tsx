@@ -3,6 +3,7 @@ import { useT } from '../i18n';
 import SectionHead from '../components/SectionHead';
 import { goTo } from '../components/Navigation';
 import { tools } from '../data/tools';
+import Deferred, { LazyToolMap } from '../components/Deferred';
 
 const CAT = [
   { id: 'application', color: 'var(--neu)' },
@@ -40,7 +41,7 @@ const SoftwareSection = () => {
         </div>
       </div>
       <div className="panel p-3 reveal">
-        <img src="/images/software-collage.jpg" alt={t('software.alt')} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', borderRadius: 10 }} />
+        <Deferred label="tool map" minHeight={640}><LazyToolMap /></Deferred>
       </div>
     </div>
   </section>
