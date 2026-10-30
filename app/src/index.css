@@ -293,3 +293,8 @@ img { max-width: 100%; }
 .tm-node { cursor: pointer; transition: opacity .2s; outline: none; }
 .tm-node:focus-visible circle:last-of-type { stroke: var(--neu); stroke-width: 3; }
 @media (prefers-reduced-motion: no-preference) { .tm-node circle { transition: r .15s; } }
+
+/* Zeugma figure */
+.zf-flow { stroke-dasharray: 4 4; }
+@media (prefers-reduced-motion: no-preference) { .zf-flow { animation: zfflow 1.2s linear infinite; } }
+@keyframes zfflow { to { stroke-dashoffset: -16; } }

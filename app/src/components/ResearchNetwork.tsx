@@ -11,13 +11,25 @@ const METH: Record<string, { label: string; color: string }> = {
   computational: { label: 'net.computational', color: '#38d9f5' },
 };
 const short = (l: string) => l.replace(/ [&κ][αι]? .*$/, '').replace(/ & .*$/, '').replace(/,.*$/, '').replace(/ (for|για) .*$/, '');
+const SHORT: Record<string, { en: string; el: string }> = {
+  'dl-nlu': { en: 'Deep learning & NLU', el: 'Βαθιά μάθηση & ΚΦΓ' },
+  'greek-nlp': { en: 'Greek & dialect NLP', el: 'ΕΦΓ για ελληνικά & διαλέκτους' },
+  'arabic': { en: 'Arabic dialects & distance', el: 'Αραβικές διάλεκτοι & απόσταση' },
+  'rag': { en: 'RAG & knowledge LLMs', el: 'RAG & LLM με γνώση' },
+  'type-theory': { en: 'Type theory & proof assistants', el: 'Θεωρία τύπων & βοηθοί απόδειξης' },
+  'bayesian': { en: 'Probabilistic semantics', el: 'Πιθανοκρατική σημασιολογία' },
+  'digital-humanities': { en: 'AI for digital humanities', el: 'ΤΝ για ψηφιακές ανθρωπιστικές επιστήμες' },
+  'dialogue': { en: 'Dialogue modelling', el: 'Μοντελοποίηση διαλόγου' },
+  'formal-syntax': { en: 'Formal syntax of Greek', el: 'Τυπική σύνταξη της ελληνικής' },
+  'music': { en: 'Music & language', el: 'Μουσική & γλώσσα' },
+};
 const clean = (t: string) => t.replace(/\\'/g, "'");
 
 /** Research areas as a network. Positions: classical MDS (LingEmbed Jacobi solver) of hop distances along the
  *  area-to-area connections; software nodes sit at the centroid of the areas that list them. Each listed
  *  publication is resolved by title against the site's publication list. */
 export default function ResearchNetwork() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [sel, setSel] = useState<string>(() => (window as unknown as { __pendingArea?: string }).__pendingArea ?? 'type-theory');
   useEffect(() => {
     const on = (e: Event) => { const id = (e as CustomEvent).detail; if (researchAreas.some(a => a.id === id)) setSel(id); };
@@ -25,6 +37,7 @@ export default function ResearchNetwork() {
     return () => window.removeEventListener('selectResearchArea', on);
   }, []);
   const L = (id: string) => t(`area.${id}.label`);
+  const lbl = (id: string) => SHORT[id]?.[lang === 'el' ? 'el' : 'en'] ?? short(L(id));
   const m = useMemo(() => {
     const idx: Record<string, number> = Object.fromEntries(researchAreas.map((a, i) => [a.id, i]));
     const adj: number[][] = researchAreas.map(() => []);
@@ -34,7 +47,10 @@ export default function ResearchNetwork() {
       if (!adj[i].includes(j)) { adj[i].push(j); adj[j].push(i); edges.push([Math.min(i, j), Math.max(i, j)]); }
     }));
     const E = classicalMDS(bfsDistances(adj));
-    const P = fit2D(E.X, { x: 150, y: 96, w: 800, h: 430 });
+    const P0 = fit2D(E.X, { x: 150, y: 110, w: 800, h: 420 });
+    const xs = P0.map(p => p[0]), ys = P0.map(p => p[1]);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const P: [number, number][] = P0.map(([x, y]) => [130 + ((x - x0) / ((x1 - x0) || 1)) * 840, 120 + ((y - y0) / ((y1 - y0) || 1)) * 400]);
     const cx = P.reduce((s, p) => s + p[0], 0) / P.length, cy = P.reduce((s, p) => s + p[1], 0) / P.length;
     const resolved = researchAreas.map(a => a.publications.map(p => ({ ref: p, pub: resolveTitle(p.title) })));
     const sw: Record<string, number[]> = {};
@@ -45,9 +61,9 @@ export default function ResearchNetwork() {
       const jit = ((hashStr(name) % 1000) / 1000 - 0.5) * 1.6;
       const ox = dx * Math.cos(jit) - dy * Math.sin(jit), oy = dx * Math.sin(jit) + dy * Math.cos(jit);
       const off = areas.length > 1 ? 44 : 68;
-      return { name, areas, x: mx + ox * off, y: my + oy * off };
+      return { name, areas, x: mx + ox * off, y: my + oy * off, ax: mx };
     });
-    return { idx, P, edges, resolved, soft, E };
+    return { idx, P, edges, resolved, soft, E, cy };
   }, []);
 
   const i = m.idx[sel];
@@ -71,7 +87,7 @@ export default function ResearchNetwork() {
           {m.soft.map(s => (
             <g key={s.name} opacity={s.areas.includes(i) ? 1 : 0.4}>
               <rect x={s.x - 4} y={s.y - 4} width={8} height={8} rx={2} transform={`rotate(45 ${s.x} ${s.y})`} fill="#38d9f5" />
-              <text x={s.x} y={s.y + 16} textAnchor="middle" className="mono-t" fontSize={11} fill="#8fdcef">{s.name}</text>
+              {s.areas.includes(i) && <text x={s.x + (s.x < s.ax ? -11 : 11)} y={s.y + 4} textAnchor={s.x < s.ax ? 'end' : 'start'} className="mono-t" fontSize={11} fill="#8fdcef" style={{ paintOrder: 'stroke', stroke: '#070b18', strokeWidth: 4 }}>{s.name}</text>}
             </g>
           ))}
           {researchAreas.map((a, k) => {
@@ -85,7 +101,7 @@ export default function ResearchNetwork() {
                 <circle cx={x} cy={y} r={r + 9} fill={on ? `${meta.color}22` : 'transparent'} />
                 <circle cx={x} cy={y} r={r} fill={`${meta.color}33`} stroke={on ? '#fff' : meta.color} strokeWidth={on ? 2.4 : 1.6} />
                 <text x={x} y={y + 4} textAnchor="middle" className="mono-t" fontSize={12.5} fontWeight={600} fill="#e7ecf7">{a.publications.length}</text>
-                <text x={x} y={y - r - 8} textAnchor="middle" fontSize={14} fontWeight={600} fill="#e7ecf7">{short(L(a.id))}</text>
+                <text x={x} y={y < m.cy ? y - r - 9 : y + r + 20} textAnchor="middle" fontSize={14} fontWeight={600} fill="#e7ecf7" style={{ paintOrder: 'stroke', stroke: '#070b18', strokeWidth: 5 }}>{lbl(a.id)}</text>
               </g>
             );
           })}
@@ -120,7 +136,7 @@ export default function ResearchNetwork() {
         )}
         <p className="eyebrow mt-4" style={{ marginBottom: 6 }}>{t('net.connected')}</p>
         <div className="flex flex-wrap gap-1.5">
-          {area.connections.map(c => { const a = researchAreas.find(x => x.id === c); return a ? <button key={c} className="chip" onClick={() => setSel(c)}>{short(L(a.id))}</button> : null; })}
+          {area.connections.map(c => { const a = researchAreas.find(x => x.id === c); return a ? <button key={c} className="chip" onClick={() => setSel(c)}>{lbl(a.id)}</button> : null; })}
         </div>
         </div>
       </div>

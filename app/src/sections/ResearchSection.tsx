@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { useT } from '../i18n';
 import SectionHead from '../components/SectionHead';
-import Deferred, { LazyResearchNetwork } from '../components/Deferred';
+import Deferred, { LazyResearchNetwork, LazyZeugma } from '../components/Deferred';
 import { goTo } from '../components/Navigation';
 
 const ResearchSection = () => {
@@ -24,7 +24,7 @@ const ResearchSection = () => {
         </a>
       </div>
       <figure className="panel p-3 reveal" style={{ margin: 0 }}>
-        <img src="/images/research-zeugma.png" alt={t('research.figAlt')} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', borderRadius: 10, background: '#fff' }} />
+        <Deferred label="Zeugma" minHeight={700}><LazyZeugma /></Deferred>
         <figcaption className="mono text-[11px] muted mt-2">{t('research.fig')}</figcaption>
       </figure>
     </div>
