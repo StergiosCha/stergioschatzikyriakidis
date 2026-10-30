@@ -16,7 +16,7 @@ const SoftwareSection = () => {
   const { t } = useT();
   return (
   <section id="software" className="block" aria-labelledby="software-title">
-    <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+    <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 items-center">
       <div>
         <SectionHead index="04" kicker={t('software.kicker')} id="software-title" title={<>{t('software.title.a')}<br />{t('software.title.b')}</>} />
         <div className="prose-le reveal">
@@ -41,7 +41,7 @@ const SoftwareSection = () => {
         </div>
       </div>
       <div className="panel p-3 reveal">
-        <Deferred label="tool map" minHeight={640}><LazyToolMap /></Deferred>
+        <Deferred label="tool map" minHeight={820}><LazyToolMap /></Deferred>
       </div>
     </div>
   </section>

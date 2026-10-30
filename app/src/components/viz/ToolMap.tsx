@@ -10,7 +10,7 @@ const CATS: { id: Cat; color: string }[] = [
   { id: 'code', color: 'var(--emb)' },
   { id: 'model', color: 'var(--neg)' },
 ];
-const W = 520, C = W / 2, RINGS = [118, 168, 214], MIN_SPAN = 46, GAP = 8;
+const W = 720, C = W / 2, R_NODE = 200, R_HUB = 78, R_BAND = 184, MIN_SPAN = 46, GAP = 7;
 
 const firstSentence = (s: string) => {
   const cut = s.indexOf('. ');
@@ -35,21 +35,25 @@ export default function ToolMap() {
     const restN = counts.reduce((s, n, i) => s + (small[i] ? 0 : n), 0);
     const spans = counts.map((n, i) => small[i] ? MIN_SPAN : (360 - fixed) * n / restN);
     let start = 0;
-    const sectors = CATS.map((c, i) => { const s = { ...c, n: counts[i], a0: start, a1: start + spans[i] }; start += spans[i]; return s; });
-    const nodes: { tool: Tool; idx: number; x: number; y: number; color: string; cat: Cat; hub: number[] }[] = [];
+    const sectors = CATS.map((c, i) => { const s = { ...c, n: counts[i], a0: start, a1: start + spans[i], mid: start + spans[i] / 2 }; start += spans[i]; return s; });
+    const nodes: { tool: Tool; idx: number; ang: number; x: number; y: number; color: string; cat: Cat; path: string }[] = [];
     sectors.forEach(sec => {
       const list = tools.map((tool, idx) => ({ tool, idx })).filter(o => o.tool.category === sec.id);
-      const k = list.length > 9 ? 3 : list.length > 3 ? 2 : 1;
-      const lo = sec.a0 + GAP, hi = sec.a1 - GAP;
-      const hub = pol(64, (sec.a0 + sec.a1) / 2);
+      const lo = sec.a0 + GAP, hi = sec.a1 - GAP, step = (hi - lo) / list.length;
+      const [hx, hy] = pol(R_HUB, sec.mid);
       list.forEach((o, j) => {
-        const ring = j % k, perRing = Math.ceil(list.length / k), pos = Math.floor(j / k);
-        const frac = perRing > 1 ? (pos + (ring % 2 ? 0.5 : 0)) / (perRing - (ring % 2 ? 0 : 1) || 1) : 0.5;
-        const [x, y] = pol(RINGS[ring + (k === 1 ? 1 : 0)], lo + Math.min(1, frac) * (hi - lo));
-        nodes.push({ ...o, x, y, color: sec.color, cat: sec.id, hub });
+        const ang = lo + (j + 0.5) * step;
+        const [x, y] = pol(R_NODE, ang);
+        const [qx, qy] = pol((R_HUB + R_NODE) / 2 + 10, ang);
+        nodes.push({ ...o, ang, x, y, color: sec.color, cat: sec.id, path: `M${hx.toFixed(1)},${hy.toFixed(1)} Q${qx.toFixed(1)},${qy.toFixed(1)} ${x.toFixed(1)},${y.toFixed(1)}` });
       });
     });
-    return { sectors, nodes };
+    const arc = (r0: number, r1: number, d0: number, d1: number) => {
+      const [x0, y0] = pol(r1, d0), [x1, y1] = pol(r1, d1), [x2, y2] = pol(r0, d1), [x3, y3] = pol(r0, d0);
+      const large = d1 - d0 > 180 ? 1 : 0;
+      return `M${x0},${y0} A${r1},${r1} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${large} 0 ${x3},${y3} Z`;
+    };
+    return { sectors, nodes, arc };
   }, []);
 
   const cur = tools[active];
@@ -67,41 +71,48 @@ export default function ToolMap() {
       </div>
       <svg viewBox={`0 0 ${W} ${W}`} role="img" aria-label={t('software.map.aria')} style={{ width: '100%', height: 'auto', display: 'block' }}>
         <defs>
-          <radialGradient id="tmGlow"><stop offset="0" stopColor="rgba(167,139,250,.22)" /><stop offset="1" stopColor="rgba(167,139,250,0)" /></radialGradient>
+          <radialGradient id="tmGlow"><stop offset="0" stopColor="rgba(167,139,250,.20)" /><stop offset=".6" stopColor="rgba(56,217,245,.05)" /><stop offset="1" stopColor="rgba(56,217,245,0)" /></radialGradient>
+          <filter id="tmSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" /></filter>
         </defs>
-        <circle cx={C} cy={C} r={W / 2 - 6} fill="url(#tmGlow)" />
-        {RINGS.map(r => <circle key={r} cx={C} cy={C} r={r} fill="none" stroke="var(--line)" strokeDasharray="2 6" />)}
+        <circle cx={C} cy={C} r={R_NODE + 30} fill="url(#tmGlow)" />
+        <circle cx={C} cy={C} r={R_HUB} fill="none" stroke="var(--line)" strokeDasharray="2 5" />
+        <circle cx={C} cy={C} r={R_NODE} fill="none" stroke="var(--line)" strokeOpacity={0.6} />
         {layout.sectors.map(s => {
-          const [x0, y0] = pol(W / 2 - 10, s.a0);
-          return <line key={s.id} x1={C} y1={C} x2={x0} y2={y0} stroke="var(--line)" strokeWidth={1} />;
+          const dim = cat && s.id !== cat;
+          return <path key={'b' + s.id} d={layout.arc(R_BAND - 5, R_BAND, s.a0 + GAP / 2, s.a1 - GAP / 2)} fill={s.color} opacity={dim ? 0.12 : 0.7} />;
         })}
         {layout.nodes.map(n => {
-          const dim = cat && n.cat !== cat;
-          return <line key={'e' + n.idx} x1={n.hub[0]} y1={n.hub[1]} x2={n.x} y2={n.y} stroke={n.color} strokeOpacity={dim ? 0.05 : n.idx === active ? 0.9 : 0.22} strokeWidth={n.idx === active ? 2 : 1} />;
+          const dim = cat && n.cat !== cat, on = n.idx === active;
+          return <path key={'e' + n.idx} d={n.path} fill="none" stroke={n.color} strokeOpacity={dim ? 0.04 : on ? 0.95 : 0.28} strokeWidth={on ? 2.2 : 1.1} />;
         })}
         {layout.sectors.map(s => {
-          const [hx, hy] = pol(64, (s.a0 + s.a1) / 2);
+          const [hx, hy] = pol(R_HUB, s.mid);
           const dim = cat && s.id !== cat;
           return (
-            <g key={'h' + s.id} opacity={dim ? 0.25 : 1}>
-              <circle cx={hx} cy={hy} r={15} fill="var(--bg2)" stroke={s.color} strokeWidth={2} />
-              <text x={hx} y={hy + 4} textAnchor="middle" className="mono" fontSize={11} fill={s.color}>{s.n}</text>
+            <g key={'h' + s.id} opacity={dim ? 0.25 : 1} style={{ cursor: 'pointer' }} onClick={() => setCat(cat === s.id ? null : s.id)}>
+              <circle cx={hx} cy={hy} r={20} fill={s.color} opacity={0.25} filter="url(#tmSoft)" />
+              <circle cx={hx} cy={hy} r={16} fill="var(--bg2)" stroke={s.color} strokeWidth={2} />
+              <text x={hx} y={hy + 4.5} textAnchor="middle" className="mono" fontSize={13} fontWeight={600} fill={s.color}>{s.n}</text>
             </g>
           );
         })}
-        <circle cx={C} cy={C} r={30} fill="var(--panel)" stroke="var(--line2)" />
-        <text x={C} y={C + 2} textAnchor="middle" fontSize={20} fontWeight={600} fill="var(--text)" style={{ fontFamily: 'var(--serif)' }}>{tools.length}</text>
-        <text x={C} y={C + 17} textAnchor="middle" fontSize={9} className="mono" fill="var(--muted)">{t('software.map.total')}</text>
+        <circle cx={C} cy={C} r={38} fill="var(--panel)" stroke="var(--line2)" />
+        <text x={C} y={C + 4} textAnchor="middle" fontSize={26} fontWeight={600} fill="var(--text)" style={{ fontFamily: 'var(--serif)' }}>{tools.length}</text>
+        <text x={C} y={C + 21} textAnchor="middle" fontSize={10} className="mono" fill="var(--muted)" letterSpacing="1.5">{t('software.map.total')}</text>
         {layout.nodes.map(n => {
           const dim = cat && n.cat !== cat, on = n.idx === active, live = !!n.tool.platformUrl;
+          const left = n.ang > 180, rot = left ? n.ang + 90 : n.ang - 90;
+          const name = n.tool.name.length > 24 && !on ? n.tool.name.slice(0, 23) + '…' : n.tool.name;
           return (
             <g key={'n' + n.idx} className="tm-node" tabIndex={0} role="button" aria-label={n.tool.name}
-               opacity={dim ? 0.18 : 1} transform={`translate(${n.x.toFixed(1)},${n.y.toFixed(1)})`}
+               opacity={dim ? 0.15 : 1} transform={`translate(${n.x.toFixed(1)},${n.y.toFixed(1)})`}
                onMouseEnter={() => setActive(n.idx)} onFocus={() => setActive(n.idx)} onClick={() => open(n.tool)}
                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(n.tool); } }}>
-              {live && <circle r={on ? 15 : 12.5} fill="none" stroke={n.color} strokeOpacity={on ? 0.9 : 0.45} strokeWidth={1.4} />}
-              <circle r={on ? 9.5 : 7.5} fill={n.color} fillOpacity={on ? 1 : 0.85} stroke="var(--bg)" strokeWidth={2} />
-              {on && <text y={-22} textAnchor="middle" fontSize={11.5} fontWeight={600} fill="var(--text)" style={{ paintOrder: 'stroke', stroke: 'var(--bg)', strokeWidth: 4 }}>{n.tool.name.length > 28 ? n.tool.name.slice(0, 27) + '…' : n.tool.name}</text>}
+              {on && <circle r={18} fill={n.color} opacity={0.35} filter="url(#tmSoft)" />}
+              {live && <circle r={on ? 11.5 : 9.5} fill="none" stroke={n.color} strokeOpacity={on ? 1 : 0.55} strokeWidth={1.3} />}
+              <circle r={on ? 7 : 5.2} fill={n.color} stroke="var(--bg)" strokeWidth={1.5} />
+              <text transform={`rotate(${rot.toFixed(1)})`} x={left ? -15 : 15} y={3.6} textAnchor={left ? 'end' : 'start'}
+                    fontSize={on ? 12.5 : 11} fontWeight={on ? 600 : 400} fill={on ? 'var(--text)' : 'var(--soft)'}>{name}</text>
             </g>
           );
         })}

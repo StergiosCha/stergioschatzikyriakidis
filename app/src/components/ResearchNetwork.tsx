@@ -34,7 +34,7 @@ export default function ResearchNetwork() {
       if (!adj[i].includes(j)) { adj[i].push(j); adj[j].push(i); edges.push([Math.min(i, j), Math.max(i, j)]); }
     }));
     const E = classicalMDS(bfsDistances(adj));
-    const P = fit2D(E.X, { x: 170, y: 80, w: 560, h: 300 });
+    const P = fit2D(E.X, { x: 150, y: 96, w: 800, h: 430 });
     const cx = P.reduce((s, p) => s + p[0], 0) / P.length, cy = P.reduce((s, p) => s + p[1], 0) / P.length;
     const resolved = researchAreas.map(a => a.publications.map(p => ({ ref: p, pub: resolveTitle(p.title) })));
     const sw: Record<string, number[]> = {};
@@ -44,7 +44,7 @@ export default function ResearchNetwork() {
       let dx = mx - cx, dy = my - cy; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
       const jit = ((hashStr(name) % 1000) / 1000 - 0.5) * 1.6;
       const ox = dx * Math.cos(jit) - dy * Math.sin(jit), oy = dx * Math.sin(jit) + dy * Math.cos(jit);
-      const off = areas.length > 1 ? 34 : 52;
+      const off = areas.length > 1 ? 44 : 68;
       return { name, areas, x: mx + ox * off, y: my + oy * off };
     });
     return { idx, P, edges, resolved, soft, E };
@@ -56,11 +56,11 @@ export default function ResearchNetwork() {
   const res = m.resolved[i];
 
   return (
-    <div className="grid lg:grid-cols-[1.45fr_1fr] gap-4">
+    <div className="grid gap-4">
       <div className="panel p-2">
-        <svg className="viz" viewBox="0 0 900 440" role="group" aria-label={t('net.aria')}>
-          <text x={16} y={24} className="mono-t" fontSize={11} letterSpacing="1.5" fill="#a78bfa">{t('net.title')}</text>
-          <text x={16} y={40} fontSize={11} fill="#9aa5c4">{t('net.sub', { a: researchAreas.length, c: m.edges.length, s: m.soft.length })}</text>
+        <svg className="viz" viewBox="0 0 1100 600" role="group" aria-label={t('net.aria')}>
+          <text x={20} y={28} className="mono-t" fontSize={12.5} letterSpacing="1.5" fill="#a78bfa">{t('net.title')}</text>
+          <text x={20} y={47} fontSize={12.5} fill="#9aa5c4">{t('net.sub', { a: researchAreas.length, c: m.edges.length, s: m.soft.length })}</text>
           {m.soft.map(s => s.areas.map(ai => (
             <line key={s.name + ai} x1={s.x} y1={s.y} x2={m.P[ai][0]} y2={m.P[ai][1]} stroke="#38d9f5" strokeOpacity={s.areas.includes(i) ? 0.45 : 0.08} strokeDasharray="2 4" />
           )))}
@@ -71,12 +71,12 @@ export default function ResearchNetwork() {
           {m.soft.map(s => (
             <g key={s.name} opacity={s.areas.includes(i) ? 1 : 0.4}>
               <rect x={s.x - 4} y={s.y - 4} width={8} height={8} rx={2} transform={`rotate(45 ${s.x} ${s.y})`} fill="#38d9f5" />
-              <text x={s.x} y={s.y + 16} textAnchor="middle" className="mono-t" fontSize={9.5} fill="#8fdcef">{s.name}</text>
+              <text x={s.x} y={s.y + 16} textAnchor="middle" className="mono-t" fontSize={11} fill="#8fdcef">{s.name}</text>
             </g>
           ))}
           {researchAreas.map((a, k) => {
             const [x, y] = m.P[k]; const meta = METH[a.methodology];
-            const r = 8 + 4.4 * Math.sqrt(a.publications.length);
+            const r = 10 + 5.2 * Math.sqrt(a.publications.length);
             const on = k === i, near = neigh.has(a.id);
             return (
               <g key={a.id} className="seg-btn" role="button" tabIndex={0} aria-pressed={on} aria-label={t('net.nodeAria', { label: L(a.id), n: a.publications.length })}
@@ -84,8 +84,8 @@ export default function ResearchNetwork() {
                 opacity={on || near ? 1 : 0.55}>
                 <circle cx={x} cy={y} r={r + 9} fill={on ? `${meta.color}22` : 'transparent'} />
                 <circle cx={x} cy={y} r={r} fill={`${meta.color}33`} stroke={on ? '#fff' : meta.color} strokeWidth={on ? 2.4 : 1.6} />
-                <text x={x} y={y + 4} textAnchor="middle" className="mono-t" fontSize={11} fontWeight={600} fill="#e7ecf7">{a.publications.length}</text>
-                <text x={x} y={y - r - 8} textAnchor="middle" fontSize={12} fontWeight={600} fill="#e7ecf7">{short(L(a.id))}</text>
+                <text x={x} y={y + 4} textAnchor="middle" className="mono-t" fontSize={12.5} fontWeight={600} fill="#e7ecf7">{a.publications.length}</text>
+                <text x={x} y={y - r - 8} textAnchor="middle" fontSize={14} fontWeight={600} fill="#e7ecf7">{short(L(a.id))}</text>
               </g>
             );
           })}
@@ -95,7 +95,8 @@ export default function ResearchNetwork() {
           <span><i className="dot" style={{ background: '#38d9f5', borderRadius: 2 }} />{t('net.software')}</span>
         </div>
       </div>
-      <div className="info-card" aria-live="polite" style={{ borderTop: `3px solid ${METH[area.methodology].color}` }}>
+      <div className="info-card lg:grid lg:grid-cols-[1.35fr_1fr] lg:gap-10" aria-live="polite" style={{ borderTop: `3px solid ${METH[area.methodology].color}` }}>
+        <div>
         <h5>{t(METH[area.methodology].label)}</h5>
         <h3 className="h3" style={{ fontSize: '1.2rem' }}>{L(area.id)}</h3>
         <p className="soft text-[14px] mt-1">{t(`area.${area.id}.desc`)}</p>
@@ -112,12 +113,15 @@ export default function ResearchNetwork() {
             </li>
           ))}
         </ul>
+        </div>
+        <div>
         {area.software && area.software.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">{area.software.map(s => <span key={s} className="tag neu">{s}</span>)}</div>
         )}
         <p className="eyebrow mt-4" style={{ marginBottom: 6 }}>{t('net.connected')}</p>
         <div className="flex flex-wrap gap-1.5">
           {area.connections.map(c => { const a = researchAreas.find(x => x.id === c); return a ? <button key={c} className="chip" onClick={() => setSel(c)}>{short(L(a.id))}</button> : null; })}
+        </div>
         </div>
       </div>
     </div>

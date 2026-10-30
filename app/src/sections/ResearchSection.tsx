@@ -30,7 +30,7 @@ const ResearchSection = () => {
     </div>
     <div className="reveal" id="research-network" style={{ scrollMarginTop: 80 }}>
       <p className="eyebrow">{t('research.eyebrow')}</p>
-      <Deferred label="network" minHeight={520}><LazyResearchNetwork /></Deferred>
+      <Deferred label="network" minHeight={760}><LazyResearchNetwork /></Deferred>
     </div>
   </section>
   );
