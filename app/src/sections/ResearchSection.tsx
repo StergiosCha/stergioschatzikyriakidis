@@ -1,114 +1,38 @@
-import { useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
-import { useIsMobile } from '../hooks/use-mobile';
-import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useT } from '../i18n';
+import SectionHead from '../components/SectionHead';
+import Deferred, { LazyResearchNetwork } from '../components/Deferred';
+import { goTo } from '../components/Navigation';
 
 const ResearchSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const photoRef = useRef<HTMLImageElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const isMobile = useIsMobile();
-  const reducedMotion = usePrefersReducedMotion();
-
-  useLayoutEffect(() => {
-    if (isMobile || reducedMotion) return;
-    const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.5,
-        },
-      });
-
-      scrollTl.fromTo(photoRef.current, { x: '-60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo([headlineRef.current, bodyRef.current, ctaRef.current], { x: '30vw', opacity: 0 }, { x: 0, opacity: 1, stagger: 0.02, ease: 'none' }, 0);
-      scrollTl.to(photoRef.current, { y: '20vh', opacity: 0.25, ease: 'power2.in' }, 0.7);
-      scrollTl.to([headlineRef.current, bodyRef.current, ctaRef.current], { x: '-18vw', opacity: 0.25, ease: 'power2.in' }, 0.7);
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isMobile, reducedMotion]);
-
-  const scrollToOutputs = () => {
-    window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: 'publications' }));
-    const element = document.getElementById('outputs');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  if (isMobile) {
-    return (
-      <section ref={sectionRef} id="research" className="bg-paper px-6 py-16">
-        <div className="w-full aspect-[4/3] max-h-[40vh] rounded-lg overflow-hidden mb-8">
-          <img ref={photoRef} src="/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-        </div>
-        <h2 ref={headlineRef} className="text-ink mb-6">Research interests</h2>
-        <div ref={bodyRef}>
-          <p className="text-ink leading-relaxed text-base">
-            My research interests lie at the intersection of Natural Language Processing (NLP),
-            Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
-            Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
-            Parsing, Sentiment Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive
-            Theorem Proving for natural language semantics, Computational Dialectology, Constructive
-            Type-Theoretical Semantics and their computational implementation.
-          </p>
-          <p className="text-ink leading-relaxed mt-4 text-base">
-            I also work on Probabilistic Semantics, developing NLP resources for under-resourced
-            languages, and exploring the interaction between symbolic logic-based approaches and
-            Machine Learning/Deep Learning methods for linguistic problems.
-          </p>
-        </div>
-        <a
-          ref={ctaRef}
-          href="#outputs"
-          onClick={(e) => { e.preventDefault(); scrollToOutputs(); }}
-          className="btn-primary mt-6 inline-flex"
-        >
-          See selected publications
-          <ArrowRight size={18} />
-        </a>
-      </section>
-    );
-  }
-
+  const { t } = useT();
   return (
-    <section ref={sectionRef} id="research" className="pinned-section z-30" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div className="section-content">
-        <div className="absolute overflow-hidden" style={{ left: '10vw', top: '30vh', width: '36vw', height: '52vh', borderRadius: '10px' }}>
-          <img ref={photoRef} src="/images/research-zeugma.png" alt="Zeugma Neuro-Symbolic Reasoning System" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-        </div>
-        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '52vw', top: '18vh', width: '40vw' }}>Research interests</h2>
-        <div ref={bodyRef} className="absolute" style={{ left: '52vw', top: '32vh', width: '40vw' }}>
-          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            My research interests lie at the intersection of Natural Language Processing (NLP),
-            Neuro-Symbolic AI, and Theoretical Linguistics. My work spans Natural Language Inference,
-            Dialogue Modelling, Retrieval-Augmented Generation (RAG)-assisted LLM generation, Semantic
-            Parsing, Sentiment Analysis, Metaphor Detection, Formal Semantics and Syntax, Interactive
-            Theorem Proving for natural language semantics, Computational Dialectology, Constructive
-            Type-Theoretical Semantics and their computational implementation.
+  <section id="research" className="block" aria-labelledby="research-title">
+    <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-10 items-start mb-10">
+      <div>
+        <SectionHead index="03" kicker={t('research.kicker')} id="research-title" title={t('research.title')} />
+        <div className="prose-le reveal">
+          <p>
+            {t('research.p1')}
           </p>
-          <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I also work on Probabilistic Semantics, developing NLP resources for under-resourced
-            languages, and exploring the interaction between symbolic logic-based approaches and
-            Machine Learning/Deep Learning methods for linguistic problems.
+          <p>
+            {t('research.p2')}
           </p>
         </div>
-        <a ref={ctaRef} href="#outputs" onClick={(e) => { e.preventDefault(); scrollToOutputs(); }} className="btn-primary absolute" style={{ left: '52vw', top: '82vh' }}>
-          See selected publications
-          <ArrowRight size={18} />
+        <a href="#outputs" onClick={(e) => { e.preventDefault(); goTo('outputs', 'publications'); }} className="btn ghost sm mt-2 reveal">
+          {t('research.cta')} <ArrowRight size={16} aria-hidden="true" />
         </a>
       </div>
-    </section>
+      <figure className="panel p-3 reveal" style={{ margin: 0 }}>
+        <img src="/images/research-zeugma.png" alt={t('research.figAlt')} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', borderRadius: 10, background: '#fff' }} />
+        <figcaption className="mono text-[11px] muted mt-2">{t('research.fig')}</figcaption>
+      </figure>
+    </div>
+    <div className="reveal" id="research-network" style={{ scrollMarginTop: 80 }}>
+      <p className="eyebrow">{t('research.eyebrow')}</p>
+      <Deferred label="network" minHeight={520}><LazyResearchNetwork /></Deferred>
+    </div>
+  </section>
   );
 };
 

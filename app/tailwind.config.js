@@ -4,7 +4,20 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ["Fraunces", "Noto Serif", "Georgia", "serif"],
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "Menlo", "monospace"],
+        display: ["Fraunces", "Noto Serif", "Georgia", "serif"],
+      },
       colors: {
+        // LingEmbed palette (symbolic = amber, embedding = violet, neural = cyan)
+        night: { DEFAULT: "#070b18", 2: "#0d1428", panel: "#111a33", line: "#24304f" },
+        fg: { DEFAULT: "#e7ecf7", soft: "#c3cbe0", muted: "#8c98b8" },
+        sym: "#f5b942",
+        emb: "#a78bfa",
+        neu: "#38d9f5",
+        neg: "#ff6b9a",
         ink: "rgb(var(--c-ink) / <alpha-value>)",
         paper: "rgb(var(--c-paper) / <alpha-value>)",
         mut: "rgb(var(--c-muted) / <alpha-value>)",

@@ -1,123 +1,49 @@
-import { useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Database } from 'lucide-react';
-import { useIsMobile } from '../hooks/use-mobile';
-import { usePrefersReducedMotion } from '../hooks/use-reduced-motion';
+import { useT } from '../i18n';
+import SectionHead from '../components/SectionHead';
+import { goTo } from '../components/Navigation';
+import { tools } from '../data/tools';
 
-gsap.registerPlugin(ScrollTrigger);
+const CAT = [
+  { id: 'application', color: 'var(--neu)' },
+  { id: 'dataset', color: 'var(--sym)' },
+  { id: 'code', color: 'var(--emb)' },
+  { id: 'model', color: 'var(--neg)' },
+] as const;
 
 const SoftwareSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const photoRef = useRef<HTMLImageElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-  const reducedMotion = usePrefersReducedMotion();
-
-  useLayoutEffect(() => {
-    if (isMobile || reducedMotion) return;
-    const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=140%',
-          pin: true,
-          scrub: 0.5,
-        },
-      });
-
-      scrollTl.fromTo(photoRef.current, { x: '60vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0);
-      scrollTl.fromTo([headlineRef.current, bodyRef.current, ctaRef.current], { x: '-40vw', opacity: 0 }, { x: 0, opacity: 1, stagger: 0.02, ease: 'none' }, 0);
-      scrollTl.to(photoRef.current, { x: '20vw', opacity: 0.25, ease: 'power2.in' }, 0.7);
-      scrollTl.to([headlineRef.current, bodyRef.current, ctaRef.current], { y: '-12vh', opacity: 0.25, ease: 'power2.in' }, 0.7);
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isMobile, reducedMotion]);
-
-  const scrollToOutputsTab = (tab: string) => {
-    window.dispatchEvent(new CustomEvent('switchOutputTab', { detail: tab }));
-    const element = document.getElementById('outputs');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  if (isMobile) {
-    return (
-      <section ref={sectionRef} id="software" className="bg-paper px-6 py-16">
-        <h2 ref={headlineRef} className="text-ink mb-6">
-          Software, Apps
-          <br />
-          & Datasets
-        </h2>
-        <div ref={bodyRef}>
-          <p className="text-ink leading-relaxed text-base">
-            I build resources for under-resourced languages and neural-symbolic NLP: dialect
-            identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
-            with a focus on Greek and dialectal varieties.
-          </p>
-          <p className="text-ink leading-relaxed mt-4 text-base">
-            These include the <strong>Greek NLP Swiss Knife</strong> portal, AI research assistants, classical philology platforms, text editors
-            with grammatical analysis, linguistic distance calculators, and comprehensive datasets
-            for Greek dialectology and natural language inference.
-          </p>
-        </div>
-        <div ref={ctaRef} className="flex flex-wrap gap-3 mt-6">
-          <a href="#outputs" onClick={(e) => { e.preventDefault(); scrollToOutputsTab('software'); }} className="btn-primary">
-            <ArrowRight size={18} />
-            Explore tools
-          </a>
-          <a href="#outputs" onClick={(e) => { e.preventDefault(); scrollToOutputsTab('software'); }} className="btn-secondary">
-            <Database size={18} />
-            View datasets
-          </a>
-        </div>
-        <div className="w-full aspect-[4/3] max-h-[40vh] rounded-lg overflow-hidden mt-8">
-          <img ref={photoRef} src="/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-        </div>
-      </section>
-    );
-  }
-
+  const { t } = useT();
   return (
-    <section ref={sectionRef} id="software" className="pinned-section z-40" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div className="section-content">
-        <h2 ref={headlineRef} className="absolute text-ink" style={{ left: '8vw', top: '16vh', width: '46vw' }}>
-          Software, Apps
-          <br />
-          & Datasets
-        </h2>
-        <div ref={bodyRef} className="absolute" style={{ left: '8vw', top: '38vh', width: '44vw' }}>
-          <p className="text-ink leading-relaxed" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            I build resources for under-resourced languages and neural-symbolic NLP: dialect
-            identification, NLI benchmarks, dialogue systems, and RAG-assisted pipelines—often
-            with a focus on Greek and dialectal varieties.
+  <section id="software" className="block" aria-labelledby="software-title">
+    <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+      <div>
+        <SectionHead index="04" kicker={t('software.kicker')} id="software-title" title={<>{t('software.title.a')}<br />{t('software.title.b')}</>} />
+        <div className="prose-le reveal">
+          <p>
+            {t('software.p1')}
           </p>
-          <p className="text-ink leading-relaxed mt-4" style={{ fontSize: 'clamp(14px, 1.2vw, 18px)' }}>
-            These include the <strong>Greek NLP Swiss Knife</strong> portal, AI research assistants, classical philology platforms, text editors
-            with grammatical analysis, linguistic distance calculators, and comprehensive datasets
-            for Greek dialectology and natural language inference.
+          <p>
+            {t('software.p2.a')} <strong>Greek NLP Swiss Knife</strong> {t('software.p2.b')}
           </p>
         </div>
-        <div ref={ctaRef} className="absolute flex gap-4" style={{ left: '8vw', top: '68vh' }}>
-          <a href="#outputs" onClick={(e) => { e.preventDefault(); scrollToOutputsTab('software'); }} className="btn-primary">
-            <ArrowRight size={18} />
-            Explore tools
-          </a>
-          <a href="#outputs" onClick={(e) => { e.preventDefault(); scrollToOutputsTab('software'); }} className="btn-secondary">
-            <Database size={18} />
-            View datasets
-          </a>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6 reveal">
+          {CAT.map(c => (
+            <div key={c.id} className="info-card">
+              <div className="big-num" style={{ color: c.color }}>{tools.filter(t => t.category === c.id).length}</div>
+              <div className="num-label">{t(`software.cat.${c.id}`)}</div>
+            </div>
+          ))}
         </div>
-        <div className="absolute overflow-hidden" style={{ left: '56vw', top: '18vh', width: '36vw', height: '60vh', borderRadius: '10px' }}>
-          <img ref={photoRef} src="/images/software-collage.jpg" alt="Software tools and platforms collage" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <div className="flex flex-wrap gap-3 reveal">
+          <a href="#outputs" onClick={(e) => { e.preventDefault(); goTo('outputs', 'software'); }} className="btn primary"><ArrowRight size={18} aria-hidden="true" /> {t('software.explore')}</a>
+          <a href="#outputs" onClick={(e) => { e.preventDefault(); goTo('outputs', 'software'); }} className="btn ghost"><Database size={18} aria-hidden="true" /> {t('software.datasets')}</a>
         </div>
       </div>
-    </section>
+      <div className="panel p-3 reveal">
+        <img src="/images/software-collage.jpg" alt={t('software.alt')} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', borderRadius: 10 }} />
+      </div>
+    </div>
+  </section>
   );
 };
 

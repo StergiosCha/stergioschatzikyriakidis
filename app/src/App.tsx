@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './components/Navigation';
+import { LangProvider, useT } from './i18n';
+import BackgroundCanvas from './components/BackgroundCanvas';
 import HeroSection from './sections/HeroSection';
+import ProjectsSection from './sections/ProjectsSection';
 import BioSection from './sections/BioSection';
 import ResearchSection from './sections/ResearchSection';
 import SoftwareSection from './sections/SoftwareSection';
@@ -12,36 +12,39 @@ import TeachingSection from './sections/TeachingSection';
 import OutputsSection from './sections/OutputsSection';
 import NewsResearchSection from './sections/NewsResearchSection';
 import ContactSection from './sections/ContactSection';
+import { useReveal } from './hooks/use-reveal';
 import './App.css';
 
-gsap.registerPlugin(ScrollTrigger);
+function Shell() {
+  const { t } = useT();
+  useReveal();
+  return (
+    <>
+      <a className="skip-link" href="#main">{t('skip')}</a>
+      <BackgroundCanvas />
+      <div className="app" id="top">
+        <Navigation />
+        <main id="main">
+          <HeroSection />
+          <ProjectsSection />
+          <div className="divider" />
+          <BioSection />
+          <ResearchSection />
+          <SoftwareSection />
+          <NovelistSection />
+          <LiveAppsSection />
+          <TeachingSection />
+          <OutputsSection />
+          <NewsResearchSection />
+        </main>
+        <ContactSection />
+      </div>
+    </>
+  );
+}
 
 function App() {
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-    };
-  }, []);
-
-  return (
-    <div ref={mainRef} className="app">
-      <Navigation />
-      <main className="main-content">
-        <HeroSection />
-        <BioSection />
-        <ResearchSection />
-        <SoftwareSection />
-        <NovelistSection />
-        <LiveAppsSection />
-        <TeachingSection />
-        <OutputsSection />
-        <NewsResearchSection />
-        <ContactSection />
-      </main>
-    </div>
-  );
+  return <LangProvider><Shell /></LangProvider>;
 }
 
 export default App;
