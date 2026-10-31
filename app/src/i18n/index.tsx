@@ -12,6 +12,8 @@ const fill = (s: string, vars?: Vars) => (vars ? s.replace(/\{(\w+)\}/g, (m, k) 
 
 function initialLang(): Lang {
   try {
+    const q = new URLSearchParams(window.location.search).get('lang');
+    if (q === 'en' || q === 'el') { localStorage.setItem('lang', q); return q; }
     const stored = localStorage.getItem('lang');
     if (stored === 'en' || stored === 'el') return stored;
   } catch { /* storage unavailable */ }

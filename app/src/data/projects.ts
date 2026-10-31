@@ -2,7 +2,7 @@
 export interface ProjectLink { label: string; href: string }
 export interface FoundationalProject {
   id: string; name: string; kicker: string; summary: string; facts: string[];
-  links: ProjectLink[]; tags: string[]; source: string; needsConfirmation?: string;
+  links: ProjectLink[]; tags: string[]; source: string; needsConfirmation?: string; bibtex?: string;
 }
 
 export const svarnaProject: FoundationalProject = {
@@ -21,6 +21,14 @@ export const svarnaProject: FoundationalProject = {
   ],
   tags: ['KWIC', 'Keyness', 'Discourse markers', 'LLM analysis'],
   source: 'Dropbox/svarna_arxiv_submission.zip (svarna_arxiv.tex: abstract + Table 1); app/src/data/liveApps.ts; app/src/data/news.ts',
+  bibtex: `@misc{chatzikyriakidis2026svarna,
+  title  = {Svarna: An Open Corpus Workbench for Modern Greek},
+  author = {Chatzikyriakidis, Stergios},
+  year   = {2026},
+  eprint = {2607.00970},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2607.00970}
+}`
 };
 
 export const atlasProject: FoundationalProject = {
@@ -38,6 +46,13 @@ export const atlasProject: FoundationalProject = {
   ],
   tags: ['Coq', 'Montague', 'MTT', 'TTR', 'DisCoCat'],
   source: 'Dropbox/revisiting-formal-semantics/README.md, CITATION.cff, atlas_data/atlas.json',
+  bibtex: `@software{chatzikyriakidis_formal_atlas,
+  title   = {Formal Atlas of Semantics},
+  author  = {Chatzikyriakidis, Stergios},
+  license = {MIT},
+  url     = {https://github.com/StergiosCha/formal_atlas_of_semantics},
+  note    = {Cite with the exact Git commit used}
+}`
 };
 
 export const lingembedProject: FoundationalProject = {

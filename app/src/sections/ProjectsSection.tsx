@@ -29,6 +29,20 @@ const Head = ({ p, glyph, tone }: { p: FoundationalProject; glyph: string; tone:
   );
 };
 
+const Cite = ({ p }: { p: FoundationalProject }) => {
+  const { t } = useT();
+  const [ok, setOk] = useState(false);
+  if (!p.bibtex) return null;
+  const copy = () => { navigator.clipboard?.writeText(p.bibtex!).then(() => { setOk(true); setTimeout(() => setOk(false), 1800); }); };
+  return (
+    <details className="cite mt-4">
+      <summary className="mono text-[12px]">{t('proj.cite')}</summary>
+      <pre className="cite-pre"><code>{p.bibtex}</code></pre>
+      <button type="button" className="btn sm ghost" onClick={copy}>{ok ? t('proj.cite.copied') : t('proj.cite.copy')}</button>
+    </details>
+  );
+};
+
 const Facts = ({ p }: { p: FoundationalProject }) => {
   const { t } = useT();
   return p.facts.length ? <ul className="facts">{p.facts.map((_, i) => <li key={i}>{t(`proj.${p.id}.fact${i}`)}</li>)}</ul> : null;
@@ -52,6 +66,7 @@ export default function ProjectsSection() {
               <Facts p={svarnaProject} />
               <div className="flex flex-wrap gap-1.5 mt-4">{svarnaProject.tags.map(x => <span key={x} className="tag emb">{x}</span>)}</div>
               <Links p={svarnaProject} />
+              <Cite p={svarnaProject} />
             </div>
             <Deferred label={loading('Svarna')} minHeight={420}><LazySvarnaRegisters /></Deferred>
           </div>
@@ -64,6 +79,7 @@ export default function ProjectsSection() {
               <Facts p={atlasProject} />
               <div className="flex flex-wrap gap-1.5 mt-4">{atlasProject.tags.map(x => <span key={x} className="tag sym">{x}</span>)}</div>
               <Links p={atlasProject} />
+              <Cite p={atlasProject} />
             </div>
             <Deferred label="Formal Atlas" minHeight={640}><LazyAtlasGraph /></Deferred>
           </div>

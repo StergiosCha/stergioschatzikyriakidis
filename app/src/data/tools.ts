@@ -116,7 +116,7 @@ export const tools: Tool[] = [
   },
   {
     name: "Svarna: Greek Corpus Workbench",
-    description: "Corpus linguistics workbench for Modern Greek: KWIC concordancing, frequency and n-gram analysis, discourse markers, keyness (log-likelihood), regex search, and LLM-assisted pragmatic analysis over 500M+ words across six corpora. Role: Main developer.",
+    description: "Corpus linguistics workbench for Modern Greek: KWIC concordancing, frequency and n-gram analysis, discourse markers, keyness (log-likelihood), regex search, and LLM-assisted pragmatic analysis over 500M+ words across five databases (institutional, literary, dialectal, social media, historical). Role: Main developer.",
     platformUrl: "https://greek-corpus-workbench.wonderfulhill-e1c9f1a0.westeurope.azurecontainerapps.io",
     githubUrl: "https://github.com/StergiosCha/SVARNA_CORPUS_APP",
     category: "application"
@@ -152,7 +152,7 @@ export const tools: Tool[] = [
   },
   {
     name: "GRDD/GRDD+",
-    description: "Greek Regional Dialects: 11 varieties, ~7M words. Role: Main creator.",
+    description: "Greek Regional Dialects: GRDD (arXiv:2308.00802) and its extension GRDD+ covering 10 varieties, ~6.4M words. Role: Main creator.",
     platformUrl: null,
     githubUrl: "https://github.com/StergiosCha/Greek_dialect_corpus",
     category: "dataset"
@@ -189,7 +189,7 @@ export const tools: Tool[] = [
     name: "Precise Entailment",
     description: "Expert-annotated NLI (150 examples). Role: Contributor.",
     platformUrl: null,
-    githubUrl: null,
+    githubUrl: "https://github.com/StergiosCha/Precise_Entailment_Greek",
     category: "dataset"
   },
   {

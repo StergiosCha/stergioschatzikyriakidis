@@ -3,6 +3,7 @@ import { useT } from '../i18n';
 import SectionHead from '../components/SectionHead';
 import { goTo } from '../components/Navigation';
 import { svarnaLabUrl } from '../data/projects';
+import Deferred, { LazyTimeline } from '../components/Deferred';
 
 const BioSection = () => {
   const { t } = useT();
@@ -35,6 +36,10 @@ const BioSection = () => {
           </p>
         </div>
       </div>
+    </div>
+    <div className="reveal mt-12" id="timeline" style={{ scrollMarginTop: 80 }}>
+      <p className="eyebrow">{t('tl.eyebrow')}</p>
+      <Deferred label="timeline" minHeight={360}><LazyTimeline /></Deferred>
     </div>
   </section>
   );

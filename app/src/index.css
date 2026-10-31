@@ -298,3 +298,9 @@ img { max-width: 100%; }
 .zf-flow { stroke-dasharray: 4 4; }
 @media (prefers-reduced-motion: no-preference) { .zf-flow { animation: zfflow 1.2s linear infinite; } }
 @keyframes zfflow { to { stroke-dashoffset: -16; } }
+
+/* how-to-cite boxes */
+.cite summary { cursor: pointer; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; list-style: none; }
+.cite summary::before { content: "› "; color: var(--sym); }
+.cite[open] summary::before { content: "⌄ "; }
+.cite-pre { margin: 8px 0; padding: 10px 12px; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; font: 400 11.5px/1.5 var(--mono); color: var(--soft); overflow-x: auto; white-space: pre; }

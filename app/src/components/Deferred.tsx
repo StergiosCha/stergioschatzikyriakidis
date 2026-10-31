@@ -54,3 +54,4 @@ export const LazyResearchNetwork = lazy(() => import('./ResearchNetwork'));
 export const LazyYearChart = lazy(() => import('./viz/YearChart'));
 export const LazyToolMap = lazy(() => import('./viz/ToolMap'));
 export const LazyZeugma = lazy(() => import('./viz/ZeugmaFigure'));
+export const LazyTimeline = lazy(() => import('./viz/Timeline'));
