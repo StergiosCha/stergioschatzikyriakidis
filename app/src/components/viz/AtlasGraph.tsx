@@ -3,8 +3,8 @@ import { useT } from '../../i18n';
 import { formalAtlas } from '../../data/formalAtlas';
 import { bfsDistances, classicalMDS, fit2D, fmtInt } from '../../lib/le-math';
 
-const LEVEL_COLOR: Record<string, string> = { 'intra-family': '#a78bfa', 'cross-family': '#f5b942', 'cross-foundation': '#38d9f5' };
-const GRADE_COLOR = (g: number | null) => g == null ? 'var(--muted)' : g >= 5 ? '#6ee7b7' : g === 4 ? '#38d9f5' : g === 3 ? '#a78bfa' : g === 2 ? '#f5b942' : '#ff6b9a';
+const LEVEL_COLOR: Record<string, string> = { 'intra-family': 'var(--emb)', 'cross-family': 'var(--sym)', 'cross-foundation': 'var(--neu)' };
+const GRADE_COLOR = (g: number | null) => g == null ? 'var(--muted)' : g >= 5 ? '#6ee7b7' : g === 4 ? 'var(--neu)' : g === 3 ? 'var(--emb)' : g === 2 ? 'var(--sym)' : '#ff6b9a';
 
 /** Graph of the checked framework comparisons in the Formal Atlas of Semantics.
  *  Positions: classical MDS (Jacobi eigensolver) of hop distances in the comparison graph, so the layout
@@ -47,7 +47,7 @@ export default function AtlasGraph() {
       <div className="grid lg:grid-cols-[1.35fr_1fr] gap-4">
         <div className="panel p-2">
           <svg className="viz" viewBox="0 0 700 400" role="img" aria-label={`${t('at.graphAria', { n: nodes.length, e: edges.length })}. ${t('at.graphSub')}`}>
-            <text x={16} y={24} className="mono-t" fontSize={11} letterSpacing="1.5" fill="#f5b942">{t('at.graphTitle')}</text>
+            <text x={16} y={24} className="mono-t" fontSize={11} letterSpacing="1.5" fill="var(--sym)">{t('at.graphTitle')}</text>
             {edges.map((ed, i) => {
               const [x1, y1] = g.P[g.idx[ed.a]], [x2, y2] = g.P[g.idx[ed.b]];
               const on = i === selEdge || hover === ed.a || hover === ed.b;
@@ -57,7 +57,7 @@ export default function AtlasGraph() {
                   aria-label={t('at.edgeAria', { a: lab(ed.a), b: lab(ed.b), level: t(`at.level.${ed.level}`), n: nG })}
                   onClick={() => setSelEdge(i)} onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setSelEdge(i); } }}>
                   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16} />
-                  <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={LEVEL_COLOR[ed.level] ?? '#8c98b8'} strokeOpacity={on ? 0.95 : 0.35} strokeWidth={1 + nG * 0.6} />
+                  <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={LEVEL_COLOR[ed.level] ?? 'var(--muted)'} strokeOpacity={on ? 0.95 : 0.35} strokeWidth={1 + nG * 0.6} />
                   {i === selEdge && <line x1={x1} y1={y1} x2={x2} y2={y2} className="flow" stroke="#fff" strokeOpacity={0.6} />}
                 </g>
               );
@@ -69,9 +69,9 @@ export default function AtlasGraph() {
               return (
                 <g key={n.id} transform={`translate(${x},${y})`} className="seg-btn" tabIndex={0} role="img" aria-label={`${n.label}: ${n.theorems != null ? `${n.theorems} ${t('at.theorems')}` : t('at.outsideAria')}`} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(n.id)} onBlur={() => setHover(null)}>
                   <circle r={r + 6} fill={act ? 'rgba(167,139,250,.16)' : 'transparent'} />
-                  <circle r={r} fill={n.theorems ? 'rgba(245,185,66,.22)' : '#0d1428'} stroke={act ? '#fff' : '#f5b942'} strokeWidth={act ? 2.2 : 1.5} strokeDasharray={n.theorems ? undefined : '3 3'} />
-                  <text y={-r - 8} textAnchor="middle" fontSize={12.5} fontWeight={600} fill="#e7ecf7">{n.label}</text>
-                  <text y={r + 15} textAnchor="middle" className="mono-t" fontSize={10} fill="#8c98b8">{n.theorems != null ? t('at.thm', { n: n.theorems }) : t('at.outside')}</text>
+                  <circle r={r} fill={n.theorems ? 'rgba(245,185,66,.22)' : 'var(--bg2)'} stroke={act ? '#fff' : 'var(--sym)'} strokeWidth={act ? 2.2 : 1.5} strokeDasharray={n.theorems ? undefined : '3 3'} />
+                  <text y={-r - 8} textAnchor="middle" fontSize={12.5} fontWeight={600} fill="var(--text)">{n.label}</text>
+                  <text y={r + 15} textAnchor="middle" className="mono-t" fontSize={10} fill="var(--muted)">{n.theorems != null ? t('at.thm', { n: n.theorems }) : t('at.outside')}</text>
                 </g>
               );
             })}
@@ -87,7 +87,7 @@ export default function AtlasGraph() {
           {e.bridge && <p className="mono text-[11.5px] muted mt-1 break-all">{t('at.bridge')} {e.bridge}</p>}
           <div className="mt-3 grid gap-1">
             {e.phenomena.map(p => (
-              <div key={p.name} className="flex items-center justify-between gap-2 mono text-[12px]" style={{ borderBottom: '1px dashed rgba(255,255,255,.06)', padding: '3px 0' }}>
+              <div key={p.name} className="flex items-center justify-between gap-2 mono text-[12px]" style={{ borderBottom: '1px dashed var(--hair)', padding: '3px 0' }}>
                 <span className="soft truncate" title={p.name}>{p.name}</span>
                 <span className="shrink-0 px-2 rounded-full" style={{ color: GRADE_COLOR(p.grade), border: `1px solid ${GRADE_COLOR(p.grade)}55` }}>{p.grade ?? '—'}</span>
               </div>
@@ -110,7 +110,7 @@ export default function AtlasGraph() {
                     <th scope="row" className="muted font-normal text-left whitespace-nowrap" title={P_LABEL[p]}>P{p}</th>
                     {row.map((v, f) => (
                       <td key={f} title={`P${p} ${P_LABEL[p]} × F${f} ${F_LABEL[f]}: ${v}`} className="text-center rounded"
-                        style={{ background: v ? `rgba(167,139,250,${0.12 + 0.58 * (v / g.maxCell)})` : 'rgba(255,255,255,.03)', color: '#ffffff', padding: '5px 0', minWidth: 30 }}>{v || ''}</td>
+                        style={{ background: v ? `rgba(167,139,250,${0.12 + 0.58 * (v / g.maxCell)})` : 'var(--hair2)', color: '#ffffff', padding: '5px 0', minWidth: 30 }}>{v || ''}</td>
                     ))}
                   </tr>
                 ))}

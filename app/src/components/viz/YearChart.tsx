@@ -27,7 +27,7 @@ export default function YearChart({ items, cats, selected, onSelect, label }: {
       <svg className="viz" viewBox={`0 0 ${W} ${H}`} role="group" aria-label={t('chart.aria', { label, a: m.y0, b: m.y1 })}>
         {Array.from({ length: Math.floor(m.max / ystep) + 1 }, (_, k) => k * ystep).map(v => {
           const y = H - padB - (v / m.max) * (H - padB - top);
-          return <g key={v}><line x1={padL} x2={W} y1={y} y2={y} stroke="rgba(255,255,255,.06)" /><text x={padL - 6} y={y + 4} textAnchor="end" fontSize={10} className="mono-t" fill="#8c98b8">{v}</text></g>;
+          return <g key={v}><line x1={padL} x2={W} y1={y} y2={y} stroke="var(--hair)" /><text x={padL - 6} y={y + 4} textAnchor="end" fontSize={10} className="mono-t" fill="var(--muted)">{v}</text></g>;
         })}
         {m.years.map((y, i) => {
           let acc = 0; const x = padL + i * bw;
@@ -44,7 +44,7 @@ export default function YearChart({ items, cats, selected, onSelect, label }: {
                 const h = (v / m.max) * (H - padB - top); acc += h;
                 return <rect key={c.id} x={x + bw * 0.14} width={bw * 0.72} y={H - padB - acc} height={Math.max(0, h - 1)} rx={2} fill={c.color}><title>{`${y} · ${c.label}: ${v}`}</title></rect>;
               })}
-              {(i % (m.years.length > 24 ? 3 : 2) === 0 || y === m.y1) && <text x={x + bw / 2} y={H - 8} textAnchor="middle" fontSize={10} className="mono-t" fill="#8c98b8">{`’${String(y).slice(2)}`}</text>}
+              {(i % (m.years.length > 24 ? 3 : 2) === 0 || y === m.y1) && <text x={x + bw / 2} y={H - 8} textAnchor="middle" fontSize={10} className="mono-t" fill="var(--muted)">{`’${String(y).slice(2)}`}</text>}
             </g>
           );
         })}

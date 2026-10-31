@@ -6,9 +6,9 @@ import { bfsDistances, classicalMDS, fit2D, hashStr } from '../lib/le-math';
 import { resolveTitle } from '../lib/pubs';
 
 const METH: Record<string, { label: string; color: string }> = {
-  formal: { label: 'net.formal', color: '#f5b942' },
-  bridge: { label: 'net.bridge', color: '#a78bfa' },
-  computational: { label: 'net.computational', color: '#38d9f5' },
+  formal: { label: 'net.formal', color: 'var(--sym)' },
+  bridge: { label: 'net.bridge', color: 'var(--emb)' },
+  computational: { label: 'net.computational', color: 'var(--neu)' },
 };
 const short = (l: string) => l.replace(/ [&κ][αι]? .*$/, '').replace(/ & .*$/, '').replace(/,.*$/, '').replace(/ (for|για) .*$/, '');
 const SHORT: Record<string, { en: string; el: string }> = {
@@ -75,19 +75,19 @@ export default function ResearchNetwork() {
     <div className="grid gap-4">
       <div className="panel p-2">
         <svg className="viz" viewBox="0 0 1100 600" role="group" aria-label={t('net.aria')}>
-          <text x={20} y={28} className="mono-t" fontSize={12.5} letterSpacing="1.5" fill="#a78bfa">{t('net.title')}</text>
-          <text x={20} y={47} fontSize={12.5} fill="#9aa5c4">{t('net.sub', { a: researchAreas.length, c: m.edges.length, s: m.soft.length })}</text>
+          <text x={20} y={28} className="mono-t" fontSize={12.5} letterSpacing="1.5" fill="var(--emb)">{t('net.title')}</text>
+          <text x={20} y={47} fontSize={12.5} fill="var(--muted)">{t('net.sub', { a: researchAreas.length, c: m.edges.length, s: m.soft.length })}</text>
           {m.soft.map(s => s.areas.map(ai => (
-            <line key={s.name + ai} x1={s.x} y1={s.y} x2={m.P[ai][0]} y2={m.P[ai][1]} stroke="#38d9f5" strokeOpacity={s.areas.includes(i) ? 0.45 : 0.08} strokeDasharray="2 4" />
+            <line key={s.name + ai} x1={s.x} y1={s.y} x2={m.P[ai][0]} y2={m.P[ai][1]} stroke="var(--neu)" strokeOpacity={s.areas.includes(i) ? 0.45 : 0.08} strokeDasharray="2 4" />
           )))}
           {m.edges.map(([a, b]) => {
             const on = a === i || b === i;
-            return <line key={`${a}-${b}`} x1={m.P[a][0]} y1={m.P[a][1]} x2={m.P[b][0]} y2={m.P[b][1]} stroke={on ? '#e7ecf7' : '#4b5a82'} strokeOpacity={on ? 0.75 : 0.45} strokeWidth={on ? 1.8 : 1.1} />;
+            return <line key={`${a}-${b}`} x1={m.P[a][0]} y1={m.P[a][1]} x2={m.P[b][0]} y2={m.P[b][1]} stroke={on ? 'var(--text)' : 'var(--line2)'} strokeOpacity={on ? 0.75 : 0.45} strokeWidth={on ? 1.8 : 1.1} />;
           })}
           {m.soft.map(s => (
             <g key={s.name} opacity={s.areas.includes(i) ? 1 : 0.4}>
-              <rect x={s.x - 4} y={s.y - 4} width={8} height={8} rx={2} transform={`rotate(45 ${s.x} ${s.y})`} fill="#38d9f5" />
-              {s.areas.includes(i) && <text x={s.x + (s.x < s.ax ? -11 : 11)} y={s.y + 4} textAnchor={s.x < s.ax ? 'end' : 'start'} className="mono-t" fontSize={11} fill="#8fdcef" style={{ paintOrder: 'stroke', stroke: '#070b18', strokeWidth: 4 }}>{s.name}</text>}
+              <rect x={s.x - 4} y={s.y - 4} width={8} height={8} rx={2} transform={`rotate(45 ${s.x} ${s.y})`} fill="var(--neu)" />
+              {s.areas.includes(i) && <text x={s.x + (s.x < s.ax ? -11 : 11)} y={s.y + 4} textAnchor={s.x < s.ax ? 'end' : 'start'} className="mono-t" fontSize={11} fill="var(--neu)" style={{ paintOrder: 'stroke', stroke: 'var(--bg)', strokeWidth: 4 }}>{s.name}</text>}
             </g>
           ))}
           {researchAreas.map((a, k) => {
@@ -98,17 +98,17 @@ export default function ResearchNetwork() {
               <g key={a.id} className="seg-btn" role="button" tabIndex={0} aria-pressed={on} aria-label={t('net.nodeAria', { label: L(a.id), n: a.publications.length })}
                 onClick={() => setSel(a.id)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a.id); } }}
                 opacity={on || near ? 1 : 0.55}>
-                <circle cx={x} cy={y} r={r + 9} fill={on ? `${meta.color}22` : 'transparent'} />
-                <circle cx={x} cy={y} r={r} fill={`${meta.color}33`} stroke={on ? '#fff' : meta.color} strokeWidth={on ? 2.4 : 1.6} />
-                <text x={x} y={y + 4} textAnchor="middle" className="mono-t" fontSize={12.5} fontWeight={600} fill="#e7ecf7">{a.publications.length}</text>
-                <text x={x} y={y < m.cy ? y - r - 9 : y + r + 20} textAnchor="middle" fontSize={14} fontWeight={600} fill="#e7ecf7" style={{ paintOrder: 'stroke', stroke: '#070b18', strokeWidth: 5 }}>{lbl(a.id)}</text>
+                <circle cx={x} cy={y} r={r + 9} fill={meta.color} fillOpacity={on ? 0.13 : 0} />
+                <circle cx={x} cy={y} r={r} fill={meta.color} fillOpacity={0.2} stroke={on ? '#fff' : meta.color} strokeWidth={on ? 2.4 : 1.6} />
+                <text x={x} y={y + 4} textAnchor="middle" className="mono-t" fontSize={12.5} fontWeight={600} fill="var(--text)">{a.publications.length}</text>
+                <text x={x} y={y < m.cy ? y - r - 9 : y + r + 20} textAnchor="middle" fontSize={14} fontWeight={600} fill="var(--text)" style={{ paintOrder: 'stroke', stroke: 'var(--bg)', strokeWidth: 5 }}>{lbl(a.id)}</text>
               </g>
             );
           })}
         </svg>
         <div className="legend px-3 pb-2">
           {Object.values(METH).map(v => <span key={v.label}><i className="dot" style={{ background: v.color }} />{t(v.label)}</span>)}
-          <span><i className="dot" style={{ background: '#38d9f5', borderRadius: 2 }} />{t('net.software')}</span>
+          <span><i className="dot" style={{ background: 'var(--neu)', borderRadius: 2 }} />{t('net.software')}</span>
         </div>
       </div>
       <div className="info-card lg:grid lg:grid-cols-[1.35fr_1fr] lg:gap-10" aria-live="polite" style={{ borderTop: `3px solid ${METH[area.methodology].color}` }}>

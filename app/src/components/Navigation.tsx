@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X, Download, Sun, Moon } from 'lucide-react';
 import { useT, type Lang } from '../i18n';
 
 export const NAV_LINKS: { label: string; id: string; tab?: string }[] = [
@@ -34,6 +34,23 @@ export const goTo = (id: string, tab?: string) => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   history.replaceState(null, '', `#${id}`);
+};
+
+const getDark = () => document.documentElement.classList.contains('dark');
+const ThemeToggle = () => {
+  const { t } = useT();
+  const [dark, setDark] = useState<boolean>(() => (typeof document !== 'undefined' ? getDark() : true));
+  const toggle = () => {
+    const next = !dark;
+    document.documentElement.classList.toggle('dark', next);
+    try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch { /* storage unavailable */ }
+    setDark(next);
+  };
+  return (
+    <button type="button" className="theme-toggle" onClick={toggle} aria-pressed={!dark} aria-label={dark ? t('nav.theme.light') : t('nav.theme.dark')} title={dark ? t('nav.theme.light') : t('nav.theme.dark')}>
+      {dark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
+    </button>
+  );
 };
 
 const LangToggle = () => {
@@ -100,9 +117,9 @@ const Navigation = () => {
         <nav className="nav-links" aria-label={t('nav.main')}>
           {NAV_LINKS.map(l => link(l))}
           <a className="btn-pill" href="/cv_cha.pdf" download="cv_cha.pdf" style={{ marginLeft: 8 }}><Download size={14} aria-hidden="true" /> {t('nav.cv')}</a>
-          <span style={{ marginLeft: 8 }}><LangToggle /></span>
+          <span style={{ marginLeft: 8, display: 'inline-flex', gap: 8, alignItems: 'center' }}><LangToggle /><ThemeToggle /></span>
         </nav>
-        <span className="nav-menu-btn"><LangToggle /></span>
+        <span className="nav-menu-btn" style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}><LangToggle /><ThemeToggle /></span>
         <button ref={menuBtn} className="icon-btn nav-menu-btn" aria-label={t('nav.openMenu')} aria-expanded={open} aria-controls="nav-drawer" onClick={() => setOpen(true)}>
           <Menu size={20} aria-hidden="true" />
         </button>

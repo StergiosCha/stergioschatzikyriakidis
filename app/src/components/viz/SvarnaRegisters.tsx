@@ -3,7 +3,7 @@ import { useT } from '../../i18n';
 import { svarnaDatabases, svarnaReportedTotal } from '../../data/svarnaCorpus';
 import { fmtInt, fmtM } from '../../lib/le-math';
 
-export const DB_COLORS: Record<string, string> = { corpus: '#38d9f5', literature: '#a78bfa', dialectal: '#f5b942', social: '#ff6b9a', historical: '#6ee7b7' };
+export const DB_COLORS: Record<string, string> = { corpus: 'var(--neu)', literature: 'var(--emb)', dialectal: 'var(--sym)', social: '#ff6b9a', historical: '#6ee7b7' };
 
 /** Register composition of Svarna, recomputed in the browser from the paper's per-source table. */
 export default function SvarnaRegisters() {

@@ -14,9 +14,9 @@ const COL: Record<Kind, string> = { pub: 'var(--sym)', talk: 'var(--neu)' };
 
 // Career positions, from the bio text on the site (bio.p2) and the news list.
 const POSITIONS = [
-  { from: 2016, to: 2021, key: 'tl.pos.clasp' },
-  { from: 2021, to: 2026, key: 'tl.pos.crete' },
-  { from: 2026, to: 2026, key: 'tl.pos.ilsp' },
+  { from: 2016, to: 2021, key: 'tl.pos.clasp', row: 0 },
+  { from: 2021, to: 2026, key: 'tl.pos.crete', row: 1 },
+  { from: 2026, to: 2026, key: 'tl.pos.ilsp', row: 0 },
 ];
 
 const yearOf = (s: string) => { const m = s.match(/(19|20)\d{2}/); return m ? +m[0] : null; };
@@ -31,7 +31,7 @@ export default function Timeline() {
     [...publications, ...abstracts].forEach(p => bump(yearOf(p.year), 'pub'));
     allTalks.forEach(x => bump(yearOf(x.year), 'talk'));
     const years = Object.keys(counts).map(Number).sort((a, b) => a - b);
-    const y0 = years[0], y1 = Math.max(years[years.length - 1], 2027);
+    const y0 = years[0], y1 = years[years.length - 1];
     const max = Math.max(...Object.values(counts).map(c => c.pub + c.talk));
     // milestones: monographs + edited volumes from publications, and software/general news items
     const books = publications.filter(p => p.type === 'monograph').map(p => ({ year: yearOf(p.year), label: p.title, kind: 'book' as const, link: p.link || p.pdfLink || null }));
@@ -56,14 +56,14 @@ export default function Timeline() {
         {/* positions band */}
         {POSITIONS.map(p => (
           <g key={p.key}>
-            <rect x={x(p.from)} y={18} width={Math.max(cw, (p.to - p.from + (p.to === p.from ? 1 : 0)) * cw)} height={18} rx={9} fill="var(--emb)" opacity={0.18} />
-            <text x={x(p.from) + 10} y={31} fontSize={11} fill="var(--soft)" style={{ fontFamily: 'var(--mono)' }}>{t(p.key)}</text>
+            <rect x={x(p.from) + 2} y={10 + p.row * 20} width={Math.max(cw, (p.to - p.from + (p.to === p.from ? 1 : 0)) * cw) - 4} height={16} rx={8} fill="var(--emb)" opacity={0.18} />
+            <text x={x(p.from) + 10} y={22 + p.row * 20} fontSize={10.5} fill="var(--soft)" style={{ fontFamily: 'var(--mono)' }}>{t(p.key)}</text>
           </g>
         ))}
         {/* milestones */}
         {m.miles.map((mi, i) => {
           const same = m.miles.filter(z => z.year === mi.year); const k = same.indexOf(mi);
-          const cx = x(mi.year) + cw / 2, cy = 58 + (k % 2) * 10;
+          const cx = x(mi.year) + cw / 2, cy = 62 + (k % 2) * 10;
           return (
             <g key={i} style={{ cursor: 'pointer' }} onClick={() => setSel(mi.year)}>
               <circle cx={cx} cy={cy} r={5} fill={kindColor[mi.kind]} stroke="var(--bg)" strokeWidth={1.5} />
@@ -79,7 +79,7 @@ export default function Timeline() {
             <g key={y} role="button" tabIndex={0} aria-label={`${y}: ${c.pub} ${t('tl.pubs')}, ${c.talk} ${t('tl.talks')}`}
                onClick={() => setSel(on ? null : y)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(on ? null : y); } }}
                style={{ cursor: 'pointer' }} opacity={sel && !on ? 0.45 : 1}>
-              <rect x={x(y) + 1} y={top} width={cw - 2} height={barH} fill={on ? 'rgba(255,255,255,.05)' : 'transparent'} rx={4} />
+              <rect x={x(y) + 1} y={top} width={cw - 2} height={barH} fill={on ? 'var(--hair)' : 'transparent'} rx={4} />
               <rect x={x(y) + 4} y={base - hp} width={cw - 8} height={hp} fill={COL.pub} rx={2} />
               <rect x={x(y) + 4} y={base - hp - ht} width={cw - 8} height={ht} fill={COL.talk} rx={2} opacity={0.85} />
               {total > 0 && <text x={x(y) + cw / 2} y={base - hp - ht - 5} textAnchor="middle" fontSize={10} fill="var(--muted)" style={{ fontFamily: 'var(--mono)' }}>{total}</text>}

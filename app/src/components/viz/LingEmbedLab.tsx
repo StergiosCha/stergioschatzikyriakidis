@@ -85,11 +85,11 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
             <linearGradient id="labSE" x1="0" x2="1"><stop offset="0" stopColor="#f5b942" /><stop offset="1" stopColor="#a78bfa" /></linearGradient>
             <linearGradient id="labEN" x1="0" x2="1"><stop offset="0" stopColor="#a78bfa" /><stop offset="1" stopColor="#38d9f5" /></linearGradient>
           </defs>
-          {([[P.tree, t('le.symbolic'), '#f5b942', t('le.analysis', { t: th.short }), ''], [P.emb, t('le.embedding'), '#a78bfa', '‖hᵢ − hⱼ‖² = d_tree(i, j)', ''], [P.neu, t('le.neural'), '#38d9f5', 'tanh · 8 → 8 → 8 → 4', t('le.encoder')]] as const).map(([p, ttl, c, s, tip]) => (
+          {([[P.tree, t('le.symbolic'), 'var(--sym)', t('le.analysis', { t: th.short }), ''], [P.emb, t('le.embedding'), 'var(--emb)', '‖hᵢ − hⱼ‖² = d_tree(i, j)', ''], [P.neu, t('le.neural'), 'var(--neu)', 'tanh · 8 → 8 → 8 → 4', t('le.encoder')]] as const).map(([p, ttl, c, s, tip]) => (
             <g key={ttl}>{tip && <title>{tip}</title>}
-              <rect x={p.x} y={p.y - 50} width={p.w} height={p.h + 60} rx={14} fill="rgba(255,255,255,.018)" stroke="rgba(255,255,255,.06)" />
+              <rect x={p.x} y={p.y - 50} width={p.w} height={p.h + 60} rx={14} fill="var(--hair2)" stroke="var(--hair)" />
               <text x={p.x + 16} y={p.y - 26} className="mono-t" fontSize={13} fontWeight={600} letterSpacing="1.5" fill={c}>{ttl}</text>
-              <text x={p.x + 16} y={p.y - 10} fontSize={11.5} fill="#9aa5c4">{s}</text>
+              <text x={p.x + 16} y={p.y - 10} fontSize={11.5} fill="var(--muted)">{s}</text>
             </g>
           ))}
           {/* links */}
@@ -102,9 +102,9 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
             return (
               <g key={'te' + c.id}>
                 {th.layout === 'dependency'
-                  ? <path d={`M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`} stroke="#4b5a82" strokeWidth={1.4} fill="none" />
-                  : <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#4b5a82" strokeWidth={1.4} />}
-                {c.rel && c.rel !== 'root' && <text x={(x1 + x2) / 2 + (x2 < x1 ? -14 : 14)} y={(y1 + y2) / 2 - 2} textAnchor="middle" className="mono-t" fontSize={10} fill="#9aa5c4">{c.rel}</text>}
+                  ? <path d={`M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`} stroke="var(--line2)" strokeWidth={1.4} fill="none" />
+                  : <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--line2)" strokeWidth={1.4} />}
+                {c.rel && c.rel !== 'root' && <text x={(x1 + x2) / 2 + (x2 < x1 ? -14 : 14)} y={(y1 + y2) / 2 - 2} textAnchor="middle" className="mono-t" fontSize={10} fill="var(--muted)">{c.rel}</text>}
               </g>
             );
           })}
@@ -113,35 +113,35 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
             return (
               <g key={'tn' + c.id} transform={`translate(${x},${y})`} className="seg-btn" role="button" tabIndex={0} aria-pressed={on} aria-label={`${c.label} (${c.sub})`}
                 onMouseEnter={() => pick(c.idx)} onFocus={() => pick(c.idx)} onBlur={() => setPaused(false)}>
-                <circle r={8} fill={on ? '#f5b942' : c.word ? 'rgba(245,185,66,.18)' : '#0d1428'} stroke={on ? '#fff' : '#f5b942'} strokeWidth={on ? 2.4 : 1.6} />
-                <text y={below ? 24 : -14} textAnchor="middle" fontSize={12.5} fontWeight={600} fill="#e7ecf7">{c.label}</text>
-                <text y={below ? 38 : -28} textAnchor="middle" className="mono-t" fontSize={10.5} fill="#f5b942">{c.sub}</text>
+                <circle r={8} fill={on ? 'var(--sym)' : c.word ? 'rgba(245,185,66,.18)' : 'var(--bg2)'} stroke={on ? '#fff' : 'var(--sym)'} strokeWidth={on ? 2.4 : 1.6} />
+                <text y={below ? 24 : -14} textAnchor="middle" fontSize={12.5} fontWeight={600} fill="var(--text)">{c.label}</text>
+                <text y={below ? 38 : -28} textAnchor="middle" className="mono-t" fontSize={10.5} fill="var(--sym)">{c.sub}</text>
               </g>
             );
           })}
           {/* embedding */}
-          <circle cx={m.ep.x + m.ep.w / 2} cy={m.ep.y + m.ep.h / 2} r={Math.min(m.ep.w, m.ep.h) / 2 + 10} fill="none" stroke="#a78bfa" strokeOpacity={0.35} strokeDasharray="3 4" />
+          <circle cx={m.ep.x + m.ep.w / 2} cy={m.ep.y + m.ep.h / 2} r={Math.min(m.ep.w, m.ep.h) / 2 + 10} fill="none" stroke="var(--emb)" strokeOpacity={0.35} strokeDasharray="3 4" />
           {m.T.nodes.map(c => { if (!c.parent) return null; const p = m.T.byId[c.parent]; return <line key={'ee' + c.id} x1={m.emb[p.idx][0]} y1={m.emb[p.idx][1]} x2={m.emb[c.idx][0]} y2={m.emb[c.idx][1]} stroke="rgba(167,139,250,.28)" strokeWidth={1.2} />; })}
           {m.T.nodes.map(c => {
             const [x, y] = m.emb[c.idx]; const on = c.idx === i;
             return (
               <g key={'en' + c.id} onMouseEnter={() => pick(c.idx)}>
-                <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : '#a78bfa'} stroke={on ? '#a78bfa' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
+                <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : 'var(--emb)'} stroke={on ? 'var(--emb)' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
                 <text x={x + 10} y={y - 8} className="mono-t" fontSize={10.5} fill="#cfc6f7">{c.label}</text>
               </g>
             );
           })}
-          <text x={P.emb.x + 16} y={P.emb.y + P.emb.h} fontSize={11.5} fill="#9aa5c4">{t('le.exact', { d: m.E.dims, p: (m.E.explained2 * 100).toFixed(0) })}</text>
+          <text x={P.emb.x + 16} y={P.emb.y + P.emb.h} fontSize={11.5} fill="var(--muted)">{t('le.exact', { d: m.E.dims, p: (m.E.explained2 * 100).toFixed(0) })}</text>
           {/* neural */}
           {m.W.map((M, l) => M.map((row, j) => row.map((w, src) => {
             const [x1, y1] = m.npos[l][src], [x2, y2] = m.npos[l + 1][j];
             const flow = Math.abs(w * (l === 0 ? a[0][src] : a[l][src]));
-            return <line key={`${l}-${j}-${src}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#38d9f5" strokeWidth={1} strokeOpacity={Math.min(0.85, 0.04 + flow * 0.9)} style={{ transition: 'stroke-opacity .35s' }} />;
+            return <line key={`${l}-${j}-${src}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--neu)" strokeWidth={1} strokeOpacity={Math.min(0.85, 0.04 + flow * 0.9)} style={{ transition: 'stroke-opacity .35s' }} />;
           })))}
           {m.npos.map((layer, l) => layer.map(([x, y], j) => (
-            <circle key={`n${l}-${j}`} cx={x} cy={y} r={9} stroke="rgba(255,255,255,.25)" fill={divColor(l === 0 ? a[0][j] / 1.2 : a[l][j])} style={{ transition: 'fill .35s' }}><title>{`${['input', 'layer 1', 'layer 2', 'out'][l]} unit ${j}: ${a[l][j].toFixed(3)}`}</title></circle>
+            <circle key={`n${l}-${j}`} cx={x} cy={y} r={9} stroke="var(--line2)" fill={divColor(l === 0 ? a[0][j] / 1.2 : a[l][j])} style={{ transition: 'fill .35s' }}><title>{`${['input', 'layer 1', 'layer 2', 'out'][l]} unit ${j}: ${a[l][j].toFixed(3)}`}</title></circle>
           )))}
-          {['h ∈ ℝ⁸', 'layer 1', 'layer 2', 'out'].map((lbl, l) => <text key={lbl} x={m.cols[l]} y={m.np.y + m.np.h + 26} textAnchor="middle" className="mono-t" fontSize={10} fill="#9aa5c4">{lbl}</text>)}
+          {['h ∈ ℝ⁸', 'layer 1', 'layer 2', 'out'].map((lbl, l) => <text key={lbl} x={m.cols[l]} y={m.np.y + m.np.h + 26} textAnchor="middle" className="mono-t" fontSize={10} fill="var(--muted)">{lbl}</text>)}
         </svg>
       </div>
       <div className="grid md:grid-cols-3 gap-3 mt-3">
@@ -180,7 +180,7 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
             </label>
             <h4 className="text-[.95rem] mb-2">{t('le.superposition')} <span className="mono muted font-normal">T ∈ ℝ<sup>6×6</sup></span></h4>
             <div className="grid gap-[3px] max-w-[360px]" style={{ gridTemplateColumns: 'repeat(6,1fr)' }} role="img" aria-label={t('le.heatAria')}>
-              {b.Tm.flat().map((v, j) => <div key={j} className="aspect-square rounded flex items-center justify-center mono text-[9.5px]" style={{ background: divColor(v / b.mx), color: 'rgba(255,255,255,.85)' }}>{v.toFixed(1)}</div>)}
+              {b.Tm.flat().map((v, j) => <div key={j} className="aspect-square rounded flex items-center justify-center mono text-[9.5px]" style={{ background: divColor(v / b.mx), color: 'var(--text)' }}>{v.toFixed(1)}</div>)}
             </div>
           </div>
           <div aria-live="polite">

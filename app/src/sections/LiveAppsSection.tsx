@@ -49,8 +49,8 @@ const LiveAppsSection = () => {
           <div className="flex items-center gap-3 px-4 py-2.5" style={{ borderBottom: '1px solid var(--line)', background: 'rgba(7,11,24,.6)' }}>
             <div className="flex gap-1.5" aria-hidden="true">
               <span className="w-3 h-3 rounded-full" style={{ background: '#ff6b9a88' }} />
-              <span className="w-3 h-3 rounded-full" style={{ background: '#f5b94288' }} />
-              <span className="w-3 h-3 rounded-full" style={{ background: '#38d9f588' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: 'var(--sym)88' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: 'var(--neu)88' }} />
             </div>
             <div className="hidden sm:flex items-center gap-2 flex-1 min-w-0 px-3 py-1 rounded-md mono text-[11px] muted truncate" style={{ background: 'var(--bg2)' }}>
               <LiveDot /><span className="truncate">{featuredApp.url.replace('https://', '')}</span>

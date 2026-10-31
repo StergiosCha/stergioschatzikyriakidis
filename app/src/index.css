@@ -9,6 +9,7 @@
   --bg: #070b18; --bg2: #0d1428; --panel: #111a33; --line: #24304f; --line2: #3a4a75; --field: #62729e;
   --text: #e7ecf7; --soft: #c3cbe0; --muted: #8c98b8;
   --sym: #f5b942; --emb: #a78bfa; --neu: #38d9f5; --neg: #ff6b9a; --ok: #6ee7b7;
+  --hair: rgba(255,255,255,.06); --hair2: rgba(255,255,255,.018);
   --r: 16px;
   --serif: 'Fraunces', 'Noto Serif', Georgia, serif; --sans: 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
@@ -310,3 +311,22 @@ img { max-width: 100%; }
 .powered:hover { color: var(--text); text-decoration: none; }
 .powered img { height: 20px; width: auto; opacity: .9; }
 .powered b { font-weight: 600; color: var(--text); }
+
+/* ---------- light theme (html without .dark) ---------- */
+html:not(.dark) {
+  --bg: #f7f8fc; --bg2: #eef1f8; --panel: #ffffff; --line: #d9deeb; --line2: #c3cad9; --field: #8a94ad;
+  --text: #0e1630; --soft: #3a4560; --muted: #5d6885;
+  --sym: #a86a00; --emb: #6d4fd6; --neu: #0b7fa6; --neg: #c8325f; --ok: #15825a;
+  --c-ink: 14 22 48; --c-paper: 247 248 252; --c-muted: 93 104 133; --c-surface: 255 255 255;
+  --hair: rgba(14,22,48,.08); --hair2: rgba(14,22,48,.03);
+  color-scheme: light;
+}
+html:not(.dark) body { background: radial-gradient(1200px 700px at 15% -10%, #ebe6ff 0%, transparent 60%), radial-gradient(1000px 600px at 100% 10%, #dff3fa 0%, transparent 55%), var(--bg); }
+html:not(.dark) #bg-canvas { opacity: .35; }
+html:not(.dark) .grad-sym { background: linear-gradient(90deg, #a86a00, #c2410c); -webkit-background-clip: text; background-clip: text; }
+html:not(.dark) .grad-neu { background: linear-gradient(90deg, #6d4fd6, #0b7fa6); -webkit-background-clip: text; background-clip: text; }
+html:not(.dark) .grad-all { background: linear-gradient(90deg, #a86a00, #6d4fd6 55%, #0b7fa6); -webkit-background-clip: text; background-clip: text; }
+html:not(.dark) .glass, html:not(.dark) .panel, html:not(.dark) .info-card { box-shadow: 0 6px 24px rgba(14, 22, 48, .06); }
+html:not(.dark) .powered img { filter: invert(1) brightness(.25); }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--field); background: var(--bg2); color: var(--soft); cursor: pointer; }
+.theme-toggle:hover { color: var(--text); }

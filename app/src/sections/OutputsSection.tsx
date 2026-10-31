@@ -16,9 +16,9 @@ const TABS = [
 type TabId = typeof TABS[number]['id'];
 
 const TALK_CATS = [
-  { id: 'invited', label: 'Invited talks', color: '#f5b942' },
-  { id: 'conference', label: 'Conference / workshop', color: '#a78bfa' },
-  { id: 'poster', label: 'Posters', color: '#38d9f5' },
+  { id: 'invited', label: 'Invited talks', color: 'var(--sym)' },
+  { id: 'conference', label: 'Conference / workshop', color: 'var(--emb)' },
+  { id: 'poster', label: 'Posters', color: 'var(--neu)' },
 ];
 const talkNum = (t: Talk) => { const m = t.year.match(/(19|20)\d{2}/); return m ? +m[0] : null; };
 

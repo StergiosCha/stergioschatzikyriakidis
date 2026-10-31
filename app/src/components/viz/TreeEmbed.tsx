@@ -46,19 +46,19 @@ export default function TreeEmbed() {
           <defs>
             <linearGradient id="gSE" x1="0" x2="1"><stop offset="0" stopColor="#f5b942" /><stop offset="1" stopColor="#a78bfa" /></linearGradient>
           </defs>
-          <rect x={8} y={8} width={352} height={364} rx={14} fill="rgba(255,255,255,.018)" stroke="rgba(255,255,255,.06)" />
-          <rect x={370} y={8} width={342} height={364} rx={14} fill="rgba(255,255,255,.018)" stroke="rgba(255,255,255,.06)" />
-          <text x={24} y={32} className="mono-t" fontSize={11} letterSpacing="1.5" fill="#f5b942">{t('le.symbolic')}</text>
-          <text x={24} y={48} fontSize={11} fill="#9aa5c4">{t('le.analysis', { t: th.short })}</text>
-          <text x={386} y={32} className="mono-t" fontSize={11} letterSpacing="1.5" fill="#a78bfa">{t('le.embedding')}</text>
-          <text x={386} y={48} fontSize={11} fill="#9aa5c4">‖hᵢ − hⱼ‖² = d_tree(i, j)</text>
+          <rect x={8} y={8} width={352} height={364} rx={14} fill="var(--hair2)" stroke="var(--hair)" />
+          <rect x={370} y={8} width={342} height={364} rx={14} fill="var(--hair2)" stroke="var(--hair)" />
+          <text x={24} y={32} className="mono-t" fontSize={11} letterSpacing="1.5" fill="var(--sym)">{t('le.symbolic')}</text>
+          <text x={24} y={48} fontSize={11} fill="var(--muted)">{t('le.analysis', { t: th.short })}</text>
+          <text x={386} y={32} className="mono-t" fontSize={11} letterSpacing="1.5" fill="var(--emb)">{t('le.embedding')}</text>
+          <text x={386} y={48} fontSize={11} fill="var(--muted)">‖hᵢ − hⱼ‖² = d_tree(i, j)</text>
           {m.T.nodes.map(c => {
             if (!c.parent) return null;
             const p = m.T.byId[c.parent];
             const [x1, y1] = m.tree[p.idx], [x2, y2] = m.tree[c.idx];
             return th.layout === 'dependency'
-              ? <path key={c.id} d={`M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`} stroke="#4b5a82" strokeWidth={1.4} fill="none" />
-              : <line key={c.id} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#4b5a82" strokeWidth={1.4} />;
+              ? <path key={c.id} d={`M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`} stroke="var(--line2)" strokeWidth={1.4} fill="none" />
+              : <line key={c.id} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--line2)" strokeWidth={1.4} />;
           })}
           {m.T.nodes.map(c => {
             if (!c.parent) return null;
@@ -73,9 +73,9 @@ export default function TreeEmbed() {
             const on = c.idx === n.idx;
             return (
               <g key={'t' + c.id} transform={`translate(${x},${y})`} className="seg-btn" role="button" tabIndex={0} aria-pressed={on} aria-label={`${c.label} (${c.sub})`} onMouseEnter={() => { setPaused(true); setActive(c.idx); }} onFocus={() => { setPaused(true); setActive(c.idx); }} onBlur={() => setPaused(false)}>
-                <circle r={8} fill={on ? '#f5b942' : c.word ? 'rgba(245,185,66,.18)' : '#0d1428'} stroke={on ? '#fff' : '#f5b942'} strokeWidth={on ? 2.4 : 1.6} />
-                <text y={below ? 24 : -14} textAnchor="middle" fontSize={12} fontWeight={600} fill="#e7ecf7">{c.label}</text>
-                <text y={below ? 37 : -27} textAnchor="middle" className="mono-t" fontSize={9.5} fill="#f5b942" opacity={0.9}>{c.sub}</text>
+                <circle r={8} fill={on ? 'var(--sym)' : c.word ? 'rgba(245,185,66,.18)' : 'var(--bg2)'} stroke={on ? '#fff' : 'var(--sym)'} strokeWidth={on ? 2.4 : 1.6} />
+                <text y={below ? 24 : -14} textAnchor="middle" fontSize={12} fontWeight={600} fill="var(--text)">{c.label}</text>
+                <text y={below ? 37 : -27} textAnchor="middle" className="mono-t" fontSize={9.5} fill="var(--sym)" opacity={0.9}>{c.sub}</text>
               </g>
             );
           })}
@@ -83,12 +83,12 @@ export default function TreeEmbed() {
             const [x, y] = m.emb[c.idx]; const on = c.idx === n.idx;
             return (
               <g key={'p' + c.id} style={{ cursor: 'pointer' }} onMouseEnter={() => { setPaused(true); setActive(c.idx); }}>
-                <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : '#a78bfa'} stroke={on ? '#a78bfa' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
+                <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : 'var(--emb)'} stroke={on ? 'var(--emb)' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
                 <text x={x + 10} y={y - 8} className="mono-t" fontSize={10} fill="#cfc6f7">{c.label}</text>
               </g>
             );
           })}
-          <text x={386} y={360} fontSize={11} fill="#9aa5c4">{t('le.exact', { d: m.E.dims, p: (m.E.explained2 * 100).toFixed(0) })}</text>
+          <text x={386} y={360} fontSize={11} fill="var(--muted)">{t('le.exact', { d: m.E.dims, p: (m.E.explained2 * 100).toFixed(0) })}</text>
         </svg>
       </div>
       <div className="grid sm:grid-cols-2 gap-3 mt-3">
