@@ -304,3 +304,9 @@ img { max-width: 100%; }
 .cite summary::before { content: "› "; color: var(--sym); }
 .cite[open] summary::before { content: "⌄ "; }
 .cite-pre { margin: 8px 0; padding: 10px 12px; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; font: 400 11.5px/1.5 var(--mono); color: var(--soft); overflow-x: auto; white-space: pre; }
+
+/* powered by SimasiaAI */
+.powered { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: .84rem; text-decoration: none; }
+.powered:hover { color: var(--text); text-decoration: none; }
+.powered img { height: 20px; width: auto; opacity: .9; }
+.powered b { font-weight: 600; color: var(--text); }

@@ -45,6 +45,7 @@ const base = {
   'zf.aria': 'Zeugma: neuro-symbolic reasoning over LLM-generated knowledge graphs', 'zf.sub': 'LLM extraction → knowledge graph → Prolog reasoning', 'zf.s1': 'ancient text', 'zf.s2': 'LLM extraction', 'zf.s2d': 'entities and relations, extracted by LLMs', 'zf.s3': 'knowledge graph', 'zf.s3d': 'hover a node to see its triples (S, P, O)', 'zf.s4': 'Prolog engine', 'zf.run': 'run query', 'zf.solved': 'solved ✓', 'zf.s5': 'reasoning', 'zf.o1': 'entailment detection', 'zf.o2': 'contradiction analysis', 'zf.o3': 'semantic relation mapping', 'zf.o4': 'cross-reference validation',
   'proj.cite': 'how to cite', 'proj.cite.copy': 'Copy BibTeX', 'proj.cite.copied': 'Copied ✓',
   'tl.eyebrow': 'interactive · career timeline', 'tl.aria': 'Career timeline: publications and talks per year, with books, software and appointments', 'tl.pubs': 'publications', 'tl.talks': 'talks', 'tl.books': 'books', 'tl.software': 'software', 'tl.career': 'appointments', 'tl.close': 'close', 'tl.more': 'more', 'tl.pos.clasp': 'Associate Director, CLASP (Gothenburg)', 'tl.pos.crete': 'Professor, University of Crete', 'tl.pos.ilsp': 'ILSP / Athena RC',
+  'footer.powered': 'Powered by',
   'research.cta': 'See selected publications', 'research.fig': 'Zeugma: neuro-symbolic reasoning over LLM-generated knowledge graphs',
   'research.figAlt': 'Zeugma Neuro-Symbolic Reasoning System', 'research.eyebrow': 'interactive · research landscape',
   'net.title': 'RESEARCH NETWORK', 'net.sub': '{a} areas · {c} connections · {s} software systems',

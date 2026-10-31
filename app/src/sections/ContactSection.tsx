@@ -26,6 +26,9 @@ const ContactSection = () => {
     </section>
     <footer className="footer flex flex-wrap justify-between gap-3">
       <span>© {new Date().getFullYear()} {t('name.full')}</span>
+      <a className="powered" href="https://simasiaai.gr/" target="_blank" rel="noopener noreferrer">
+        <span>{t('footer.powered')}</span><img src="/images/simasia-mark.png" alt="SimasiaAI" width={22} height={20} /><b>SimasiaAI</b>
+      </a>
     </footer>
   </>
   );
