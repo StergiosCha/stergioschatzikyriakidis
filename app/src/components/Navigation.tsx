@@ -112,14 +112,14 @@ const Navigation = () => {
     <>
       <header className="nav">
         <a className="brand" href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <span className="brand-mark" aria-hidden="true">λ⊢</span> {t('name.full')}
+          <span className="brand-mark" aria-hidden="true">λ⊢</span> <span className="brand-long">{t('name.full')}</span><span className="brand-short">{t('name.last')}</span>
         </a>
         <nav className="nav-links" aria-label={t('nav.main')}>
           {NAV_LINKS.map(l => link(l))}
           <a className="btn-pill" href="/cv_cha.pdf" download="cv_cha.pdf" style={{ marginLeft: 8 }}><Download size={14} aria-hidden="true" /> {t('nav.cv')}</a>
-          <span style={{ marginLeft: 8, display: 'inline-flex', gap: 8, alignItems: 'center' }}><LangToggle /><ThemeToggle /></span>
+          
         </nav>
-        <span className="nav-menu-btn" style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}><LangToggle /><ThemeToggle /></span>
+        <span className="nav-tools"><LangToggle /><ThemeToggle /></span>
         <button ref={menuBtn} className="icon-btn nav-menu-btn" aria-label={t('nav.openMenu')} aria-expanded={open} aria-controls="nav-drawer" onClick={() => setOpen(true)}>
           <Menu size={20} aria-hidden="true" />
         </button>
