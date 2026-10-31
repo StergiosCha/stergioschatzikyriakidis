@@ -3,7 +3,7 @@
 // Tool names (Svarna, LingEmbed, Formal Atlas, CoDAG, …) stay in Latin script. Publication data stays in its original language.
 export const el: Record<string, string> = {
   'nav.projects': 'Έργα', 'nav.about': 'Σχετικά', 'nav.research': 'Έρευνα', 'nav.publications': 'Δημοσιεύσεις',
-  'nav.talks': 'Ομιλίες', 'nav.software': 'Λογισμικό', 'nav.demos': 'Ζωντανές εφαρμογές', 'nav.teaching': 'Διδασκαλία',
+  'nav.talks': 'Ομιλίες', 'nav.software': 'Λογισμικό', 'nav.demos': 'Διαδραστικές εφαρμογές', 'nav.teaching': 'Διδασκαλία',
   'nav.news': 'Νέα', 'nav.contact': 'Επικοινωνία', 'nav.cv': 'Βιογραφικό', 'nav.downloadCv': 'Λήψη βιογραφικού', 'nav.menu': 'μενού',
   'nav.openMenu': 'Άνοιγμα μενού πλοήγησης', 'nav.closeMenu': 'Κλείσιμο μενού πλοήγησης', 'nav.main': 'Κύρια πλοήγηση',
   'nav.drawer': 'Μενού πλοήγησης', 'nav.role': 'Διευθυντής Ερευνών (Ερευνητής Α΄)', 'nav.org': 'ΙΕΛ, Ερευνητικό Κέντρο «Αθηνά»',
@@ -19,7 +19,7 @@ export const el: Record<string, string> = {
   'hero.legend.aria': 'Γλώσσα, λογική και μηχανική μάθηση, σε αμφίδρομη σχέση', 'hero.applied': 'εφαρμογές σε:',
   'hero.chip.dialect': 'ΕΦΓ διαλέκτων', 'hero.chip.llm': 'συλλογιστική των LLM', 'hero.chip.nli': 'συνεπαγωγή φυσικής γλώσσας',
   'hero.chip.distance': 'γλωσσική απόσταση', 'hero.chip.dh': 'ψηφιακές ανθρωπιστικές επιστήμες', 'hero.chip.dialogue': 'διάλογος',
-  'hero.stat.pubs': 'δημοσιεύσεις', 'hero.stat.talks': 'ομιλίες & αναρτημένες ανακοινώσεις', 'hero.stat.apps': 'ζωντανές εφαρμογές', 'hero.stat.years': 'περίοδος δημοσιεύσεων',
+  'hero.stat.pubs': 'δημοσιεύσεις', 'hero.stat.talks': 'ομιλίες & αναρτημένες ανακοινώσεις', 'hero.stat.apps': 'διαδραστικές εφαρμογές', 'hero.stat.years': 'περίοδος δημοσιεύσεων',
   'projects.kicker': 'θεμελιώδη έργα', 'projects.title.a': 'Υποδομές για την', 'projects.title.greek': 'ελληνική γλώσσα',
   'projects.title.b': 'και για την', 'projects.title.formal': 'τυπική σημασία',
   'projects.intro': 'Ανοιχτά συστήματα σε λειτουργία, πάνω στα οποία στηρίζεται και άλλη έρευνα.',
@@ -52,7 +52,7 @@ export const el: Record<string, string> = {
   'novel.kicker': 'πέρα από την ακαδημαϊκή έρευνα', 'novel.kickerB': 'λογοτεχνία', 'novel.title': 'Μυθιστοριογράφος',
   'novel.text': 'Πέρα από την ακαδημαϊκή έρευνα, γράφω λογοτεχνία. Έχω εκδώσει τέσσερα μυθιστορήματα στα ελληνικά και τρεις συλλογές διηγημάτων (μία στα αγγλικά).',
   'novel.cta': 'Ο λογοτεχνικός μου ιστότοπος', 'novel.alt': 'Εξώφυλλα βιβλίων',
-  'demos.kicker': 'διαδραστικό', 'demos.title': 'Ζωντανές εφαρμογές',
+  'demos.kicker': 'δοκιμάστε τα', 'demos.title': 'Διαδραστικές εφαρμογές',
   'demos.intro': 'Δεν πρόκειται για στιγμιότυπα οθόνης. Κάθε εργαλείο παρακάτω είναι εγκατεστημένο και λειτουργεί αυτή τη στιγμή· δοκιμάστε απευθείας το ενσωματωμένο περιβάλλον εργασίας ή ανοίξτε οποιαδήποτε εφαρμογή σε νέα καρτέλα.',
   'demos.full': 'Πλήρης οθόνη', 'demos.failed': 'Η εφαρμογή δεν φορτώθηκε εδώ· ίσως ξεκινά ακόμη μετά από αδράνεια.',
   'demos.newTab': 'Άνοιγμα σε νέα καρτέλα', 'demos.retry': 'Νέα προσπάθεια', 'demos.waking': 'Εκκίνηση του περιβάλλοντος εργασίας…',
