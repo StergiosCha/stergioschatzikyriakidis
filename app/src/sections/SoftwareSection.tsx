@@ -24,7 +24,7 @@ const SoftwareSection = () => {
             {t('software.p1')}
           </p>
           <p>
-            {t('software.p2.a')} <strong>Greek NLP Swiss Knife</strong> {t('software.p2.b')}
+            {t('software.p2.a')} <a href="https://greek-app-heaven-portal.livelyhill-85880e66.westeurope.azurecontainerapps.io" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neu)', textDecoration: 'underline', textUnderlineOffset: 3 }}><strong>Greek NLP Swiss Knife</strong></a> {t('software.p2.b')}
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6 reveal">

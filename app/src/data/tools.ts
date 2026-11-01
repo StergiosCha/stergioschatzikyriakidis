@@ -166,7 +166,7 @@ export const tools: Tool[] = [
   },
   {
     name: "OYXOY",
-    description: "Greek NLU benchmark: NLI (1,763), WSD (6,896), metaphor (14,416). Role: Co-creator.",
+    description: "Greek NLU benchmark: NLI (1,762), WSD (6,896), metaphor (14,416). Role: Co-creator.",
     platformUrl: null,
     githubUrl: "https://github.com/StergiosCha/OYXOY",
     category: "dataset"

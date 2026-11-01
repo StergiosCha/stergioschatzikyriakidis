@@ -57,7 +57,7 @@ export default function Timeline() {
         {POSITIONS.map(p => (
           <g key={p.key}>
             <rect x={x(p.from) + 2} y={10 + p.row * 20} width={Math.max(cw, (p.to - p.from + (p.to === p.from ? 1 : 0)) * cw) - 4} height={16} rx={8} fill="var(--emb)" opacity={0.18} />
-            <text x={x(p.from) + 10} y={22 + p.row * 20} fontSize={10.5} fill="var(--soft)" style={{ fontFamily: 'var(--mono)' }}>{t(p.key)}</text>
+            <text x={p.from === p.to ? x(p.to) + cw - 10 : x(p.from) + 10} textAnchor={p.from === p.to ? 'end' : 'start'} y={22 + p.row * 20} fontSize={10.5} fill="var(--soft)" style={{ fontFamily: 'var(--mono)' }}>{t(p.key)}</text>
           </g>
         ))}
         {/* milestones */}

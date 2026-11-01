@@ -12,13 +12,13 @@ const METH: Record<string, { label: string; color: string }> = {
 };
 const short = (l: string) => l.replace(/ [&κ][αι]? .*$/, '').replace(/ & .*$/, '').replace(/,.*$/, '').replace(/ (for|για) .*$/, '');
 const SHORT: Record<string, { en: string; el: string }> = {
-  'dl-nlu': { en: 'Deep learning & NLU', el: 'Βαθιά μάθηση & ΚΦΓ' },
-  'greek-nlp': { en: 'Greek & dialect NLP', el: 'ΕΦΓ για ελληνικά & διαλέκτους' },
+  'dl-nlu': { en: 'Deep learning & NLU', el: 'Βαθιά μάθηση & κατανόηση γλώσσας' },
+  'greek-nlp': { en: 'Greek & dialect NLP', el: 'Ελληνικά & διάλεκτοι' },
   'arabic': { en: 'Arabic dialects & distance', el: 'Αραβικές διάλεκτοι & απόσταση' },
   'rag': { en: 'RAG & knowledge LLMs', el: 'RAG & LLM με γνώση' },
   'type-theory': { en: 'Type theory & proof assistants', el: 'Θεωρία τύπων & βοηθοί απόδειξης' },
   'bayesian': { en: 'Probabilistic semantics', el: 'Πιθανοκρατική σημασιολογία' },
-  'digital-humanities': { en: 'AI for digital humanities', el: 'ΤΝ για ψηφιακές ανθρωπιστικές επιστήμες' },
+  'digital-humanities': { en: 'AI for digital humanities', el: 'Ψηφιακές ανθρωπιστικές επιστήμες' },
   'dialogue': { en: 'Dialogue modelling', el: 'Μοντελοποίηση διαλόγου' },
   'formal-syntax': { en: 'Formal syntax of Greek', el: 'Τυπική σύνταξη της ελληνικής' },
   'music': { en: 'Music & language', el: 'Μουσική & γλώσσα' },

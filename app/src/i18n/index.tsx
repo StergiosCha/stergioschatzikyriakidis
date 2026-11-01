@@ -31,7 +31,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = lang === 'el'
-      ? 'Στέργιος Χατζηκυριακίδης — Διευθυντής Ερευνών, ΙΕΛ, Ερευνητικό Κέντρο «Αθηνά»'
+      ? 'Στέργιος Χατζηκυριακίδης — Διευθυντής Ερευνών, Ινστιτούτο Επεξεργασίας του Λόγου, Ερευνητικό Κέντρο «Αθηνά»'
       : 'Stergios Chatzikyriakidis — Director of Research, ILSP, Athena Research Centre';
   }, [lang]);
   const [elReady, setElReady] = useState(!!elDict);
