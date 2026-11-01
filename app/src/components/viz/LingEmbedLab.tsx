@@ -121,13 +121,13 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
           })}
           {/* embedding */}
           <circle cx={m.ep.x + m.ep.w / 2} cy={m.ep.y + m.ep.h / 2} r={Math.min(m.ep.w, m.ep.h) / 2 + 10} fill="none" stroke="var(--emb)" strokeOpacity={0.35} strokeDasharray="3 4" />
-          {m.T.nodes.map(c => { if (!c.parent) return null; const p = m.T.byId[c.parent]; return <line key={'ee' + c.id} x1={m.emb[p.idx][0]} y1={m.emb[p.idx][1]} x2={m.emb[c.idx][0]} y2={m.emb[c.idx][1]} stroke="rgba(167,139,250,.28)" strokeWidth={1.2} />; })}
+          {m.T.nodes.map(c => { if (!c.parent) return null; const p = m.T.byId[c.parent]; return <line key={'ee' + c.id} x1={m.emb[p.idx][0]} y1={m.emb[p.idx][1]} x2={m.emb[c.idx][0]} y2={m.emb[c.idx][1]} stroke="rgba(167,139,250,.28)" className="lt-embedge" strokeWidth={1.2} />; })}
           {m.T.nodes.map(c => {
             const [x, y] = m.emb[c.idx]; const on = c.idx === i;
             return (
               <g key={'en' + c.id} onMouseEnter={() => pick(c.idx)}>
                 <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : 'var(--emb)'} stroke={on ? 'var(--emb)' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
-                <text x={x + 10} y={y - 8} className="mono-t" fontSize={10.5} fill="#cfc6f7">{c.label}</text>
+                <text x={x + 10} y={y - 8} className="mono-t lt-emblabel" fontSize={10.5} fill="#cfc6f7">{c.label}</text>
               </g>
             );
           })}
@@ -186,7 +186,7 @@ export default function LingEmbedLab({ initial = 'ccg' }: { initial?: string }) 
           <div aria-live="polite">
             <h4 className="text-[.95rem] mb-2">{t('le.unbind')}</h4>
             <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label={t('le.roleAria')}>
-              {b.items.map((x, j) => <button key={x.id} className="minibtn" aria-pressed={j === k} style={j === k ? { background: 'var(--emb)', color: '#0a0f20', borderColor: 'var(--emb)' } : { color: 'var(--emb)' }} onClick={() => setQuery(j)}>{x.role}</button>)}
+              {b.items.map((x, j) => <button key={x.id} className="minibtn lt-onfill-btn" aria-pressed={j === k} style={j === k ? { background: 'var(--emb)', color: '#0a0f20', borderColor: 'var(--emb)' } : { color: 'var(--emb)' }} onClick={() => setQuery(j)}>{x.role}</button>)}
             </div>
             <div className="mono text-[13px] soft mb-3">T · r<sub>{b.items[k].role}</sub> = û → {t('le.nearest')} <b style={{ color: 'var(--sym)' }}>{b.items[best].label}</b> {best === k ? '✓' : '✗'}</div>
             <div className="mono text-[12px] muted">{t('le.recovered')}</div>{vrow(u, t('le.recovered'))}

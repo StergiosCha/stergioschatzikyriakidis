@@ -58,7 +58,7 @@ export default function AtlasGraph() {
                   onClick={() => setSelEdge(i)} onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setSelEdge(i); } }}>
                   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16} />
                   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={LEVEL_COLOR[ed.level] ?? 'var(--muted)'} strokeOpacity={on ? 0.95 : 0.35} strokeWidth={1 + nG * 0.6} />
-                  {i === selEdge && <line x1={x1} y1={y1} x2={x2} y2={y2} className="flow" stroke="#fff" strokeOpacity={0.6} />}
+                  {i === selEdge && <line x1={x1} y1={y1} x2={x2} y2={y2} className="flow lt-flow" stroke="#fff" strokeOpacity={0.6} />}
                 </g>
               );
             })}
@@ -109,7 +109,7 @@ export default function AtlasGraph() {
                   <tr key={p}>
                     <th scope="row" className="muted font-normal text-left whitespace-nowrap" title={P_LABEL[p]}>P{p}</th>
                     {row.map((v, f) => (
-                      <td key={f} title={`P${p} ${P_LABEL[p]} × F${f} ${F_LABEL[f]}: ${v}`} className="text-center rounded"
+                      <td key={f} title={`P${p} ${P_LABEL[p]} × F${f} ${F_LABEL[f]}: ${v}`} className="text-center rounded lt-pxf"
                         style={{ background: v ? `rgba(167,139,250,${0.12 + 0.58 * (v / g.maxCell)})` : 'var(--hair2)', color: '#ffffff', padding: '5px 0', minWidth: 30 }}>{v || ''}</td>
                     ))}
                   </tr>

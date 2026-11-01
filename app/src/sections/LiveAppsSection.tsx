@@ -46,7 +46,7 @@ const LiveAppsSection = () => {
 
       <div ref={embedWrapRef} className="mb-12 reveal">
         <div className="panel overflow-hidden">
-          <div className="flex items-center gap-3 px-4 py-2.5" style={{ borderBottom: '1px solid var(--line)', background: 'rgba(7,11,24,.6)' }}>
+          <div className="flex items-center gap-3 px-4 py-2.5 lt-chrome" style={{ borderBottom: '1px solid var(--line)', background: 'rgba(7,11,24,.6)' }}>
             <div className="flex gap-1.5" aria-hidden="true">
               <span className="w-3 h-3 rounded-full" style={{ background: '#ff6b9a88' }} />
               <span className="w-3 h-3 rounded-full" style={{ background: 'var(--sym)88' }} />

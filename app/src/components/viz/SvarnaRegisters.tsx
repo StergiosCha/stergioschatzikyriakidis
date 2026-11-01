@@ -57,7 +57,7 @@ export default function SvarnaRegisters() {
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(d.id); } }}
             style={{ opacity: sel === d.id ? 1 : 0.5 }}>
             <rect x={x + 1} y={4} width={Math.max(1.5, w - 2)} height={38} rx={7} fill={DB_COLORS[d.id]} />
-            {w > 96 && <text x={x + 10} y={28} fontSize={13} fontWeight={600} fill="#0a0f20">{t(`db.${d.id}`).split(/[ (/]/)[0]}</text>}
+            {w > 96 && <text x={x + 10} y={28} fontSize={13} fontWeight={600} fill="#0a0f20" className={`lt-onfill lt-onfill-${d.id}`}>{t(`db.${d.id}`).split(/[ (/]/)[0]}</text>}
           </g>
         ))}
       </svg>

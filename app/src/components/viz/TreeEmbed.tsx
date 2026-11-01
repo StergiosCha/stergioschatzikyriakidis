@@ -64,7 +64,7 @@ export default function TreeEmbed() {
             if (!c.parent) return null;
             const p = m.T.byId[c.parent];
             const [x1, y1] = m.emb[p.idx], [x2, y2] = m.emb[c.idx];
-            return <line key={'e' + c.id} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(167,139,250,.28)" strokeWidth={1.2} />;
+            return <line key={'e' + c.id} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(167,139,250,.28)" className="lt-embedge" strokeWidth={1.2} />;
           })}
           <path className="flow" stroke="url(#gSE)" d={`M${px},${py} C${(px + ex) / 2 + 40},${py} ${(px + ex) / 2 - 40},${ey} ${ex},${ey}`} />
           {m.T.nodes.map(c => {
@@ -84,7 +84,7 @@ export default function TreeEmbed() {
             return (
               <g key={'p' + c.id} style={{ cursor: 'pointer' }} onMouseEnter={() => { setPaused(true); setActive(c.idx); }}>
                 <circle cx={x} cy={y} r={c.word ? 7 : 5.5} fill={on ? '#fff' : c.word ? '#c4b5fd' : 'var(--emb)'} stroke={on ? 'var(--emb)' : '#0a0f20'} strokeWidth={on ? 3 : 1.5} />
-                <text x={x + 10} y={y - 8} className="mono-t" fontSize={10} fill="#cfc6f7">{c.label}</text>
+                <text x={x + 10} y={y - 8} className="mono-t lt-emblabel" fontSize={10} fill="#cfc6f7">{c.label}</text>
               </g>
             );
           })}
