@@ -60,7 +60,7 @@ const HeroSection = () => {
       </div>
       <div className="reveal">
         <div className="portrait">
-          <img src="/images/hero-portrait.jpg" alt={t('name.full')} width={720} height={900} fetchPriority="high" />
+          <img src="/images/portrait.webp" alt={t('name.full')} width={720} height={900} fetchPriority="high" />
         </div>
       </div>
     </section>

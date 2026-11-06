@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://stergioschatzikyriakidis.org/</loc>
-    <lastmod>2026-09-21</lastmod>
-    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stergioschatzikyriakidis.org/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stergioschatzikyriakidis.org/?lang=el"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stergioschatzikyriakidis.org/"/>
+    <lastmod>2026-11-06</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://stergioschatzikyriakidis.org/teaching/clarin-2026/</loc>
     <lastmod>2026-09-21</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>

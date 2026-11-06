@@ -12,7 +12,7 @@ const BioSection = () => {
     <div className="grid lg:grid-cols-[0.7fr_1.3fr] gap-12 items-start">
       <div className="reveal">
         <div className="portrait" style={{ maxWidth: 400 }}>
-          <img src="/images/bio-portrait.jpg" alt={t('name.full')} loading="lazy" decoding="async" />
+          <img src="/images/portrait.webp" alt={t('name.full')} loading="lazy" decoding="async" />
         </div>
       </div>
       <div>
