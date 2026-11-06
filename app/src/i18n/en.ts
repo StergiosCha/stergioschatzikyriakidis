@@ -112,11 +112,9 @@ const base = {
   'sv.subs': '{label} · {n} sub-corpora', 'sv.wpsHere': 'words / sentence here', 'sv.wpsAll': 'words / sentence overall',
   // visual: Formal Atlas
   'at.sources': 'surveyed sources', 'at.records': 'Coq records', 'at.theorems': 'theorems', 'at.proved': 'proved ({n} admitted)',
-  'at.graphTitle': 'CHECKED COMPARISONS', 'at.graphSub': 'layout = classical MDS of hop distance · not a similarity score',
-  'at.graphAria': 'Comparison graph of {n} formal frameworks with {e} checked comparisons', 'at.edgeAria': '{a} and {b}, {level}, {n} graded phenomena', 'at.thm': '{n} thm', 'at.outside': 'outside atlas/', 'at.outsideAria': 'outside the atlas layer',
+  'at.graphTitle': 'CHECKED COMPARISONS', 'at.graphAria': 'Comparison graph of {n} formal frameworks with {e} checked comparisons', 'at.edgeAria': '{a} and {b}, {level}, {n} of {m} phenomena addressed by both', 'at.thm': '{n} thm', 'at.outside': 'outside atlas/', 'at.outsideAria': 'outside the atlas layer',
   'at.level.intra-family': 'intra-family', 'at.level.cross-family': 'cross-family', 'at.level.cross-foundation': 'cross-foundation',
-  'at.grades': 'Grades: 5 definitional · 4 equivalence · 3 one-way or mediated · 2 divergent · 1 after re-encoding · — one side only',
-  'at.selected': 'selected comparison · {level}', 'at.bridge': 'bridge:',
+  'at.fam.montague': 'Montague lineage', 'at.fam.typelogical': 'Type-logical & categorical', 'at.fam.mtt': 'Modern type theories', 'at.fam.ttr': 'TTR', 'at.both': 'Addressed by both', 'at.only': 'Only {x}', 'at.solid': 'comparison file listed', 'at.dashed': 'no comparison file yet', 'at.nobridge': 'No comparison file yet: the two developments are compared side by side.', 'at.checklist': 'The pair’s comparison checklist ({n} phenomena), grouped by which framework’s Coq development addresses each one. Select a phenomenon to see the evidence.', 'at.selected': 'selected comparison · {level}', 'at.bridge': 'comparison file:',
   'at.pf': 'sources by intrinsic formality (P) × project evidence (F)', 'at.pfCaption': 'Cross-tabulation of {n} surveyed sources by formality grade and evidence level',
   'at.F0': 'surveyed', 'at.F1': 'sourced', 'at.F2': 'designed', 'at.F3': 'piloted', 'at.F4': 'formalized', 'at.F5': 'verified / connected',
   'at.P0': 'discursive', 'at.P1': 'systematic prose', 'at.P2': 'semi-formal', 'at.P3': 'formal fragments', 'at.P4': 'full formal system', 'at.P5': 'machine-checked',

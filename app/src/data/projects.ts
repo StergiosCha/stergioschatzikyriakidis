@@ -38,6 +38,7 @@ export const atlasProject: FoundationalProject = {
     'Two separate axes: P0–P5 intrinsic formality of a source, F0–F5 project evidence',
     'Checked proofs concern explicitly scoped encodings, not whole-source verification',
     'Comparisons are scoped evidence profiles, not a theoretical similarity score',
+    'Read the Coq source and, for supported developments, check editable copies live in the browser',
     'Tested toolchain Coq 8.20.1; MIT licence',
   ],
   links: [

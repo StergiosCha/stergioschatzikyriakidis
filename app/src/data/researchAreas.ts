@@ -21,7 +21,7 @@ export const researchAreas: ResearchArea[] = [
     id: 'dl-nlu',
     label: 'Deep Learning, NLU, Explainability & Neuro-Symbolic Systems',
     methodology: 'computational',
-    description: 'NLI evaluation, annotation artifacts, neuro-symbolic integration with Coq, LLM critique and explanation.',
+    description: 'NLI evaluation, annotation artifacts, neuro-symbolic integration with Coq, LLM critique and explanation, the ELOQUENT Fragments task (CLEF 2027).',
     publications: [
       { number: 15, title: 'Neural-Symbolic NLP: Bridging Theory and Practice' },
       { number: 30, title: 'Neuro-Symbolic NLP: Taxonomy, Assessment, and Directions' },

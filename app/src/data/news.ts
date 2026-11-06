@@ -7,6 +7,12 @@ export interface NewsItem {
 
 export const news: NewsItem[] = [
   {
+    date: "2026-11",
+    text: "Co-organising the ELOQUENT lab at CLEF 2027 (Bucharest, 14–17 September 2027) and its new Fragments task, with Maria Barrett, Jussi Karlgren, Bruno Nadalic Sotic and Aarne Talman: systems must learn an unseen language fragment from its specification alone, and every answer is checked by a parser, a model checker or a theorem prover.",
+    link: "https://stergioscha.github.io/fragments-task/",
+    type: "event"
+  },
+  {
     date: "2026-09",
     text: "Appointed Director of Research (Researcher A) at the Institute for Language and Speech Processing (ILSP), Athena Research Centre, Athens.",
     link: "https://www.athenarc.gr/",
