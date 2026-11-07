@@ -8,6 +8,12 @@ export interface NewsItem {
 export const news: NewsItem[] = [
   {
     date: "2026-11",
+    text: "Paper accepted at KGSWC 2026 (Belgrade), to appear in the Springer proceedings: 'Saying Is Still Not Modelling: An Empirical Audit of LLM-Generated Knowledge Graphs for Terminology in the Humanities'.",
+    link: null,
+    type: "paper"
+  },
+  {
+    date: "2026-11",
     text: "Co-organising the ELOQUENT lab at CLEF 2027 (Bucharest, 14–17 September 2027) and its new Fragments task, with Maria Barrett, Jussi Karlgren, Bruno Nadalic Sotic and Aarne Talman: systems must learn an unseen language fragment from its specification alone, and every answer is checked by a parser, a model checker or a theorem prover.",
     link: "https://stergioscha.github.io/fragments-task/",
     type: "event"
