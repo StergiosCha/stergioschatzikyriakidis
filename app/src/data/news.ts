@@ -96,10 +96,4 @@ export const news: NewsItem[] = [
     link: "https://github.com/StergiosCha/plot_analyzer",
     type: "software"
   },
-  {
-    date: "2025",
-    text: "Appointed Professor of Computational Linguistics at University of Crete",
-    link: null,
-    type: "general"
-  },
 ];
