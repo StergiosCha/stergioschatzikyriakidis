@@ -21,7 +21,7 @@ export const researchAreas: ResearchArea[] = [
     id: 'dl-nlu',
     label: 'Deep Learning, NLU, Explainability & Neuro-Symbolic Systems',
     methodology: 'computational',
-    description: 'NLI evaluation, annotation artifacts, neuro-symbolic integration with Coq, LLM critique and explanation, the ELOQUENT Fragments task (CLEF 2027).',
+    description: 'NLI evaluation, annotation artifacts, neuro-symbolic integration with Coq, LLM critique and explanation, the ELOQUENT No Data Task (CLEF 2027).',
     publications: [
       { number: 15, title: 'Neural-Symbolic NLP: Bridging Theory and Practice' },
       { number: 30, title: 'Neuro-Symbolic NLP: Taxonomy, Assessment, and Directions' },
@@ -74,7 +74,7 @@ export const researchAreas: ResearchArea[] = [
     description: 'MEDEA-NEUMOUSA for classical philology, RAG-to-Coq verification, TextCraft, poetry generation.',
     publications: [
       { number: 113, title: 'Reasoning with RAGged events: RAG-Enhanced Event Knowledge Base Construction and reasoning with proof-assistants' },
-      { number: 59, title: 'LLMs Got Rhyme? Hybrid Phonological Filtering for Greek Poetry Rhyme Detection and Generation' },
+      { number: 59, title: 'LLMs Got Rhythm? Hybrid Phonological Filtering for Greek Poetry Rhyme Detection and Generation' },
       { number: 65, title: 'Poetry in RAGs: Modern Greek interwar poetry generation using RAG and contrastive training' },
       { number: 58, title: 'HeptaTAX: A Neuro-Symbolic Pipeline and Benchmark for Classifying 16th-Century Heptanesian Notarial Acts' },
       { number: 57, title: 'Zeugma: A Neuro-Symbolic System for Reasoning Over LLM-Generated Knowledge Graphs' },
